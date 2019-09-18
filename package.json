@@ -9,7 +9,7 @@
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
     "react-sortable-tree": "^2.6.2",
-    "react-table": "^6.10.3",
+    "react-table": "6.8.6",
     "react-table-hoc-fixed-columns": "^2.1.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1"
