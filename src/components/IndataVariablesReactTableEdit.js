@@ -12,6 +12,7 @@ import { DATASTRUCTURECOMPONENTTYPE } from '../utilities/Enum'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 const ldsDataUrl = 'http://localhost:9090/data/InstanceVariable'
+const  graphqlUrl = 'http://localhost:9090/graphql'
 
 class IndataVariablesReactTableEdit extends Component {
   constructor (props) {
@@ -31,7 +32,7 @@ class IndataVariablesReactTableEdit extends Component {
   }
 
   componentDidMount () {
-    Promise.all([request('http://localhost:9090/graphql', ALL_POPULATIONS), request('http://localhost:9090/graphql', ALL_REPRESENTED_VARIABLES)])
+    Promise.all([request(graphqlUrl, ALL_POPULATIONS), request(graphqlUrl, ALL_REPRESENTED_VARIABLES)])
       .then(response => {
         this.setState({
             populations: response[0],
@@ -352,7 +353,9 @@ class IndataVariablesReactTableEdit extends Component {
                                     }
                                   }}
           />
+          {/*
           <Button onClick={this.handleButtonStateClick}>Show state</Button>
+          */}
         </Segment>
       </div>)
   }

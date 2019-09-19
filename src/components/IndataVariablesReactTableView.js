@@ -155,7 +155,9 @@ class IndataVariablesReactTableView extends Component {
                                   }
                                 }}
         />
+        {/*
         <Button onClick={this.handleButtonStateClick}>Show state</Button>
+        */}
       </div>)
   }
 }
