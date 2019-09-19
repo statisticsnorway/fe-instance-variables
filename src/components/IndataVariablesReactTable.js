@@ -5,14 +5,14 @@ import IndataVariablesReactTableEdit from './IndataVariablesReactTableEdit'
 class IndataVariablesReactTable extends Component {
 
   render () {
-    const {mode, showColumns, data} = this.props
+    const {mode, showColumns, data, lds} = this.props
 
     if (mode === 'edit') {
-      return <IndataVariablesReactTableEdit showColumns={showColumns} data={data}> </IndataVariablesReactTableEdit>
+      return <IndataVariablesReactTableEdit showColumns={showColumns} data={data} lds={lds}> </IndataVariablesReactTableEdit>
     }
 
     if (mode === 'view') {
-      return <IndataVariablesReactTableView showColumns={showColumns} data={data}> </IndataVariablesReactTableView>
+      return <IndataVariablesReactTableView showColumns={showColumns} data={data} lds={lds}> </IndataVariablesReactTableView>
     }
 
     return null

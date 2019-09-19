@@ -92,7 +92,7 @@ class VariableColumnVisibilityTable extends Component {
         <Grid.Row>
           <Grid.Column>
             <IndataVariablesReactTable mode={indataVariablesReactTableMode} showColumns={showColumns}
-                                       data={this.props.data}/>
+                                       data={this.props.data} lds={this.props.lds}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

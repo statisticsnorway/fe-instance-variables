@@ -179,3 +179,7 @@ export const UI = {
     nb: 'Dataresourceid...'
   }
 }
+
+export const GSIM = {
+  INSTANCE_VARIABLE: 'InstanceVariable'
+}

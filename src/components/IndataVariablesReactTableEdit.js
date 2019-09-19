@@ -8,11 +8,9 @@ import { request } from 'graphql-request'
 import { get, put } from '../utilities/fetch/Fetch'
 import { ALL_POPULATIONS } from '../services/graphql/queries/Population'
 import { ALL_REPRESENTED_VARIABLES } from '../services/graphql/queries/RepresentedVariables'
-import { DATASTRUCTURECOMPONENTTYPE } from '../utilities/Enum'
+import { DATASTRUCTURECOMPONENTTYPE, GSIM } from '../utilities/Enum'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
-const ldsDataUrl = 'http://localhost:9090/data/InstanceVariable'
-const  graphqlUrl = 'http://localhost:9090/graphql'
 
 class IndataVariablesReactTableEdit extends Component {
   constructor (props) {
@@ -27,11 +25,14 @@ class IndataVariablesReactTableEdit extends Component {
       instanceVariables: [],
       columns: [],
       showColumns: [],
-      error: ''
+      error: '',
+      lds: this.props.lds
     }
   }
 
   componentDidMount () {
+    const { lds } = this.state
+    const graphqlUrl = `${lds.url}/${lds.graphql}`
     Promise.all([request(graphqlUrl, ALL_POPULATIONS), request(graphqlUrl, ALL_REPRESENTED_VARIABLES)])
       .then(response => {
         this.setState({
@@ -268,6 +269,9 @@ class IndataVariablesReactTableEdit extends Component {
   }
 
   handleSave = () => {
+    const { lds } = this.props
+    const ldsDataUrl= `${lds.url}/${lds.namespace}/${GSIM.INSTANCE_VARIABLE}`
+
     this.state.instanceVariables.forEach((instanceVariable) => {
       let updatedData = {}
       let isUpdated = false

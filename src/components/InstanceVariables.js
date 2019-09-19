@@ -6,8 +6,6 @@ import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataRes
 import { UI } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 
-const  graphqlUrl = 'http://localhost:9090/graphql'
-
 class InstanceVariables extends Component {
 
   constructor (props) {
@@ -31,6 +29,8 @@ class InstanceVariables extends Component {
 
   handleOnClick = () => {
     const queryParam = {id: this.state.id}
+    const { lds } = this.props
+    const graphqlUrl = `${lds.url}/${lds.graphql}`
 
     request(graphqlUrl, DATARESOURCE_WITH_STRUCTURE, queryParam)
       .then(dataresource => {
@@ -44,7 +44,9 @@ class InstanceVariables extends Component {
   }
 
   render () {
-    const {id, theResults, ready} = this.state
+    const { id, theResults, ready } = this.state
+    const { lds } = this.props
+
     return (
       <Segment basic>
         <Segment basic>
@@ -77,7 +79,7 @@ class InstanceVariables extends Component {
           </Segment>
          */}
           <Segment>
-            <VariableColumnVisibilityTable data={theResults}/>
+            <VariableColumnVisibilityTable data={theResults} lds={lds}/>
           </Segment>
         </div>
         }
