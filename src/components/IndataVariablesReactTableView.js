@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
 import ReactTable from 'react-table'
 import { populateVariableData } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
