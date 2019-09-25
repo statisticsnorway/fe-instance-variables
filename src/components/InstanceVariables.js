@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Header, Segment, Input, Button, Grid, Icon } from 'semantic-ui-react'
+import { Header, Segment, Grid, Icon, Input, Button, Dropdown } from 'semantic-ui-react'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
-import { UI } from '../utilities/Enum'
+import { UI, LDS_URL } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
+import { populateDropdown } from '../utilities/common/dropdown'
 
 class InstanceVariables extends Component {
 
@@ -16,7 +17,8 @@ class InstanceVariables extends Component {
       theResults: [],
       id: '',
       theError: '',
-      ready: false
+      ready: false,
+      lds: props.lds
     }
 
     this.handleOnClick = this.handleOnClick.bind(this)
@@ -43,29 +45,48 @@ class InstanceVariables extends Component {
       })
   }
 
+  onChangeLds = (e, data) => {
+    this.setState({lds: data.value})
+  }
+
+
   render () {
     const { id, theResults, ready } = this.state
-    const { lds } = this.props
+    const { lds } = this.state
 
     return (
       <Segment basic>
         <Segment basic>
           <Grid columns={2} divided>
-            <Grid.Row>
-              <Grid.Column textAlign='left'>
-                <Header as='h1' icon>
-                  <Icon name='clone outline'/>
-                  {UI.INSTANCE_VARIABLES.nb}
-                </Header>
-              </Grid.Column>
-              <Grid.Column textAlign='right'>
-                {SSBLogo('30%')}
-              </Grid.Column>
-            </Grid.Row>
+            <Grid.Column textAlign='left'>
+              <Grid.Row>
+              <Header as='h2' icon>
+                <Icon name='clone outline'/>
+                {UI.INSTANCE_VARIABLES.nb}
+              </Header>
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column textAlign='right'>
+              <Grid.Row>
+                <Segment basic>
+                  {SSBLogo('30%')}
+                </Segment>
+              </Grid.Row>
+              <Grid.Row>
+                <Segment basic>
+                  <Dropdown style={{width: "400px"}}
+                            selection
+                            placeholder={UI.CHOOSE_LDS.nb}
+                            options={populateDropdown(LDS_URL)}
+                            onChange={(e, data) => this.onChangeLds(e, data)}
+                  />
+                </Segment>
+              </Grid.Row>
+            </Grid.Column>
           </Grid>
         </Segment>
         <Segment basic>
-          <Input type="text" name='id' placeholder={UI.SEARCH_BY_DATARESOURCEID.nb} value={id}
+          <Input name='id' placeholder={UI.SEARCH_BY_DATARESOURCEID.nb} value={id}
                  onChange={(event, value) => this.handleChange(event, value)}
                  style={{width: "320px"}}/>
           <Button content={UI.SEARCH.nb} onClick={() => this.handleOnClick()}>

@@ -6,8 +6,9 @@ class App extends Component {
   state = {
     languageCode: 'nb',
     lds: {
-      namespace: 'data',
-      url: 'http://localhost:9090',
+      namespace: 'ns',
+      url: 'https://lds-client.staging.ssbmod.net/be/lds-b',
+      //url: process.env.REACT_APP_LDS ? process.env.REACT_APP_LDS : 'http://localhost:9090',
       user: 'Test user',
       graphql: 'graphql'
     }
