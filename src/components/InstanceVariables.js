@@ -3,6 +3,7 @@ import { Header, Segment, Grid, Icon, Input, Button, Dropdown, Message } from 's
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
+import { DATASET_WITH_STRUCTURE } from '../services/graphql/queries/DataSet'
 import { UI, LDS_URL, MESSAGES } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
@@ -16,6 +17,7 @@ class InstanceVariables extends Component {
       isLoading: false,
       result: [],
       id: '',
+      datasetid: '',
       error: '',
       ready: false,
       lds: props.lds
@@ -45,6 +47,22 @@ class InstanceVariables extends Component {
       })
   }
 
+  handleOnDataSetSearchClick = () => {
+    const queryParam = {id: this.state.datasetid}
+    const { lds } = this.state
+    const graphqlUrl = `${lds.url}/${lds.graphql}`
+
+    request(graphqlUrl, DATASET_WITH_STRUCTURE, queryParam)
+      .then(dataset => {
+        this.setState({result: [dataset], ready: true}, () => {
+        })
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({result: [], error: error})
+      })
+  }
+
   onChangeLds = (e, data) => {
     this.setState(
       prevState => ({
@@ -58,7 +76,7 @@ class InstanceVariables extends Component {
 
 
   render () {
-    const { id, result, ready, error, lds } = this.state
+    const { id, datasetid, result, ready, error, lds } = this.state
 
     return (
       <Segment basic>
@@ -98,6 +116,13 @@ class InstanceVariables extends Component {
                  style={{width: "320px"}}/>
           <Button content={UI.SEARCH.nb} onClick={() => this.handleOnClick()}>
           </Button>
+
+          <Input name='datasetid' placeholder={UI.SEARCH_BY_DATASETID.nb} value={datasetid}
+                 onChange={(event, value) => this.handleChange(event, value)}
+                 style={{width: "320px"}}/>
+          <Button content={UI.SEARCH.nb} onClick={() => this.handleOnDataSetSearchClick()}>
+          </Button>
+
         </Segment>
         {ready &&
         <div>

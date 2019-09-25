@@ -10,7 +10,7 @@ export const LANGUAGES = {
 }
 
 export const LDS_URL = {
-  local:  'https://localhost:9090',
+  local:  'http://localhost:9090',
   stagingLds: 'https://lds-client.staging.ssbmod.net/be/lds',
   stagingLdsB: 'https://lds-client.staging.ssbmod.net/be/lds-b',
   stagingLdsC: 'https://lds-client.staging.ssbmod.net/be/lds-c'
@@ -185,10 +185,15 @@ export const UI = {
     en: 'Dataresourceid...',
     nb: 'Dataresourceid...'
   },
+  SEARCH_BY_DATASETID: {
+    en: 'Datasetid...',
+    nb: 'Datasettid...'
+  },
   CHOOSE_LDS: {
     en: 'Choose lds...',
     nb: 'Velg lds...'
   }
+
 }
 
 export const GSIM = {
