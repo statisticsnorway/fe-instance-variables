@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Header, Segment, Grid, Icon, Input, Button, Dropdown } from 'semantic-ui-react'
+import { Header, Segment, Grid, Icon, Input, Button, Dropdown, Message } from 'semantic-ui-react'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
-import { UI, LDS_URL } from '../utilities/Enum'
+import { UI, LDS_URL, MESSAGES } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
 
@@ -14,9 +14,9 @@ class InstanceVariables extends Component {
 
     this.state = {
       isLoading: false,
-      theResults: [],
+      result: [],
       id: '',
-      theError: '',
+      error: '',
       ready: false,
       lds: props.lds
     }
@@ -31,28 +31,34 @@ class InstanceVariables extends Component {
 
   handleOnClick = () => {
     const queryParam = {id: this.state.id}
-    const { lds } = this.props
+    const { lds } = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
 
     request(graphqlUrl, DATARESOURCE_WITH_STRUCTURE, queryParam)
       .then(dataresource => {
-        this.setState({theResults: dataresource.DataResourceById.dataSets.edges, ready: true}, () => {
+        this.setState({result: dataresource.DataResourceById.dataSets.edges, ready: true}, () => {
         })
       })
       .catch(error => {
         console.log(error)
-        this.setState({theResults: [], theError: error})
+        this.setState({result: [], error: error})
       })
   }
 
   onChangeLds = (e, data) => {
-    this.setState({lds: data.value})
+    this.setState(
+      prevState => ({
+        lds: {
+          ...prevState.lds,
+          url: data.value
+        }
+      })
+    )
   }
 
 
   render () {
-    const { id, theResults, ready } = this.state
-    const { lds } = this.state
+    const { id, result, ready, error, lds } = this.state
 
     return (
       <Segment basic>
@@ -86,6 +92,7 @@ class InstanceVariables extends Component {
           </Grid>
         </Segment>
         <Segment basic>
+          { error && <Message negative icon='warning' content={error} /> }
           <Input name='id' placeholder={UI.SEARCH_BY_DATARESOURCEID.nb} value={id}
                  onChange={(event, value) => this.handleChange(event, value)}
                  style={{width: "320px"}}/>
@@ -96,11 +103,11 @@ class InstanceVariables extends Component {
         <div>
          {/*
           <Segment>
-              <IndataTree unitDataSets={theResults}/>
+              <IndataTree unitDataSets={result}/>
           </Segment>
          */}
           <Segment>
-            <VariableColumnVisibilityTable data={theResults} lds={lds}/>
+            <VariableColumnVisibilityTable data={result} lds={lds}/>
           </Segment>
         </div>
         }
