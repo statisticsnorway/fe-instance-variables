@@ -7,6 +7,11 @@ import { DATASET_WITH_STRUCTURE } from '../services/graphql/queries/DataSet'
 import { UI, LDS_URL, MESSAGES } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
+import {
+  getLogicalRecordsFromDataResource,
+  getLogicalRecordsFromDataSet,
+  getUnitDataSetsFromDataResource
+} from '../utilities/GqlDataConverter'
 
 class InstanceVariables extends Component {
 
@@ -38,7 +43,7 @@ class InstanceVariables extends Component {
 
     request(graphqlUrl, DATARESOURCE_WITH_STRUCTURE, queryParam)
       .then(dataresource => {
-        this.setState({result: dataresource.DataResourceById.dataSets.edges, ready: true}, () => {
+        this.setState({result: getLogicalRecordsFromDataResource(dataresource.DataResourceById), ready: true}, () => {
         })
       })
       .catch(error => {
@@ -47,6 +52,8 @@ class InstanceVariables extends Component {
       })
   }
 
+
+
   handleOnDataSetSearchClick = () => {
     const queryParam = {id: this.state.datasetid}
     const { lds } = this.state
@@ -54,7 +61,7 @@ class InstanceVariables extends Component {
 
     request(graphqlUrl, DATASET_WITH_STRUCTURE, queryParam)
       .then(dataset => {
-        this.setState({result: [dataset], ready: true}, () => {
+        this.setState({result: getLogicalRecordsFromDataSet(dataset.UnitDataSetById), ready: true}, () => {
         })
       })
       .catch(error => {
