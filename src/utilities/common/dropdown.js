@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function populateDropdown(enumList) {
+export function populateDropdownEnum(enumList) {
   let options = []
   if (enumList) {
     Object.keys(enumList).map(enumItem => {

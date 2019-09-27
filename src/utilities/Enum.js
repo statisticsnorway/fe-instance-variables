@@ -189,6 +189,10 @@ export const UI = {
     en: 'Datasetid...',
     nb: 'Datasettid...'
   },
+  CHOOSE_DATASET: {
+    en: 'Choose dataSet...',
+    nb: 'Velg datasett...'
+  },
   CHOOSE_LDS: {
     en: 'Choose lds...',
     nb: 'Velg lds...'

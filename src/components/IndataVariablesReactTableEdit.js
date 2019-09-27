@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { Dropdown, Button, Input, Icon, Segment } from 'semantic-ui-react'
 import ReactTable from 'react-table'
-import { populateDropdown, populateVariableData, mapLdmDropdownArray } from '../utilities/GqlDataConverter'
+import {
+  populateDropdown,
+  mapLdmDropdownArray,
+  getInstanceVariableFromLogicalRecords
+} from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
 import { request } from 'graphql-request'
@@ -37,7 +41,7 @@ class IndataVariablesReactTableEdit extends Component {
       .then(response => {
         this.setState({
             populations: response[0],
-            instanceVariables: populateVariableData(this.props.data),
+            instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data),
             representedVariables: response[1]
           }
         )
@@ -46,7 +50,7 @@ class IndataVariablesReactTableEdit extends Component {
 
   componentDidUpdate (prevProps) {
     if (this.props.data !== prevProps.data) {
-      this.setState({instanceVariables: populateVariableData(this.props.data)})
+      this.setState({instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data)})
     }
   }
 

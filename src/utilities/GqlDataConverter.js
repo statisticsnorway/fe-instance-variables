@@ -150,8 +150,3 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
   return instanceVariables
 }
 
-export let getUnitDataSetsFromDataResource = (dataResource) => {
-  console.log(dataResource.DataResourceById.dataSets.edges)
-  return dataResource.DataResourceById.dataSets.edges;
-}
-

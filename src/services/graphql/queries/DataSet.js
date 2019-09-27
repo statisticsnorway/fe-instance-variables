@@ -51,3 +51,16 @@ export const DATASET_WITH_STRUCTURE = `
      }
    }
 `
+export const ALL_DATASETS = `
+  query {
+    UnitDataSet {
+      edges {
+        node {
+          id
+          name {languageText}  
+          description{languageText}
+        }
+      }
+    }
+  }
+`
