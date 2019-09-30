@@ -3,7 +3,7 @@ import { Header, Segment, Grid, Icon, Input, Button, Dropdown, Message } from 's
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
-import { UI, LDS_URL, MESSAGES } from '../utilities/Enum'
+import { UI, LDS_URL, MESSAGES, ICON } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
 
@@ -16,7 +16,9 @@ class InstanceVariables extends Component {
       isLoading: false,
       result: [],
       id: '',
-      error: '',
+      message: '',
+      messageIcon: '',
+      messageColor: '',
       ready: false,
       lds: props.lds
     }
@@ -26,7 +28,12 @@ class InstanceVariables extends Component {
   }
 
   handleChange = (event, data) => {
-    this.setState({[data.name]: data.value})
+    this.setState({
+      [data.name]: data.value,
+      message: '',
+      messageIcon: '',
+      messageColor: ''
+    })
   }
 
   handleOnClick = () => {
@@ -36,12 +43,22 @@ class InstanceVariables extends Component {
 
     request(graphqlUrl, DATARESOURCE_WITH_STRUCTURE, queryParam)
       .then(dataresource => {
-        this.setState({result: dataresource.DataResourceById.dataSets.edges, ready: true}, () => {
+        this.setState({
+          result: dataresource.DataResourceById.dataSets.edges,
+          ready: true,
+          message: '',
+          messageIcon: '',
+          messageColor: ''}, () => {
         })
       })
-      .catch(error => {
-        console.log(error)
-        this.setState({result: [], error: error})
+      .catch(message => {
+        console.log(message)
+        this.setState({
+          result: [],
+          message: MESSAGES.ERROR_IN_SEARCH.nb,
+          messageIcon: ICON.ERROR_MESSAGE,
+          messageColor: 'red'
+        })
       })
   }
 
@@ -50,6 +67,7 @@ class InstanceVariables extends Component {
       prevState => ({
         lds: {
           ...prevState.lds,
+          namespace: data.value.includes('localhost') ? 'data' : 'ns',
           url: data.value
         }
       })
@@ -58,7 +76,7 @@ class InstanceVariables extends Component {
 
 
   render () {
-    const { id, result, ready, error, lds } = this.state
+    const { id, result, ready, message, messageIcon, lds } = this.state
 
     return (
       <Segment basic>
@@ -85,6 +103,7 @@ class InstanceVariables extends Component {
                             placeholder={UI.CHOOSE_LDS.nb}
                             options={populateDropdown(LDS_URL)}
                             onChange={(e, data) => this.onChangeLds(e, data)}
+                            data-testid='choose-lds'
                   />
                 </Segment>
               </Grid.Row>
@@ -92,11 +111,14 @@ class InstanceVariables extends Component {
           </Grid>
         </Segment>
         <Segment basic>
-          { error && <Message negative icon='warning' content={error} /> }
+          <Segment basic>
+            { message && <Message negative icon={messageIcon} content={message} /> }
+          </Segment>
           <Input name='id' placeholder={UI.SEARCH_BY_DATARESOURCEID.nb} value={id}
                  onChange={(event, value) => this.handleChange(event, value)}
-                 style={{width: "320px"}}/>
-          <Button content={UI.SEARCH.nb} onClick={() => this.handleOnClick()}>
+                 data-testid='dataresourceid'/>
+          <Button content={UI.SEARCH.nb} onClick={() => this.handleOnClick()}
+                  data-testid='dateresourceidsearch'>
           </Button>
         </Segment>
         {ready &&

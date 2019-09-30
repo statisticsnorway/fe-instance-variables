@@ -1,5 +1,3 @@
-import React from 'react'
-
 export function populateDropdown(enumList) {
   let options = []
   if (enumList) {
