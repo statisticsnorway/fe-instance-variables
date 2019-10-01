@@ -79,6 +79,20 @@ export const DATARESOURCE_WITH_STRUCTURE = `
   }
 `
 
+export const ALL_DATARESOURCES = `
+  query {
+    DataResource {
+      edges {
+        node {
+          id
+          name {languageText}  
+          description{languageText}
+        }
+      }
+    }
+  }
+`
+
 export let convertDataToLdmDeleteIds = (data) => {
   console.log(data)
 

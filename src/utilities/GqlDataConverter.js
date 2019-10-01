@@ -24,7 +24,7 @@ function mapEdge(edge) {
     id: edge.node.id,
     name: edge.node.name[0].languageText,
     description: edge.node.description[0].languageText,
-    title: edge.node.name[0].languageText
+    title: edge.node.id
   }
 }
 
