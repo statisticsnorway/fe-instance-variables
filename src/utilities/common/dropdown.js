@@ -1,7 +1,7 @@
-export function populateDropdownEnum(enumList) {
+export function populateDropdown(enumList) {
   let options = []
   if (enumList) {
-    Object.keys(enumList).map(enumItem => {
+    Object.keys(enumList).forEach(enumItem => {
       let key = enumItem
       let text = enumList[enumItem]
       let value = enumList[enumItem]

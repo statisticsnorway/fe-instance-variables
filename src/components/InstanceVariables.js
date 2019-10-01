@@ -7,7 +7,7 @@ import { DATARESOURCE_WITH_STRUCTURE, ALL_DATARESOURCES } from '../services/grap
 import { DATASET_WITH_STRUCTURE, ALL_DATASETS } from '../services/graphql/queries/DataSet'
 import { UI, LDS_URL, MESSAGES } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
-import { populateDropdownEnum } from '../utilities/common/dropdown'
+import { populateDropdown } from '../utilities/common/dropdown'
 import {
   getLogicalRecordsFromDataResource,
   getLogicalRecordsFromDataSet,
@@ -151,7 +151,7 @@ class InstanceVariables extends Component {
                   <Dropdown style={{width: "400px"}}
                             selection
                             placeholder={UI.CHOOSE_LDS.nb}
-                            options={populateDropdownEnum(LDS_URL)}
+                            options={populateDropdown(LDS_URL)}
                             onChange={(e, data) => this.onChangeLds(e, data)}
                   />
                 </Segment>
