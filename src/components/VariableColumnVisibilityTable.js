@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Checkbox, Table, Grid, Popup, Button, Icon } from 'semantic-ui-react'
+import { Checkbox, Table, Grid, Popup, Button, Icon, Segment } from 'semantic-ui-react'
 import IndataVariablesReactTable from './IndataVariablesReactTable'
-import { UI } from '../utilities/Enum'
+import { UI, ICON } from '../utilities/Enum'
 
 class VariableColumnVisibilityTable extends Component {
   constructor (props) {
@@ -72,30 +72,32 @@ class VariableColumnVisibilityTable extends Component {
     const {showColumns, indataVariablesReactTableMode} = this.state
 
     return (
-      <Grid>
-        <Grid.Row style={{borderColor: 'b', overflow: 'visible'}}>
-          <Grid.Column floated='left'>
-            <Popup on='click' content={this.variableTable(showColumns)}
-                   trigger={<Button label={UI.SHOW_VARIABLES.nb} style={{borderColor: 'blue'}}/>}/>
-          </Grid.Column>
-          <Grid.Column floated='right'>
-            {indataVariablesReactTableMode === 'view' &&
-            <Button icon onClick={this.handleEditClick}>
-              <Icon name='edit'/>
-            </Button>}
-            {indataVariablesReactTableMode === 'edit' &&
-            <Button icon onClick={this.handleViewClick}>
-              <Icon name='edit outline'/>
-            </Button>}
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <IndataVariablesReactTable mode={indataVariablesReactTableMode} showColumns={showColumns}
-                                       data={this.props.data} lds={this.props.lds}/>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+        <Grid>
+          <Grid.Row style={{borderColor: 'b', overflow: 'visible'}}>
+            <Grid.Column floated='left'>
+              <Popup on='click' content={this.variableTable(showColumns)}
+                     trigger={<Button label={UI.SHOW_VARIABLES.nb} style={{borderColor: 'blue'}}/>}/>
+            </Grid.Column>
+            <Grid.Column floated='right'>
+              {indataVariablesReactTableMode === 'view' &&
+              <Button icon onClick={this.handleEditClick}>
+                <Icon name={ICON.EDIT}
+                      data-testid='iconEdit'/>
+              </Button>}
+              {indataVariablesReactTableMode === 'edit' &&
+              <Button icon onClick={this.handleViewClick}>
+                <Icon name={ICON.VIEW}
+                      data-testid='iconView'/>
+              </Button>}
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <IndataVariablesReactTable mode={indataVariablesReactTableMode} showColumns={showColumns}
+                                         data={this.props.data} lds={this.props.lds}/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
     )
 
   }

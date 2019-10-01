@@ -69,9 +69,13 @@ export const DATASTRUCTURECOMPONENTTYPE = {
 }
 
 export const MESSAGES = {
-  COULD_NOT_CONNECT: {
-    en: 'Could not connect to: ',
-    nb: 'Kunne ikke koble til: '
+  ERROR: {
+    en: 'Error',
+    nb: 'Noe feilet'
+  },
+  ERROR_IN_SEARCH: {
+    en: 'Error in search.',
+    nb: 'Noe feiler i søket.'
   },
   INVALID_FORMAT: {
     en: 'Invalid file format',
@@ -97,57 +101,20 @@ export const MESSAGES = {
     en: 'A property starts with uppercase',
     nb: 'Et objektelement starter med stor bokstav'
   },
-  SPECIAL_FEATURES: {
-    en: 'Enable/disable special features',
-    nb: 'Skru av/på tileggsfunksjoner'
-  },
-  TIMEOUT: {
-    en: 'Request timeout for url: ',
-    nb: 'Tidsavbrudd for kobling mot: '
+  SAVE_SUCCESSFUL: {
+    en: 'Save to LDS was is completed',
+    nb: 'Lagring til LDS gjennomført'
   }
 }
 
 export const UI = {
-  CREATE_NEW: {
-    en: 'Create new',
-    nb: 'Opprett ny'
-  },
   ENGLISH: {
     en: 'English',
     nb: 'Engelsk'
   },
-  GSIM_IMAGE: 'https://statswiki.unece.org/download/attachments/75563987/Figure%202%20Simplified%20view%20of%20GSIM%20information%20objects.png',
-  HEADER: {
-    en: 'GSIM objects',
-    nb: 'GSIM objekter'
-  },
-  HOME: {
-    en: 'Create, import and browse GSIM structured data in Linked Data Store (LDS)',
-    nb: 'Opprett, importér og bla gjennom GSIM strukturert data i Linked Data Store (LDS)'
-  },
-  IMPORT: {
-    en: 'Import',
-    nb: 'Importér'
-  },
-  DATA_MENU: {
-    en: 'Data',
-    nb: 'Data'
-  },
-  IMPORT_DESCRIPTION: {
-    en: 'Import example data to LDS. The upload checks for some missing fields and valid JSON-format before submitting. LDS will return with errors if there are any.',
-    nb: 'Importér eksempeldata til LDS. Opplastingen sjekker etter noen manglende felter og gyldig JSON-format før den sender dataene. LDS returnerer med feil hvis det er noen.'
-  },
-  IMPORTING: {
-    en: 'Importing objects...',
-    nb: 'Importerer objekter...'
-  },
-  IMPORTING_DONE: {
-    en: 'Done importing objects',
-    nb: 'Ferdig med importering'
-  },
-  IMPORTING_SUCCESS: {
-    en: 'Successful imports',
-    nb: 'Feilfrie importer'
+  NORWEGIAN: {
+    en: 'Norwegian',
+    nb: 'Norsk'
   },
   LANGUAGE: {
     en: 'Language',
@@ -157,22 +124,6 @@ export const UI = {
     en: 'English',
     nb: 'Norsk'
   },
-  NORWEGIAN: {
-    en: 'Norwegian',
-    nb: 'Norsk'
-  },
-  SHOW_ALL: {
-    en: 'Show all',
-    nb: 'Vis alle'
-  },
-  SHOW_VARIABLES: {
-    en: 'Show variables',
-    nb: 'Vis variable'
-  },
-  SELECT_FILE: {
-    en: 'Select files',
-    nb: 'Velg filer'
-  },
   INSTANCE_VARIABLES: {
     en: 'Instance variables',
     nb: 'Instansvariabler'
@@ -180,6 +131,10 @@ export const UI = {
   SEARCH: {
     en: 'Search',
     nb: 'Søk'
+  },
+  SHOW_VARIABLES: {
+    en: 'Show variables',
+    nb: 'Vis variable'
   },
   SEARCH_BY_DATARESOURCEID: {
     en: 'Dataresourceid...',
@@ -194,3 +149,11 @@ export const UI = {
 export const GSIM = {
   INSTANCE_VARIABLE: 'InstanceVariable'
 }
+
+export const ICON = {
+  INFO_MESSAGE: 'check circle',
+  ERROR_MESSAGE: 'times circle outline',
+  EDIT: 'edit',
+  VIEW: 'edit outline'
+}
+
