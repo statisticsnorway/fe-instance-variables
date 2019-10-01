@@ -10,7 +10,7 @@ export const LANGUAGES = {
 }
 
 export const LDS_URL = {
-  local:  'https://localhost:9090',
+  local:  'http://localhost:9090',
   stagingLds: 'https://lds-client.staging.ssbmod.net/be/lds',
   stagingLdsB: 'https://lds-client.staging.ssbmod.net/be/lds-b',
   stagingLdsC: 'https://lds-client.staging.ssbmod.net/be/lds-c'
