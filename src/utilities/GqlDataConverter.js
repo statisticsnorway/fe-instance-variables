@@ -15,7 +15,7 @@ export function populateDropdown(dropdownArray) {
 }
 
 
-export let mapLdmDropdownArray = (result) => {
+export let mapLdmArray = (result) => {
   return (result != null && result.length > 0) ? result.map(mapEdge) : []
 }
 
@@ -23,7 +23,8 @@ function mapEdge(edge) {
   return {
     id: edge.node.id,
     name: edge.node.name[0].languageText,
-    description: edge.node.description[0].languageText
+    description: edge.node.description[0].languageText,
+    title: edge.node.name[0].languageText
   }
 }
 

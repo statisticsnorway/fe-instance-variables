@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Header, Segment, Grid, Icon, Input, Button, Dropdown, Message } from 'semantic-ui-react'
+import { Header, Segment, Grid, Icon, Input, Button, Dropdown, Message, Search } from 'semantic-ui-react'
+import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
@@ -10,7 +11,7 @@ import { populateDropdownEnum } from '../utilities/common/dropdown'
 import {
   getLogicalRecordsFromDataResource,
   getLogicalRecordsFromDataSet,
-  mapLdmDropdownArray,
+  mapLdmArray,
   populateDropdown
 } from '../utilities/GqlDataConverter'
 
@@ -23,9 +24,10 @@ class InstanceVariables extends Component {
     this.state = {
       isLoading: false,
       result: [],
-      id: '',
+      id: props.id,
       datasetid: '',
-      datasets: null,
+      allDatasets: [],
+      filteredDatasets: [],
       error: '',
       ready: false,
       lds: props.lds
@@ -37,7 +39,7 @@ class InstanceVariables extends Component {
 
   componentDidMount () {
     const { lds } = this.state
-    this.getAllDataSets(lds.url).then((result) => this.setState({datasets: result}))
+    this.getAllDataSets(lds.url).then((result) => this.setState({allDatasets: mapLdmArray(result.UnitDataSet.edges)}))
   }
 
   getAllDataSets = (url) => {
@@ -64,6 +66,31 @@ class InstanceVariables extends Component {
     this.searchLdmStructure(this.state.datasetid, DATASET_WITH_STRUCTURE, 'DATASET')
   }
 
+  handleResultSelect = (e, { result }) => {
+    console.log(result, 'handleResultSelect')
+    this.searchLdmStructure(result.id, DATASET_WITH_STRUCTURE, 'DATASET')
+  }
+
+  handleSearchChange = (e, { value }) => {
+
+    this.setState({ isLoading: true, datasetid: value })
+
+    setTimeout(() => {
+      if (this.state.datasetid.length < 1) return this.setState({isLoading: false, result:[], datasetid: ''})
+
+      const re = new RegExp(_.escapeRegExp(value), 'i')
+      const isMatch = obj =>
+        re.test(obj.id) || re.test(obj.name)
+
+
+      this.setState({
+        isLoading: false,
+        filteredDatasets: _.filter(this.state.allDatasets, isMatch),
+      })
+    }, 300)
+    console.log('ferdig')
+  }
+
   searchLdmStructure = (queryId, query, objectType) => {
     const queryParam = {id: queryId}
     const { lds } = this.state
@@ -72,7 +99,7 @@ class InstanceVariables extends Component {
     request(graphqlUrl, query, queryParam)
       .then(result => {
         this.setState({
-          result: objectType == 'DATASET' ? getLogicalRecordsFromDataSet(result.UnitDataSetById) : getLogicalRecordsFromDataResource(result.DataResourceById),
+          result: objectType === 'DATASET' ? getLogicalRecordsFromDataSet(result.UnitDataSetById) : getLogicalRecordsFromDataResource(result.DataResourceById),
           ready: true
         }, () => { })
       })
@@ -90,7 +117,7 @@ class InstanceVariables extends Component {
             ...prevState.lds,
               url:data.value
           },
-          datasets: result
+          allDatasets: mapLdmArray(result.UnitDataSet.edges)
         }))
       })
   }
@@ -103,7 +130,7 @@ class InstanceVariables extends Component {
 
 
   render () {
-    const { id, datasetid, datasets, result, ready, error, lds } = this.state
+    const { id, datasetid, allDatasets, filteredDatasets, result, ready, error, lds, isLoading } = this.state
 
     return (
       <Segment basic>
@@ -147,12 +174,23 @@ class InstanceVariables extends Component {
                  onChange={(event, value) => this.handleChange(event, value)}
                  style={{width: "320px"}}/>
           <Button content={UI.SEARCH.nb} onClick={() => this.handleOnDataSetSearchClick()} />
+          <Search
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+              leading: true,
+            })}
+            results={filteredDatasets}
+            value={datasetid}
+            fluid={true}
+            {...this.props}
+          />
           <Dropdown style={{width: "400px"}}
                     selection
                     placeholder={UI.CHOOSE_DATASET.nb}
-                    options={datasets ? (populateDropdown(mapLdmDropdownArray(datasets.UnitDataSet.edges))) : []}
+                    options={allDatasets ? populateDropdown(allDatasets) : []}
                     onChange={(e, data) => this.onChangeDataset(e, data)}
-          />}
+          />
         </Segment>
         {ready &&
         <div>

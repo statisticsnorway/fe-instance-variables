@@ -3,7 +3,7 @@ import { Dropdown, Button, Input, Icon, Segment } from 'semantic-ui-react'
 import ReactTable from 'react-table'
 import {
   populateDropdown,
-  mapLdmDropdownArray,
+  mapLdmArray,
   getInstanceVariableFromLogicalRecords
 } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
@@ -100,7 +100,7 @@ class IndataVariablesReactTableEdit extends Component {
             Cell: (row) => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={populateDropdown(mapLdmDropdownArray(dataStructureComponentTypes.DataStructureComponentType.edges))}
+                        options={populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangeDataStructureComponentType(e, data)}
@@ -120,7 +120,7 @@ class IndataVariablesReactTableEdit extends Component {
             Header: 'population', accessor: 'population', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={(populateDropdown(mapLdmDropdownArray(populations.Population.edges)))}
+                        options={(populateDropdown(mapLdmArray(populations.Population.edges)))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangePopulation(e, data)}
@@ -143,7 +143,7 @@ class IndataVariablesReactTableEdit extends Component {
             Header: 'name', accessor: 'representedVariable', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={populateDropdown(mapLdmDropdownArray(representedVariables.RepresentedVariable.edges))}
+                        options={populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangeRepresentedVariable(e, data)}
