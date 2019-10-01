@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dropdown, Button, Input, Icon, Segment } from 'semantic-ui-react'
+import { Dropdown, Button, Input, Icon, Segment, Message, Grid } from 'semantic-ui-react'
 import ReactTable from 'react-table'
 import {
   populateDropdown,
@@ -12,7 +12,7 @@ import { request } from 'graphql-request'
 import { get, put } from '../utilities/fetch/Fetch'
 import { ALL_POPULATIONS } from '../services/graphql/queries/Population'
 import { ALL_REPRESENTED_VARIABLES } from '../services/graphql/queries/RepresentedVariables'
-import { DATASTRUCTURECOMPONENTTYPE, GSIM } from '../utilities/Enum'
+import { DATASTRUCTURECOMPONENTTYPE, GSIM, MESSAGES, ICON } from '../utilities/Enum'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
@@ -29,13 +29,15 @@ class IndataVariablesReactTableEdit extends Component {
       instanceVariables: [],
       columns: [],
       showColumns: [],
-      error: '',
+      message: '',
+      messageIcon: '',
+      messageColor: '',
       lds: this.props.lds
     }
   }
 
   componentDidMount () {
-    const { lds } = this.state
+    const {lds} = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
     Promise.all([request(graphqlUrl, ALL_POPULATIONS), request(graphqlUrl, ALL_REPRESENTED_VARIABLES)])
       .then(response => {
@@ -45,7 +47,7 @@ class IndataVariablesReactTableEdit extends Component {
             representedVariables: response[1]
           }
         )
-      }).catch(console.error)
+      }).catch(console.message)
   }
 
   componentDidUpdate (prevProps) {
@@ -273,8 +275,8 @@ class IndataVariablesReactTableEdit extends Component {
   }
 
   handleSave = () => {
-    const { lds } = this.props
-    const ldsDataUrl= `${lds.url}/${lds.namespace}/${GSIM.INSTANCE_VARIABLE}`
+    const {lds} = this.props
+    const ldsDataUrl = `${lds.url}/${lds.namespace}/${GSIM.INSTANCE_VARIABLE}`
 
     this.state.instanceVariables.forEach((instanceVariable) => {
       let updatedData = {}
@@ -314,57 +316,82 @@ class IndataVariablesReactTableEdit extends Component {
           console.log(JSON.stringify(updatedData))
           put(ldsDataUrl + '/' + instanceVariable.instanceVariableId, JSON.stringify(updatedData)).then(response => {
               console.log(response)
+              this.setState({
+                message: MESSAGES.SAVE_SUCCESSFUL.nb,
+                messageColor: 'green',
+                messageIcon: ICON.INFO_MESSAGE
+              })
             }
-          ).catch(error =>
-            console.log(error))
+          ).catch(message => {
+              console.log(message)
+              this.setState({
+                message: MESSAGES.ERROR.nb,
+                messageColor: 'red',
+                messageIcon: ICON.ERROR_MESSAGE
+              })
+            }
+          )
         }
 
-      }).catch(error =>
-        console.log(error)
+      }).catch(message =>
+        console.log(message)
       )
     })
   }
 
   render () {
-    const {instanceVariables, populations, representedVariables, dataStructureComponentTypes} = this.state
+    const {instanceVariables, populations, representedVariables, dataStructureComponentTypes, message, messageColor, messageIcon} = this.state
     const {showColumns} = this.props
 
     let columns = this.populateColumns(showColumns, populations, representedVariables, dataStructureComponentTypes)
 
     return (
       <div>
-        <Segment basic>
-          <Button icon onClick={this.handleSave} floated='right'>
-            <Icon name='save'/>
-          </Button>
-        </Segment>
-        <Segment basic>
-          <ReactTableFixedColumns style={{borderColor: 'purple', overflow: 'visible'}}
-                                  data={instanceVariables}
-                                  columns={columns}
-                                  defaultPageSize={10}
-                                  className="-striped -highlight -filters -fixed"
-                                  sortable
-                                  filterable
-                                  defaultFilterMethod={this.filterMethod}
-                                  getTrProps={(state, rowInfo) => ({
-                                    onClick: () => {
-                                      this.clickRowVariable(rowInfo)
-                                      console.log('A row was clicked!')
-                                    }
-                                  })}
-                                  getTdProps={() => {
-                                    return {
-                                      style: {
-                                        overflow: 'visible'
-                                      }
-                                    }
-                                  }}
-          />
-          {/*
-          <Button onClick={this.handleButtonStateClick}>Show state</Button>
-          */}
-        </Segment>
+        {message && <Message color={messageColor} icon={messageIcon} content={message}/>}
+        <Grid>
+          <Grid.Row>
+            <Grid.Column floated='left'>
+            </Grid.Column>
+            <Grid.Column floated='right'>
+              <Button icon onClick={this.handleSave} floated='right'>
+                <Icon name='save'/>
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <ReactTableFixedColumns style={{borderColor: 'purple', overflow: 'visible'}}
+                                      data={instanceVariables}
+                                      columns={columns}
+                                      defaultPageSize={10}
+                                      className="-striped -highlight -filters -fixed"
+                                      sortable
+                                      filterable
+                                      defaultFilterMethod={this.filterMethod}
+                                      getTrProps={(state, rowInfo) => ({
+                                        onClick: () => {
+                                          this.setState({
+                                            message: '',
+                                            messageColor: '',
+                                            messageIcon: ''
+                                          })
+                                        }
+                                      })}
+                                      getTdProps={() => {
+                                        return {
+                                          style: {
+                                            overflow: 'visible'
+                                          }
+                                        }
+                                      }}
+              />
+              {/*
+              <Button onClick={this.handleButtonStateClick}>Show state</Button>
+              */}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+
       </div>)
   }
 }

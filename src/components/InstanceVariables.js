@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Header, Segment, Grid, Icon, Dropdown, Message, Search } from 'semantic-ui-react'
+import { Header, Segment, Grid, Icon, Dropdown, Input, Button, Message, Search } from 'semantic-ui-react'
 import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE, ALL_DATARESOURCES } from '../services/graphql/queries/DataResource'
 import { DATASET_WITH_STRUCTURE, ALL_DATASETS } from '../services/graphql/queries/DataSet'
-import { UI, LDS_URL, MESSAGES } from '../utilities/Enum'
+import { UI, LDS_URL, MESSAGES, ICON } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
 import {
@@ -22,6 +22,9 @@ class InstanceVariables extends Component {
     this.state = {
       isLoading: false,
       result: [],
+      message: '',
+      messageIcon: '',
+      messageColor: '',
       datasetid: props.datasetid,
       allDatasets: [],
       filteredDatasets: [],
@@ -52,7 +55,12 @@ class InstanceVariables extends Component {
 
 
   handleChange = (event, data) => {
-    this.setState({[data.name]: data.value})
+    this.setState({
+      [data.name]: data.value,
+      message: '',
+      messageIcon: '',
+      messageColor: ''
+    })
   }
 
   handleDatasetSearchChange = (e, { value }) => {
@@ -153,6 +161,7 @@ class InstanceVariables extends Component {
                             placeholder={UI.CHOOSE_LDS.nb}
                             options={populateDropdown(LDS_URL)}
                             onChange={(e, data) => this.onChangeLds(e, data)}
+                            data-testid='choose-lds'
                   />
                 </Segment>
               </Grid.Row>
