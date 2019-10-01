@@ -28,7 +28,7 @@ steps:
   - name: publish-docker
     image: plugins/gcr
     settings:
-      repo: bip-nullfem/instance-variables
+      repo: prod-bip/instance-variables
       registry: eu.gcr.io
       tags: "${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:8}"
       json_key:
