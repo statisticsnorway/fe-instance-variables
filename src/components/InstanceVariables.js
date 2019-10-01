@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Header, Segment, Grid, Icon, Dropdown, Message, Search, Divider } from 'semantic-ui-react'
+import { Header, Segment, Grid, Icon, Dropdown, Message, Search } from 'semantic-ui-react'
 import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
@@ -18,7 +18,6 @@ class InstanceVariables extends Component {
 
   constructor (props) {
     super(props)
-    console.log(props)
 
     this.state = {
       isLoading: false,
@@ -56,87 +55,45 @@ class InstanceVariables extends Component {
     this.setState({[data.name]: data.value})
   }
 
+  handleDatasetSearchChange = (e, { value }) => {
+    this.setFilteredArray(value, 'datasetid', 'filteredDatasets', this.state.allDatasets)
+  }
+
   handleDatasetResultSelect = (e, { result }) => {
-    console.log(result, 'handleResultSelect')
     this.searchLdmStructure(result.id, DATASET_WITH_STRUCTURE, 'DATASET')
   }
 
   handleDataResourceSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, dataresourceid: value })
-
-    setTimeout(() => {
-      if (value < 1) return this.setState({isLoading: false, result:[], dataresourceid: ''})
-
-      const re = new RegExp(_.escapeRegExp(value), 'i')
-      const isMatch = obj =>
-        re.test(obj.id) || re.test(obj.name)
-
-
-      this.setState({
-        isLoading: false,
-        filteredDataResources: _.filter(this.state.allDataResources, isMatch),
-      })
-    }, 300)
-    console.log('ferdig')
+    this.setFilteredArray(value, 'dataresourceid', 'filteredDataResources', this.state.allDataResources)
   }
-
-
-
-  handleDatasetSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, datasetid: value })
-
-    setTimeout(() => {
-      if (value < 1) return this.setState({isLoading: false, result:[], datasetid: ''})
-
-      const re = new RegExp(_.escapeRegExp(value), 'i')
-      const isMatch = obj =>
-        re.test(obj.id) || re.test(obj.name)
-
-
-      this.setState({
-        isLoading: false,
-        filteredDatasets: _.filter(this.state.allDatasets, isMatch),
-      })
-    }, 300)
-
-    // this.setState({
-    //   isLoading: false,
-    //   filteredDatasets: this.getFilteredArray(value, this.state.allDatasets),
-    // })
-
-    console.log(this.state,'ferdig')
-  }
-
-
 
   handleDataResourceResultSelect = (e, { result }) => {
     this.searchLdmStructure(result.id, DATARESOURCE_WITH_STRUCTURE, 'DATARESOURCE')
   }
 
-  getFilteredArray = (value, allDataArray) => {
-    let filteredArray = [];
+  setFilteredArray = (value, idType, filteredType, allDataArray)   => {
+    this.setState({ isLoading: true, [idType]: value })
+
     setTimeout(() => {
-      if (value < 1) return this.setState({isLoading: false, result:[] })
+      if (value < 1) return this.setState({isLoading: false, result:[], [idType]: ''})
 
       const re = new RegExp(_.escapeRegExp(value), 'i')
       const isMatch = obj =>
         re.test(obj.id) || re.test(obj.name)
 
-      filteredArray = _.filter(allDataArray, isMatch)
 
+      this.setState({
+        isLoading: false,
+        [filteredType]: _.filter(allDataArray, isMatch),
+      })
     }, 300)
-    return filteredArray
-
   }
-
-
 
 
   onChangeLds = (e, data) => {
     const graphqlUrl = `${data.value}/${this.state.lds.graphql}`
     Promise.all([request(graphqlUrl, ALL_DATARESOURCES), request(graphqlUrl, ALL_DATASETS)])
       .then(response => {
-        console.log(response, 'change lds')
         this.setState(prevState => ({
             lds: {
               ...prevState.lds,
