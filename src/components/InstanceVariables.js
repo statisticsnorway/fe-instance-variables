@@ -4,6 +4,7 @@ import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
 import { DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
 import { UI, LDS_URL, MESSAGES, ICON } from '../utilities/Enum'
+
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
 
