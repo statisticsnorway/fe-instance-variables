@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Header, Segment, Grid, Icon, Dropdown, Input, Button, Message, Search } from 'semantic-ui-react'
+import { Header, Segment, Grid, Icon, Dropdown, Message, Search } from 'semantic-ui-react'
 import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'

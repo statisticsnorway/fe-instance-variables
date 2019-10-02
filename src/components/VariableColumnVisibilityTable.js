@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Checkbox, Table, Grid, Popup, Button, Icon, Segment } from 'semantic-ui-react'
+import { Checkbox, Table, Grid, Popup, Button, Icon } from 'semantic-ui-react'
 import IndataVariablesReactTable from './IndataVariablesReactTable'
 import { UI, ICON } from '../utilities/Enum'
 

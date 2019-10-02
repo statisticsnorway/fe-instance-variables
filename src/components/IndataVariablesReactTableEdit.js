@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dropdown, Button, Input, Icon, Segment, Message, Grid } from 'semantic-ui-react'
+import { Dropdown, Button, Input, Icon, Message, Grid } from 'semantic-ui-react'
 import ReactTable from 'react-table'
 import {
   populateDropdown,
