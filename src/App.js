@@ -7,7 +7,7 @@ class App extends Component {
     languageCode: 'nb',
     lds: {
       namespace: 'ns',
-      url: 'https://lds-client.staging.ssbmod.net/be/lds-b',
+      url: 'https://reactapp.staging-bip-app.ssb.no/be/lds',
       //url: process.env.REACT_APP_LDS ? process.env.REACT_APP_LDS : 'http://localhost:9090',
       // url: 'http://localhost:9090',
       user: 'Test user',
