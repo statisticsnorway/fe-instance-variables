@@ -180,6 +180,7 @@ class InstanceVariables extends Component {
               })}
               results={filteredDataResources}
               value={dataresourceid}
+              data-testid='search-dataresourceid'
             />
           </Segment>
           <Segment>
@@ -193,8 +194,7 @@ class InstanceVariables extends Component {
               })}
               results={filteredDatasets}
               value={datasetid}
-              fluid={true}
-              {...this.props}
+              data-testid='search-dataseteid'
             />
         </Segment>
         </Segment.Group>
