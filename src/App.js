@@ -15,7 +15,6 @@ class App extends Component {
     }
   }
 
-
   render () {
     const { languageCode, lds } = this.state
 
