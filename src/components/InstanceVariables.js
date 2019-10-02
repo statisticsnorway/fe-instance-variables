@@ -3,14 +3,11 @@ import { Header, Segment, Grid, Icon, Dropdown, Input, Button, Message, Search }
 import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
-import { DATARESOURCE_WITH_STRUCTURE, ALL_DATARESOURCES } from '../services/graphql/queries/DataResource'
-import { DATASET_WITH_STRUCTURE, ALL_DATASETS } from '../services/graphql/queries/DataSet'
-import { UI, LDS_URL, MESSAGES, ICON } from '../utilities/Enum'
+import { UI, LDS_URL, LDM_TYPE } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
 import {
-  getLogicalRecordsFromDataResource,
-  getLogicalRecordsFromDataSet,
+  getLogicalRecordsFromLdmStructure,
   mapLdmArray
 } from '../utilities/GqlDataConverter'
 
@@ -42,17 +39,8 @@ class InstanceVariables extends Component {
 
 
   componentDidMount () {
-    const graphqlUrl = `${this.state.lds.url}/${this.state.lds.graphql}`
-    Promise.all([request(graphqlUrl, ALL_DATARESOURCES), request(graphqlUrl, ALL_DATASETS)])
-      .then(response => {
-        this.setState({
-            allDataResources: (response[0] ? mapLdmArray(response[0].DataResource.edges) : []),
-            allDatasets: (response[1] ? mapLdmArray(response[1].UnitDataSet.edges) : [])
-          }
-        )
-      }).catch(console.error)
+    this.setLdsState(this.state.lds.url)
   }
-
 
   handleChange = (event, data) => {
     this.setState({
@@ -64,66 +52,51 @@ class InstanceVariables extends Component {
   }
 
   handleDatasetSearchChange = (e, { value }) => {
-    this.setFilteredArray(value, 'datasetid', 'filteredDatasets', this.state.allDatasets)
+    this.setFilteredArray(value, LDM_TYPE.DATASET, this.state.allDatasets)
   }
 
   handleDatasetResultSelect = (e, { result }) => {
-    this.searchLdmStructure(result.id, DATASET_WITH_STRUCTURE, 'DATASET')
+    this.searchLdmStructure(result.id, LDM_TYPE.DATASET )
   }
 
   handleDataResourceSearchChange = (e, { value }) => {
-    this.setFilteredArray(value, 'dataresourceid', 'filteredDataResources', this.state.allDataResources)
+    this.setFilteredArray(value, LDM_TYPE.DATARESOURCE, this.state.allDataResources)
   }
 
   handleDataResourceResultSelect = (e, { result }) => {
-    this.searchLdmStructure(result.id, DATARESOURCE_WITH_STRUCTURE, 'DATARESOURCE')
+    this.searchLdmStructure(result.id, LDM_TYPE.DATARESOURCE)
   }
 
-  setFilteredArray = (value, idType, filteredType, allDataArray)   => {
-    this.setState({ isLoading: true, [idType]: value })
+
+  setFilteredArray = (value, ldmObject, allDataArray)   => {
+    this.setState({ isLoading: true, [ldmObject.ldmId]: value })
 
     setTimeout(() => {
-      if (value < 1) return this.setState({isLoading: false, result:[], [idType]: ''})
+      if (value < 1) return this.setState({isLoading: false, result:[], [ldmObject.ldmId]: ''})
 
       const re = new RegExp(_.escapeRegExp(value), 'i')
       const isMatch = obj =>
         re.test(obj.id) || re.test(obj.name)
 
-
       this.setState({
         isLoading: false,
-        [filteredType]: _.filter(allDataArray, isMatch),
+        [ldmObject.filteredArray]: _.filter(allDataArray, isMatch),
       })
     }, 300)
   }
 
 
-  onChangeLds = (e, data) => {
-    const graphqlUrl = `${data.value}/${this.state.lds.graphql}`
-    Promise.all([request(graphqlUrl, ALL_DATARESOURCES), request(graphqlUrl, ALL_DATASETS)])
-      .then(response => {
-        this.setState(prevState => ({
-            lds: {
-              ...prevState.lds,
-              url: data.value
-            },
-            allDataResources: (response[0] ? mapLdmArray(response[0].DataResource.edges) : []),
-            allDatasets: (response[1] ? mapLdmArray(response[1].UnitDataSet.edges) : [])
-          })
-        )
-      }).catch(console.error)
-  }
-
-
-  searchLdmStructure = (queryId, query, objectType) => {
+  searchLdmStructure = (queryId, ldmObject) => {
     const queryParam = {id: queryId}
     const { lds } = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
 
-    request(graphqlUrl, query, queryParam)
+    request(graphqlUrl, ldmObject.dataStructureQuery, queryParam)
       .then(result => {
         this.setState({
-          result: objectType === 'DATASET' ? getLogicalRecordsFromDataSet(result.UnitDataSetById) : getLogicalRecordsFromDataResource(result.DataResourceById),
+          datasetid: ldmObject === LDM_TYPE.DATASET ? queryId : '',
+          dataresourceid: ldmObject === LDM_TYPE.DATARESOURCE ? queryId : '',
+          result: getLogicalRecordsFromLdmStructure(result, ldmObject),
           ready: true
         }, () => { })
       })
@@ -133,8 +106,32 @@ class InstanceVariables extends Component {
       })
   }
 
+
+  onChangeLds = (e, data) => {
+    this.setLdsState(data.value)
+  }
+
+  setLdsState = (ldsUrl) => {
+    const graphqlUrl = `${ldsUrl}/${this.state.lds.graphql}`
+    Promise.all([request(graphqlUrl, LDM_TYPE.DATARESOURCE.allDataQuery),
+      request(graphqlUrl, LDM_TYPE.DATASET.allDataQuery)])
+      .then(response => {
+        this.setState(prevState => ({
+            lds: {
+              ...prevState.lds,
+              url: ldsUrl
+            },
+            allDataResources: (response[0] ? mapLdmArray(response[0].DataResource.edges) : []),
+            allDatasets: (response[1] ? mapLdmArray(response[1].UnitDataSet.edges) : [])
+          })
+        )
+      }).catch(console.error)
+  }
+
+
+
   render () {
-    const { dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, error, lds, isLoading } = this.state
+    const { dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, message, messageIcon, lds, isLoading } = this.state
 
     return (
       <Segment basic>
@@ -168,11 +165,14 @@ class InstanceVariables extends Component {
             </Grid.Column>
           </Grid>
         </Segment>
+        <Segment basic>
+          { message && <Message negative icon={messageIcon} content={message} /> }
+        </Segment>
         <Segment.Group horizontal>
-          { error && <Message negative icon='warning' content={error} /> }
           <Segment>
             <Header> {UI.SEARCH_BY_DATARESOURCEID.nb}</Header>
             <Search
+              input={{fluid: true}}
               loading={isLoading}
               onResultSelect={this.handleDataResourceResultSelect}
               onSearchChange={_.debounce(this.handleDataResourceSearchChange, 500, {
@@ -180,13 +180,12 @@ class InstanceVariables extends Component {
               })}
               results={filteredDataResources}
               value={dataresourceid}
-              fluid={true}
-              {...this.props}
             />
           </Segment>
           <Segment>
             <Header> {UI.SEARCH_BY_DATASETID.nb}</Header>
             <Search
+              input={{fluid: true}}
               loading={isLoading}
               onResultSelect={this.handleDatasetResultSelect}
               onSearchChange={_.debounce(this.handleDatasetSearchChange, 500, {
@@ -201,11 +200,6 @@ class InstanceVariables extends Component {
         </Segment.Group>
         {ready &&
         <div>
-         {/*
-          <Segment>
-              <IndataTree unitDataSets={result}/>
-          </Segment>
-         */}
           <Segment>
             <VariableColumnVisibilityTable data={result} lds={lds}/>
           </Segment>

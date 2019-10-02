@@ -270,9 +270,9 @@ class IndataVariablesReactTableEdit extends Component {
     })
   }
 
-  handleButtonStateClick = () => {
-    console.log('State:' + JSON.stringify(this.state, null, 2))
-  }
+  // handleButtonStateClick = () => {
+  //   console.log('State:' + JSON.stringify(this.state, null, 2))
+  // }
 
   handleSave = () => {
     const {lds} = this.props

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactTable from 'react-table'
-import { populateVariableData, getInstanceVariableFromLogicalRecords } from '../utilities/GqlDataConverter'
+import { getInstanceVariableFromLogicalRecords } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
 
@@ -126,9 +126,9 @@ class IndataVariablesReactTableView extends Component {
     else return true
   }
 
-  handleButtonStateClick = () => {
-    console.log('State:' + JSON.stringify(this.state, null, 2))
-  }
+  // handleButtonStateClick = () => {
+  //   console.log('State:' + JSON.stringify(this.state, null, 2))
+  // }
 
   render () {
     const {populations} = this.state
