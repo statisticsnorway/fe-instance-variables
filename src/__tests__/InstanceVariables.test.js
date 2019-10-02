@@ -31,8 +31,8 @@ test('InstanceVariables renders correctly', () => {
   expect(queryAllByText('Instansvariabler')).toHaveLength(1)
 
   expect(queryAllByTestId('choose-lds')).toHaveLength(1)
-  expect(queryAllByTestId('dataresourceid')).toHaveLength(1)
-  expect(queryAllByTestId('dateresourceidsearch')).toHaveLength(1)
+  expect(queryAllByTestId('search-dataseteid')).toHaveLength(1)
+  expect(queryAllByTestId('search-dataseteid')).toHaveLength(1)
 })
 
 test('ChooseLdsDropdown renders correctly', () => {

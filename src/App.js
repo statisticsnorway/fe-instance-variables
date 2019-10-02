@@ -9,6 +9,7 @@ class App extends Component {
       namespace: 'ns',
       url: 'https://lds-client.staging.ssbmod.net/be/lds-b',
       //url: process.env.REACT_APP_LDS ? process.env.REACT_APP_LDS : 'http://localhost:9090',
+      // url: 'http://localhost:9090',
       user: 'Test user',
       graphql: 'graphql'
     }

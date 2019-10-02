@@ -1,3 +1,6 @@
+import {ALL_DATASETS, DATASET_WITH_STRUCTURE} from '../services/graphql/queries/DataSet'
+import {ALL_DATARESOURCES, DATARESOURCE_WITH_STRUCTURE} from '../services/graphql/queries/DataResource'
+
 export const LANGUAGES = {
   norwegian: {
     flag: 'no',
@@ -140,10 +143,19 @@ export const UI = {
     en: 'Dataresourceid...',
     nb: 'Dataresourceid...'
   },
+  SEARCH_BY_DATASETID: {
+    en: 'Datasetid...',
+    nb: 'Datasettid...'
+  },
+  CHOOSE_DATASET: {
+    en: 'Choose dataSet...',
+    nb: 'Velg datasett...'
+  },
   CHOOSE_LDS: {
     en: 'Choose lds...',
     nb: 'Velg lds...'
   }
+
 }
 
 export const GSIM = {
@@ -155,5 +167,21 @@ export const ICON = {
   ERROR_MESSAGE: 'times circle outline',
   EDIT: 'edit',
   VIEW: 'edit outline'
+}
+
+export const LDM_TYPE = {
+  DATASET: {
+    allDataQuery: ALL_DATASETS,
+    dataStructureQuery: DATASET_WITH_STRUCTURE,
+    filteredArray: 'filteredDatasets',
+    ldmId: 'datasetid'
+  },
+  DATARESOURCE: {
+    allDataQuery: ALL_DATARESOURCES,
+    dataStructureQuery: DATARESOURCE_WITH_STRUCTURE,
+    filteredArray: 'filteredDataResources',
+    ldmId: 'dataresourceid'
+  }
+
 }
 

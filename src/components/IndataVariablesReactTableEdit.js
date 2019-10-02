@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { Dropdown, Button, Input, Icon, Segment, Message, Grid } from 'semantic-ui-react'
+import { Dropdown, Button, Input, Icon, Message, Grid } from 'semantic-ui-react'
 import ReactTable from 'react-table'
-import { populateDropdown, populateVariableData, mapLdmDropdownArray } from '../utilities/GqlDataConverter'
+import {
+  populateDropdown,
+  mapLdmArray,
+  getInstanceVariableFromLogicalRecords
+} from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
 import { request } from 'graphql-request'
@@ -39,7 +43,7 @@ class IndataVariablesReactTableEdit extends Component {
       .then(response => {
         this.setState({
             populations: response[0],
-            instanceVariables: populateVariableData(this.props.data),
+            instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data),
             representedVariables: response[1]
           }
         )
@@ -48,7 +52,7 @@ class IndataVariablesReactTableEdit extends Component {
 
   componentDidUpdate (prevProps) {
     if (this.props.data !== prevProps.data) {
-      this.setState({instanceVariables: populateVariableData(this.props.data)})
+      this.setState({instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data)})
     }
   }
 
@@ -98,7 +102,7 @@ class IndataVariablesReactTableEdit extends Component {
             Cell: (row) => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={populateDropdown(mapLdmDropdownArray(dataStructureComponentTypes.DataStructureComponentType.edges))}
+                        options={populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangeDataStructureComponentType(e, data)}
@@ -118,7 +122,7 @@ class IndataVariablesReactTableEdit extends Component {
             Header: 'population', accessor: 'population', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={(populateDropdown(mapLdmDropdownArray(populations.Population.edges)))}
+                        options={(populateDropdown(mapLdmArray(populations.Population.edges)))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangePopulation(e, data)}
@@ -141,7 +145,7 @@ class IndataVariablesReactTableEdit extends Component {
             Header: 'name', accessor: 'representedVariable', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={populateDropdown(mapLdmDropdownArray(representedVariables.RepresentedVariable.edges))}
+                        options={populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangeRepresentedVariable(e, data)}
@@ -266,9 +270,9 @@ class IndataVariablesReactTableEdit extends Component {
     })
   }
 
-  handleButtonStateClick = () => {
-    console.log('State:' + JSON.stringify(this.state, null, 2))
-  }
+  // handleButtonStateClick = () => {
+  //   console.log('State:' + JSON.stringify(this.state, null, 2))
+  // }
 
   handleSave = () => {
     const {lds} = this.props
