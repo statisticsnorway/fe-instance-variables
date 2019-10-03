@@ -87,7 +87,7 @@ class InstanceVariables extends Component {
 
   searchLdmStructure = (queryId, ldmObject) => {
     const queryParam = {id: queryId}
-    const { lds } = this.state
+    const { lds, languageCode } = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
 
     request(graphqlUrl, ldmObject.dataStructureQuery, queryParam)
@@ -101,7 +101,11 @@ class InstanceVariables extends Component {
       })
       .catch(error => {
         console.log(error)
-        this.setState({result: [], error: error})
+        this.setState({
+          result: [],
+          message: MESSAGES.ERROR[languageCode],
+          messageIcon: ICON.ERROR_MESSAGE,
+        })
       })
   }
 

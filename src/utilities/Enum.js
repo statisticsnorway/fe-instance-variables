@@ -73,8 +73,8 @@ export const DATASTRUCTURECOMPONENTTYPE = {
 
 export const MESSAGES = {
   ERROR: {
-    en: 'Error',
-    nb: 'Noe feilet'
+    en: 'Error. View browser console for further information.',
+    nb: 'Noe feilet. Se i internettleserkonsollet for mer informasjon.'
   },
   ERROR_IN_SEARCH: {
     en: 'Error in search.',
