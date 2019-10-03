@@ -14,9 +14,9 @@ export const LANGUAGES = {
 
 export const LDS_URL = {
   local:  'http://localhost:9090',
-  stagingLds: 'https://reactapp.staging-bip-app.ssb.no/be/lds',
-  stagingLdsB: 'https://reactapp.staging-bip-app.ssb.no/be/lds-b',
-  stagingLdsC: 'https://reactapp.staging-bip-app.ssb.no/be/lds-c'
+  stagingLds: 'https://instance-variables.staging-bip-app.ssb.no/be/lds',
+  stagingLdsB: 'https://instance-variables.staging-bip-app.ssb.no/be/lds-b',
+  stagingLdsC: 'https://instance-variables.staging-bip-app.ssb.no/be/lds-c'
 }
 
 export const DATASTRUCTURECOMPONENTTYPE = {

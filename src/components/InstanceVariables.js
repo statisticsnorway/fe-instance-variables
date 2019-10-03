@@ -3,7 +3,7 @@ import { Header, Segment, Grid, Icon, Dropdown, Message, Search } from 'semantic
 import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
-import { UI, LDS_URL, LDM_TYPE } from '../utilities/Enum'
+import { UI, LDS_URL, LDM_TYPE, MESSAGES, ICON } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
 import {
@@ -30,13 +30,12 @@ class InstanceVariables extends Component {
       filteredDataResources: [],
       error: '',
       ready: false,
-      lds: props.lds
+      lds: props.lds,
+      languageCode: props.languageCode
     }
 
     this.handleChange = this.handleChange.bind(this)
   }
-
-
 
   componentDidMount () {
     this.setLdsState(this.state.lds.url)
@@ -112,6 +111,8 @@ class InstanceVariables extends Component {
   }
 
   setLdsState = (ldsUrl) => {
+    const { languageCode } = this.state
+
     const graphqlUrl = `${ldsUrl}/${this.state.lds.graphql}`
     Promise.all([request(graphqlUrl, LDM_TYPE.DATARESOURCE.allDataQuery),
       request(graphqlUrl, LDM_TYPE.DATASET.allDataQuery)])
@@ -125,7 +126,15 @@ class InstanceVariables extends Component {
             allDatasets: (response[1] ? mapLdmArray(response[1].UnitDataSet.edges) : [])
           })
         )
-      }).catch(console.error)
+      }).catch( error => {
+      console.log(error)
+      this.setState({
+        message: MESSAGES.ERROR[languageCode],
+        messageIcon: ICON.ERROR_MESSAGE,
+        allDataResources: [],
+        allDatasets: []
+      })
+    })
   }
 
 
