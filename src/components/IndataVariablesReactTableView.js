@@ -132,7 +132,7 @@ class IndataVariablesReactTableView extends Component {
 
   render () {
     const {populations} = this.state
-    const instanceVariables = getInstanceVariableFromLogicalRecords(this.props.data)
+    const instanceVariables = this.props.data ? getInstanceVariableFromLogicalRecords(this.props.data) : []
     const {showColumns} = this.props
     const columns = this.populateColumns(showColumns, populations)
 
