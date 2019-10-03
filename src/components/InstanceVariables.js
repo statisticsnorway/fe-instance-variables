@@ -50,28 +50,27 @@ class InstanceVariables extends Component {
     })
   }
 
-  handleDatasetSearchChange = (e, { value }) => {
+  handleDatasetSearchChange = (e, {value}) => {
     this.setFilteredArray(value, LDM_TYPE.DATASET, this.state.allDatasets)
   }
 
-  handleDatasetResultSelect = (e, { result }) => {
-    this.searchLdmStructure(result.id, LDM_TYPE.DATASET )
+  handleDatasetResultSelect = (e, {result}) => {
+    this.searchLdmStructure(result.id, LDM_TYPE.DATASET)
   }
 
-  handleDataResourceSearchChange = (e, { value }) => {
+  handleDataResourceSearchChange = (e, {value}) => {
     this.setFilteredArray(value, LDM_TYPE.DATARESOURCE, this.state.allDataResources)
   }
 
-  handleDataResourceResultSelect = (e, { result }) => {
+  handleDataResourceResultSelect = (e, {result}) => {
     this.searchLdmStructure(result.id, LDM_TYPE.DATARESOURCE)
   }
 
-
-  setFilteredArray = (value, ldmObject, allDataArray)   => {
-    this.setState({ isLoading: true, [ldmObject.ldmId]: value })
+  setFilteredArray = (value, ldmObject, allDataArray) => {
+    this.setState({isLoading: true, [ldmObject.ldmId]: value})
 
     setTimeout(() => {
-      if (value < 1) return this.setState({isLoading: false, result:[], [ldmObject.ldmId]: ''})
+      if (value < 1) return this.setState({isLoading: false, result: [], [ldmObject.ldmId]: ''})
 
       const re = new RegExp(_.escapeRegExp(value), 'i')
       const isMatch = obj =>
@@ -84,10 +83,9 @@ class InstanceVariables extends Component {
     }, 300)
   }
 
-
   searchLdmStructure = (queryId, ldmObject) => {
     const queryParam = {id: queryId}
-    const { lds, languageCode } = this.state
+    const {lds, languageCode} = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
 
     request(graphqlUrl, ldmObject.dataStructureQuery, queryParam)
@@ -103,19 +101,20 @@ class InstanceVariables extends Component {
         console.log(error)
         this.setState({
           result: [],
+          allDataResources: [],
+          allDatasets: [],
           message: MESSAGES.ERROR[languageCode],
           messageIcon: ICON.ERROR_MESSAGE,
         })
       })
   }
 
-
   onChangeLds = (e, data) => {
     this.setLdsState(data.value)
   }
 
   setLdsState = (ldsUrl) => {
-    const { languageCode } = this.state
+    const {languageCode} = this.state
 
     const graphqlUrl = `${ldsUrl}/${this.state.lds.graphql}`
     Promise.all([request(graphqlUrl, LDM_TYPE.DATARESOURCE.allDataQuery),
@@ -127,24 +126,29 @@ class InstanceVariables extends Component {
               url: ldsUrl
             },
             allDataResources: (response[0] ? mapLdmArray(response[0].DataResource.edges) : []),
-            allDatasets: (response[1] ? mapLdmArray(response[1].UnitDataSet.edges) : [])
+            allDatasets: (response[1] ? mapLdmArray(response[1].UnitDataSet.edges) : []),
+            message: '',
+            messageIcon: ''
           })
         )
-      }).catch( error => {
+      }).catch(error => {
       console.log(error)
-      this.setState({
-        message: MESSAGES.ERROR[languageCode],
-        messageIcon: ICON.ERROR_MESSAGE,
-        allDataResources: [],
-        allDatasets: []
-      })
+      this.setState(prevState => ({
+          lds: {
+            ...prevState.lds,
+            url: ldsUrl
+          },
+          message: MESSAGES.ERROR[languageCode],
+          messageIcon: ICON.ERROR_MESSAGE,
+          allDataResources: [],
+          allDatasets: []
+        })
+      )
     })
   }
 
-
-
   render () {
-    const { dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, message, messageIcon, lds, isLoading } = this.state
+    const {dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, message, messageIcon, lds, isLoading} = this.state
 
     return (
       <Segment basic>
@@ -152,10 +156,10 @@ class InstanceVariables extends Component {
           <Grid columns={2} divided>
             <Grid.Column textAlign='left'>
               <Grid.Row>
-              <Header as='h2' icon>
-                <Icon name='clone outline'/>
-                {UI.INSTANCE_VARIABLES.nb}
-              </Header>
+                <Header as='h2' icon>
+                  <Icon name='clone outline' onClick={() => window.location.reload(false)}/>
+                  {UI.INSTANCE_VARIABLES.nb}
+                </Header>
               </Grid.Row>
             </Grid.Column>
             <Grid.Column textAlign='right'>
@@ -169,6 +173,7 @@ class InstanceVariables extends Component {
                   <Dropdown style={{width: "400px"}}
                             selection
                             placeholder={UI.CHOOSE_LDS.nb}
+                            value={lds.url}
                             options={populateDropdown(LDS_URL)}
                             onChange={(e, data) => this.onChangeLds(e, data)}
                             data-testid='choose-lds'
@@ -179,7 +184,7 @@ class InstanceVariables extends Component {
           </Grid>
         </Segment>
         <Segment basic>
-          { message && <Message negative icon={messageIcon} content={message} /> }
+          {message && <Message negative icon={messageIcon} content={message}/>}
         </Segment>
         <Segment.Group horizontal>
           <Segment>
@@ -209,7 +214,7 @@ class InstanceVariables extends Component {
               value={datasetid}
               data-testid='search-dataseteid'
             />
-        </Segment>
+          </Segment>
         </Segment.Group>
         {ready &&
         <div>
