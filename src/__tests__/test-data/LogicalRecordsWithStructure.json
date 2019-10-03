@@ -1,0 +1,532 @@
+[
+        {
+            "id": "00421599-d50f-4c34-9ce1-261aa5483c3c",
+            "shortName": "SKATTEFRIARVGAVEOGGEVINST",
+            "unitType": {
+              "name": [
+                {
+                  "languageText": "UnitType_DUMMY"
+                },
+                {
+                  "languageText": "Enhetstype_DUMMY"
+                }
+              ]
+            },
+            "instanceVariables": {
+              "edges": [
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "samletVerdiArvEllerGaveUtenforArbeidsforhold"
+                      }
+                    ],
+                    "id": "67e2de76-5bb5-465f-a6b0-76522661009e",
+                    "shortName": "samletVerdiArvEllerGaveUtenforArbeidsforhold",
+                    "description": [
+                      {
+                        "languageText": "samlet verdi arv eller gave utenfor arbeidsforhold"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "skattefriGevinstFraSpillEllerTiltakArrangertAvMassemedia"
+                      }
+                    ],
+                    "id": "f7ec0fb9-ff7f-4e08-bcac-67add36f5481",
+                    "shortName": "skattefriGevinstFraSpillEllerTiltakArrangertAvMassemedia",
+                    "description": [
+                      {
+                        "languageText": "skattefri gevinst fra spill eller tiltak arrangert av massemedia"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+        },
+        {
+            "id": "17e30acd-d504-4365-94f3-6513dbb5c9a5",
+            "shortName": "LOENNOGTILSVARENDEYTELSER",
+            "unitType": {
+              "name": [
+                {
+                  "languageText": "UnitType_DUMMY"
+                },
+                {
+                  "languageText": "Enhetstype_DUMMY"
+                }
+              ]
+            },
+            "instanceVariables": {
+              "edges": [
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "overfoertFraBarn"
+                      }
+                    ],
+                    "id": "3ee76e40-a4ff-47dc-afc2-139d1a09a151",
+                    "shortName": "overfoertFraBarn",
+                    "description": [
+                      {
+                        "languageText": "overfoert fra barn"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "beloep"
+                      }
+                    ],
+                    "id": "6b610c22-f7eb-4812-b1e3-9605615f7419",
+                    "shortName": "beloep",
+                    "description": [
+                      {
+                        "languageText": "beloep"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "organisasjonsnummer"
+                      }
+                    ],
+                    "id": "6f37a31c-a921-4db4-846f-d596adc865e9",
+                    "shortName": "organisasjonsnummer",
+                    "description": [
+                      {
+                        "languageText": "organisasjonsnummer lønn og tilsvarende ytelser "
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "behandlingsart"
+                      }
+                    ],
+                    "id": "98b70997-372b-4fea-80ab-4d2a5c0c7175",
+                    "shortName": "behandlingsart",
+                    "description": [
+                      {
+                        "languageText": "behandlingsart lønn og tilsvarende ytelser"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+        },
+        {
+            "id": "46e0923e-0f7c-4ab9-b945-d3a9308a168b",
+            "shortName": "SKATTEPLIKTIGKUNDEUTBYTTEUTENFORVIRKSOMHETPERUTBETALER",
+            "unitType": {
+              "name": [
+                {
+                  "languageText": "UnitType_DUMMY"
+                },
+                {
+                  "languageText": "Enhetstype_DUMMY"
+                }
+              ]
+            },
+            "instanceVariables": {
+              "edges": [
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "organisasjonsnummer"
+                      }
+                    ],
+                    "id": "77d454fa-430b-4d1a-be31-7c59f7479180",
+                    "shortName": "organisasjonsnummer",
+                    "description": [
+                      {
+                        "languageText": "organisasjonsnummer"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "description": [
+                          {
+                            "languageText": "dummy variabel"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+]

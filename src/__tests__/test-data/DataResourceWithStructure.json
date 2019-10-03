@@ -1,0 +1,1009 @@
+{
+  "data": {
+    "DataResourceById": {
+      "id": "8518c0ff-62ef-47c2-b26b-f663b211b1c6",
+      "name": [
+        {
+          "languageText": "uttrekkSkattemelding"
+        }
+      ],
+      "dataSets": {
+        "edges": [
+          {
+            "cursor": "757fe86d-8b1d-4f40-97fa-e94f35003e43",
+            "node": {
+              "id": "757fe86d-8b1d-4f40-97fa-e94f35003e43",
+              "description": [
+                {
+                  "languageText": "uttrekk skattemelding"
+                }
+              ],
+              "unitDataStructure": {
+                "id": "ba5f44c0-5da0-4d35-9323-499e0d894d49",
+                "name": [
+                  {
+                    "languageText": "uttrekkSkattemelding"
+                  }
+                ],
+                "logicalRecords": {
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "83e328f0-37ea-4c11-8d25-7e5417bfade6",
+                        "shortName": "OEKONOMISKEFORHOLDKNYTTETTILBOLIGSAMEIEELLERBOLIGSELSKAP",
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        },
+                        "instanceVariables": {
+                          "edges": [
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "oekonomiskeForholdKnyttetTilBoligsameieEllerBoligselskap_andelAvFellesgjeldIBoligsameie"
+                                  }
+                                ],
+                                "id": "64f9c9e2-d595-40a5-b243-af73b9dc8033",
+                                "shortName": "andelAvFellesgjeldIBoligsameie",
+                                "description": [
+                                  {
+                                    "languageText": "oekonomiskeforholdknyttettilboligsameieellerboligselskap andelavfellesgjeldiboligsameie"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "oekonomiskeForholdKnyttetTilBoligsameieEllerBoligselskap_andelAvAnnenFormueIBoligsameie"
+                                  }
+                                ],
+                                "id": "6a766e16-8309-470a-82e3-7fefc892bd43",
+                                "shortName": "andelAvAnnenFormueIBoligsameie",
+                                "description": [
+                                  {
+                                    "languageText": "oekonomiskeforholdknyttettilboligsameieellerboligselskap andelavannenformueiboligsameie"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "oekonomiskeForholdKnyttetTilBoligsameieEllerBoligselskap_record_source"
+                                  }
+                                ],
+                                "id": "a0fdd315-0f3d-497b-8abb-c7eac3cf63ab",
+                                "shortName": "RECORD_SOURCE",
+                                "description": [
+                                  {
+                                    "languageText": "oekonomiskeforholdknyttettilboligsameieellerboligselskap record source"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "ATTRIBUTE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "9c120369-b213-40e4-a16d-d4b51ca43aff",
+                        "shortName": "ARBEIDSOPPHOLDUTENFORHJEMMET",
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        },
+                        "instanceVariables": {
+                          "edges": [
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsoppholdUtenforHjemmet_merkostnadForKostVedArbeidsoppholdUtenforHjemmet"
+                                  }
+                                ],
+                                "id": "20875570-f66b-490d-993b-74d0feb4f018",
+                                "shortName": "merkostnadForKostVedArbeidsoppholdUtenforHjemmet",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsoppholdutenforhjemmet merkostnadforkostvedarbeidsoppholdutenforhjemmet"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsoppholdUtenforHjemmet_record_source"
+                                  }
+                                ],
+                                "id": "3f8b902d-e79a-41f6-9e61-39b0ec7e1a58",
+                                "shortName": "RECORD_SOURCE",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsoppholdutenforhjemmet record source"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "ATTRIBUTE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsoppholdUtenforHjemmet_antallDager"
+                                  }
+                                ],
+                                "id": "7c4e6df2-1b78-4e9d-88a1-06df3ffd7d72",
+                                "shortName": "antallDager",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsoppholdutenforhjemmet antalldager"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsoppholdUtenforHjemmet_arbeidsgiversOrganisasjonsnummer"
+                                  }
+                                ],
+                                "id": "85eaadc6-db62-4f44-ab9c-c641209cf06f",
+                                "shortName": "arbeidsgiversOrganisasjonsnummer",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsoppholdutenforhjemmet arbeidsgiversorganisasjonsnummer"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "afc0a4c5-35be-4766-b71f-e18f83f209d2",
+                        "shortName": "ARBEIDSREISE",
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        },
+                        "instanceVariables": {
+                          "edges": [
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsreise_lengdeAvArbeidsreiseTurRetur"
+                                  }
+                                ],
+                                "id": "11e5ea14-ba21-48f6-b7c3-6d8208d8e9bf",
+                                "shortName": "lengdeAvArbeidsreiseTurRetur",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsreise lengdeavarbeidsreiseturretur"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsreise_record_source"
+                                  }
+                                ],
+                                "id": "1f400ce0-fbbc-489a-87a7-ea57de934efc",
+                                "shortName": "RECORD_SOURCE",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsreise record source"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "ATTRIBUTE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsreise_bompengeEllerFergeutgifterUnderArbeidsreise"
+                                  }
+                                ],
+                                "id": "65fbc159-913d-40c7-a708-d23e6a0a5d17",
+                                "shortName": "bompengeEllerFergeutgifterUnderArbeidsreise",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsreise bompengeellerfergeutgifterunderarbeidsreise"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "arbeidsreise_antallDagerMedArbeidsreise"
+                                  }
+                                ],
+                                "id": "76bd9753-0750-4994-b345-32f24352f668",
+                                "shortName": "antallDagerMedArbeidsreise",
+                                "description": [
+                                  {
+                                    "languageText": "arbeidsreise antalldagermedarbeidsreise"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "d45f9a04-591c-4e23-b4ae-d0dc7ab41e7a",
+                        "shortName": "UTTREKKSKATTEMELDING",
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        },
+                        "instanceVariables": {
+                          "edges": [
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "uttrekkSkattemelding_inntekstaar"
+                                  }
+                                ],
+                                "id": "2bf627f7-54e4-4275-bcde-723fce88bed8",
+                                "shortName": "inntekstaar",
+                                "description": [
+                                  {
+                                    "languageText": "uttrekkskattemelding inntekstaar"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "uttrekkSkattemelding_record_source"
+                                  }
+                                ],
+                                "id": "b351886d-bbdb-4b81-bef0-b508ca039efb",
+                                "shortName": "RECORD_SOURCE",
+                                "description": [
+                                  {
+                                    "languageText": "uttrekkskattemelding record source"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "ATTRIBUTE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "dacf5d85-5864-4e66-bac3-bd691cb91c10",
+                        "shortName": "SKATTEPLIKTIG",
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        },
+                        "instanceVariables": {
+                          "edges": [
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "skattepliktig_record_source"
+                                  }
+                                ],
+                                "id": "126f60cc-55aa-4d93-85c2-c81314c7dce4",
+                                "shortName": "RECORD_SOURCE",
+                                "description": [
+                                  {
+                                    "languageText": "skattepliktig record source"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "ATTRIBUTE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "node": {
+                                "name": [
+                                  {
+                                    "languageText": "skattepliktig_personidentifikator"
+                                  }
+                                ],
+                                "id": "e1d520ce-cc1c-46db-bf6b-9a2f6c6f18cf",
+                                "shortName": "personidentifikator",
+                                "description": [
+                                  {
+                                    "languageText": "skattepliktig personidentifikator"
+                                  }
+                                ],
+                                "population": {
+                                  "id": "Population_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "Population_DUMMY"
+                                    }
+                                  ]
+                                },
+                                "dataStructureComponentType": "MEASURE",
+                                "representedVariable": {
+                                  "id": "RepresentertVariable_DUMMY",
+                                  "name": [
+                                    {
+                                      "languageText": "RepresentertVariable_DUMMY"
+                                    }
+                                  ],
+                                  "universe": {
+                                    "name": [
+                                      {
+                                        "languageText": "Universe_DUMMY"
+                                      }
+                                    ]
+                                  },
+                                  "variable": {
+                                    "id": "Variable_DUMMY",
+                                    "name": [
+                                      {
+                                        "languageText": "Variable_DUMMY"
+                                      }
+                                    ],
+                                    "unitType": {
+                                      "name": [
+                                        {
+                                          "languageText": "UnitType_DUMMY"
+                                        },
+                                        {
+                                          "languageText": "Enhetstype_DUMMY"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

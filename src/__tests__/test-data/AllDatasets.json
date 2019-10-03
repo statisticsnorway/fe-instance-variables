@@ -1,0 +1,41 @@
+{
+  "data": {
+    "UnitDataSet": {
+      "edges": [
+        {
+          "node": {
+            "id": "b9c10b86-5867-4270-b56e-ee7439fe381e",
+            "name": [
+              {
+                "languageText": "PersonWithIncomeDataset"
+              }
+            ],
+            "description": [
+              {
+                "languageText": "Persons with income in Norway per 2018-01-01"
+              }
+            ]
+          }
+        },
+        {
+          "node": {
+            "id": "d7f1a566-b906-4561-92cb-4758b766335c",
+            "name": [
+              {
+                "languageText": "FamilyDataset"
+              }
+            ],
+            "description": [
+              {
+                "languageText": "Dataset for families in Norway per 2018-01-01"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "DimensionalDataSet": {
+      "edges": []
+    }
+  }
+}
