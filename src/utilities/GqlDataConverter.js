@@ -9,15 +9,14 @@ export function populateDropdown(dropdownArray) {
       options.push(
         {key, text, value})
     })
-  } else {
-    console.warn('No dropdowncontent found.')
-  }
+  } else {console.warn('No dropdowncontent found.')  }
   return options
 }
 
 
-export let mapLdmArray = (result) => {
-  return (result != null && result.length > 0) ? result.map(mapEdge) : []
+export let mapLdmArray = (ldmArray) => {
+  console.log(ldmArray)
+  return (ldmArray != null && ldmArray.length > 0) ? ldmArray.map(mapEdge) : []
 }
 
 function mapEdge(edge) {
@@ -38,17 +37,17 @@ export let getLogicalRecordsFromLdmStructure = (data, ldmObject) => {
 
 export let getLogicalRecordsFromDataResource = (dataResource) => {
   let logicalRecords = []
-  dataResource.dataSets.edges.forEach((dataSet) => {
+  dataResource.dataSets.edges.forEach((dataSet) =>
     logicalRecords = logicalRecords.concat(getLogicalRecordsFromDataSet(dataSet.node))
-  })
+  )
   return logicalRecords
 }
 
 export let getLogicalRecordsFromDataSet = (dataSet) => {
   let logicalRecords = []
-  dataSet.unitDataStructure.logicalRecords.edges.forEach((logRec) => {
+  dataSet.unitDataStructure.logicalRecords.edges.forEach((logRec) =>
     logicalRecords = logicalRecords.concat(logRec.node)
-  })
+  )
   return logicalRecords
 }
 
@@ -61,23 +60,37 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
       let instanceVariableKey = logicalRecordKey + "_" + instanceVariable.node.id
       let instanceVariableId = instanceVariable.node.id
       let instanceVariableName = instanceVariable.node.name[0].languageText
-      let instanceVariableDescription =  instanceVariable.node.description[0].languageText
+      let instanceVariableDescription = instanceVariable.node.description ?
+        instanceVariable.node.description[0].languageText : null
       let instanceVariableShortName = instanceVariable.node.shortName
       let instanceVariableDataStructureComponentType = instanceVariable.node.dataStructureComponentType
       let instanceVariableFormatMask = instanceVariable.node.formatMask
       let population = instanceVariable.node.population.id
       let populationName = instanceVariable.node.population.name[0].languageText
-      let sentinelValueDomainName = (instanceVariable.node.sentinelValueDomain)
-        ? instanceVariable.node.sentinelValueDomain.name[0].languageText : ''
-      let representedVariable = instanceVariable.node.representedVariable.id
-      let representedVariableName = instanceVariable.node.representedVariable.name[0].languageText
-      let representedVariableDescription = instanceVariable.node.representedVariable.description[0].languageText
-      let representedVariableUniverse = instanceVariable.node.representedVariable.universe.name[0].languageText
-      let representedVariableSubstantiveValueDomain = (instanceVariable.node.representedVariable.substantiveValueDomain)
-        ? instanceVariable.node.representedVariable.substantiveValueDomain.name[0].languageText : ''
-      let representedVariableVariableName = instanceVariable.node.representedVariable.variable.name[0].languageText
-      let representedVariableVariableDescription = instanceVariable.node.representedVariable.variable.description[0].languageText
-      let representedVariableVariableUnitType = instanceVariable.node.representedVariable.variable.unitType.name[0].languageText
+      let sentinelValueDomainName = instanceVariable.node.sentinelValueDomain ?
+        instanceVariable.node.sentinelValueDomain.name[0].languageText : null
+      let representedVariable = instanceVariable.node.representedVariable ?
+        instanceVariable.node.representedVariable.id : null
+      let representedVariableName = instanceVariable.node.representedVariable ?
+        instanceVariable.node.representedVariable.name[0].languageText : null
+      let representedVariableDescription =
+        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.description) ?
+        instanceVariable.node.representedVariable.description[0].languageText : null
+      let representedVariableUniverse = instanceVariable.node.representedVariable ?
+        instanceVariable.node.representedVariable.universe.name[0].languageText : null
+      let representedVariableSubstantiveValueDomain =
+        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.substantiveValueDomain)
+        ? instanceVariable.node.representedVariable.substantiveValueDomain.name[0].languageText : null
+      let representedVariableVariableName =
+        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable) ?
+          instanceVariable.node.representedVariable.variable.name[0].languageText : null
+      let representedVariableVariableDescription =
+        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable
+        && instanceVariable.node.representedVariable.variable.description) ?
+        instanceVariable.node.representedVariable.variable.description[0].languageText : null
+      let representedVariableVariableUnitType =
+        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable) ?
+          instanceVariable.node.representedVariable.variable.unitType.name[0].languageText : null
       instanceVariables.push({
         instanceVariableKey,
         instanceVariableId,
@@ -102,4 +115,3 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
   })
   return instanceVariables
 }
-

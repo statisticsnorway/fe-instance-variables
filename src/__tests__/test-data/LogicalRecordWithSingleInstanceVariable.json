@@ -1,0 +1,83 @@
+[
+        {
+            "id": "00421599-d50f-4c34-9ce1-261aa5483c3c",
+            "shortName": "SKATTEFRIARVGAVEOGGEVINST",
+            "unitType": {
+              "name": [
+                {
+                  "languageText": "UnitType_DUMMY"
+                },
+                {
+                  "languageText": "Enhetstype_DUMMY"
+                }
+              ]
+            },
+            "instanceVariables": {
+              "edges": [
+                {
+                  "node": {
+                    "name": [
+                      {
+                        "languageText": "samletVerdiArvEllerGaveUtenforArbeidsforhold"
+                      }
+                    ],
+                    "id": "67e2de76-5bb5-465f-a6b0-76522661009e",
+                    "shortName": "samletVerdiArvEllerGaveUtenforArbeidsforhold",
+                    "description": [
+                      {
+                        "languageText": "samlet verdi arv eller gave utenfor arbeidsforhold"
+                      }
+                    ],
+                    "population": {
+                      "id": "Population_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "Population_DUMMY"
+                        }
+                      ]
+                    },
+                    "dataStructureComponentType": "MEASURE",
+                    "representedVariable": {
+                      "id": "RepresentertVariable_DUMMY",
+                      "name": [
+                        {
+                          "languageText": "RepresentertVariable_DUMMY"
+                        }
+                      ],
+                      "description": [
+                        {
+                          "languageText": "dummy presisisert variabel"
+                        }
+                      ],
+                      "universe": {
+                        "name": [
+                          {
+                            "languageText": "Universe_DUMMY"
+                          }
+                        ]
+                      },
+                      "variable": {
+                        "id": "Variable_DUMMY",
+                        "name": [
+                          {
+                            "languageText": "Variable_DUMMY"
+                          }
+                        ],
+                        "unitType": {
+                          "name": [
+                            {
+                              "languageText": "UnitType_DUMMY"
+                            },
+                            {
+                              "languageText": "Enhetstype_DUMMY"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+]
