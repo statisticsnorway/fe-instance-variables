@@ -16,7 +16,7 @@ import { DATASTRUCTURECOMPONENTTYPE, GSIM, MESSAGES, ICON } from '../utilities/E
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
-class IndataVariablesReactTableEdit extends Component {
+class InstanceVariablesTableEdit extends Component {
   constructor (props) {
     super(props)
 
@@ -396,4 +396,4 @@ class IndataVariablesReactTableEdit extends Component {
   }
 }
 
-export default IndataVariablesReactTableEdit
+export default InstanceVariablesTableEdit
