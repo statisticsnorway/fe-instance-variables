@@ -25,32 +25,33 @@ class InstanceVariablesTableView extends Component {
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
-          {Header: 'name', accessor: 'instanceVariableName', width: 500, show: true}]
+          {Header: 'name', accessor: 'instanceVariableName', width: 500, show: true}
+        ]
       },
       {
         Header: 'InstanceVariable', columns: [
-          (createColumn.call(this, 'key', 'instanceVariableKey', 900)),
-          (createColumn.call(this, 'description', 'instanceVariableDescription', 900)),
-          (createColumn.call(this, 'shortName', 'instanceVariableShortName', 300)),
-          (createColumn.call(this, 'dataStructureComponentType', 'instanceVariableDataStructureComponentType', 200)),
-          (createColumn.call(this, 'formatMask', 'instanceVariableFormatMask', 200)),
-          (createColumn.call(this, 'population', 'populationName', 300)),
-          (createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomainName'))
+          createColumn.call(this, 'key', 'instanceVariableKey', 900),
+          createColumn.call(this, 'descriptions', 'instanceVariableDescription', 900),
+          createColumn.call(this, 'shortName', 'instanceVariableShortName', 300),
+          createColumn.call(this, 'dataStructureComponentType', 'instanceVariableDataStructureComponentType', 200),
+          createColumn.call(this, 'formatMask', 'instanceVariableFormatMask', 200),
+          createColumn.call(this, 'population', 'populationName', 300),
+          createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomainName')
         ]
       },
       {
         Header: 'Represented variable', columns: [
-          (createColumn.call(this, 'name', 'representedVariableName', 300)),
-          (createColumn.call(this, 'description', 'representedVariableDescription', 300)),
-          (createColumn.call(this, 'universe', 'representedVariableUniverse', 300)),
-          (createColumn.call(this, 'substantiveValueDomain', 'representedVariableSubstantiveValueDomain', 300))
+          createColumn.call(this, 'name', 'representedVariableName', 300),
+          createColumn.call(this, 'description', 'representedVariableDescription', 300),
+          createColumn.call(this, 'universe', 'representedVariableUniverse', 300),
+          createColumn.call(this, 'substantiveValueDomain', 'representedVariableSubstantiveValueDomain', 300)
         ]
       },
       {
         Header: 'Variable', columns: [
-          (createColumn.call(this, 'name', 'representedVariableVariableName', 300)),
-          (createColumn.call(this, 'description', 'representedVariableVariableDescription', 300)),
-          (createColumn.call(this, 'unitType', 'representedVariableVariableUnitType', 300))
+          createColumn.call(this, 'name', 'representedVariableVariableName', 300),
+          createColumn.call(this, 'description', 'representedVariableVariableDescription', 300),
+          createColumn.call(this, 'unitType', 'representedVariableVariableUnitType', 300)
         ]
       }
     ]
@@ -58,7 +59,7 @@ class InstanceVariablesTableView extends Component {
     function createColumn (header, accessor, width) {
       return {Header: header,
         accessor: accessor,
-        minWidth: width,
+        width: width,
         show: this.showColumn(showColumns, accessor)
       }
     }
