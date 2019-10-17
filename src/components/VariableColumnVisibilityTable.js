@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Checkbox, Table, Grid, Popup, Button, Icon } from 'semantic-ui-react'
-import IndataVariablesReactTable from './IndataVariablesReactTable'
+import InstanceVariablesTable from './InstanceVariablesTable'
 import { UI, ICON } from '../utilities/Enum'
 
 class VariableColumnVisibilityTable extends Component {
@@ -93,8 +93,8 @@ class VariableColumnVisibilityTable extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <IndataVariablesReactTable mode={indataVariablesReactTableMode} showColumns={showColumns}
-                                         data={this.props.data} lds={this.props.lds}/>
+              <InstanceVariablesTable mode={indataVariablesReactTableMode} showColumns={showColumns}
+                                      data={this.props.data} lds={this.props.lds}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>

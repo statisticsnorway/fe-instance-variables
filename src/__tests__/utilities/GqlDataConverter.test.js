@@ -92,7 +92,6 @@ describe('Test GqlDataConverter functions', () => {
 
   test('Test getInstanceVariableFromLogicalRecords returns instancevariable with correct values', () => {
     let instanceVariable = getInstanceVariableFromLogicalRecords(LogicalRecordWithSingleInstanceVariable)[0]
-    console.log(instanceVariable)
     expect(instanceVariable.instanceVariableName).toBe('samletVerdiArvEllerGaveUtenforArbeidsforhold')
     expect(instanceVariable.instanceVariableKey).toBe('00421599-d50f-4c34-9ce1-261aa5483c3c_67e2de76-5bb5-465f-a6b0-76522661009e')
     expect(instanceVariable.instanceVariableId).toBe('67e2de76-5bb5-465f-a6b0-76522661009e')
@@ -116,7 +115,6 @@ describe('Test GqlDataConverter functions', () => {
 
   test('Test getInstanceVariableFromLogicalRecords returns instancevariable with no variable', () => {
     let instanceVariable = getInstanceVariableFromLogicalRecords(LogicalRecordWithSingleInstanceVariableNoVariable)[0]
-    console.log(instanceVariable)
     expect(instanceVariable.instanceVariableName).toBe('samletVerdiArvEllerGaveUtenforArbeidsforhold')
     expect(instanceVariable.instanceVariableKey).toBe('00421599-d50f-4c34-9ce1-261aa5483c3c_67e2de76-5bb5-465f-a6b0-76522661009e')
     expect(instanceVariable.instanceVariableId).toBe('67e2de76-5bb5-465f-a6b0-76522661009e')
