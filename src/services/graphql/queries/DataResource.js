@@ -48,25 +48,9 @@ export const DATARESOURCE_WITH_STRUCTURE = `
                                 unitType{name{languageText}}
                               }
                             }
-                            reverseMappingRawDataToInputDataTargetInstanceVariable {
-                              edges {
-                                node {
-                                  id
-                                  sourceName
-                                  sourcePath
-                                }
-                              }
-                            }
                           }
                         }
                       } 
-                     reverseRecordRelationshipSourceLogicalRecords {
-                       edges {
-                         node {
-                           id
-                         }
-                       }
-                     }
                     }
                   }
                 }
