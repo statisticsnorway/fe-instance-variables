@@ -80,7 +80,7 @@ class InstanceVariablesTableEdit extends Component {
           {
             Header: 'description', accessor: 'instanceVariableDescription', width: 900, Cell: (row) => (
               <Input id={row.row.instanceVariableKey}
-                     value={row.value}
+                     value={row.value || ''}
                      name={'instanceVariableDescription'}
                      style={{width: 900}}
                      onChange={(e, data) => this.onChangeValue(e, data)}
@@ -201,12 +201,12 @@ class InstanceVariablesTableEdit extends Component {
   }
 
   clickRowVariable = (rowInfo) => {
-    console.log(rowInfo)
+    console.log(rowInfo, 'rowinfo')
     let instVariables = this.state.instanceVariables
     let original = rowInfo.original
     let editVariable = instVariables[rowInfo.index]
-    console.log(original)
-    console.log(editVariable)
+    console.log(original, 'original')
+    console.log(editVariable, 'editVariable')
     // return this.variableTable(original)
   }
 
@@ -223,6 +223,7 @@ class InstanceVariablesTableEdit extends Component {
     let instVars = this.state.instanceVariables
 
     this.setState({instanceVariables: this.changeRepresentedVariable(instVars, data.id, representedVariable)})
+    // console.log(this.state.instanceVariables)
   }
 
   onChangeDataStructureComponentType = (e, data) => {
@@ -249,10 +250,11 @@ class InstanceVariablesTableEdit extends Component {
     variables[idx].representedVariableName = representedVariable.node.name[0].languageText
     variables[idx].representedVariableDescription = representedVariable.node.description[0].languageText
     variables[idx].representedVariableUniverse = representedVariable.node.universe.name[0].languageText
+    variables[idx].representedVariableSubstantiveValueDomain = representedVariable.node.substantiveValueDomain.name[0].languageText
     variables[idx].representedVariableVariable = representedVariable.node.variable.name[0].languageText
     variables[idx].representedVariableVariableName = representedVariable.node.variable.name[0].languageText
     variables[idx].representedVariableVariableDescription = representedVariable.node.variable.description[0].languageText
-    variables[idx].representedVariableVariableUnitTypen = representedVariable.node.variable.unitType.name[0].languageText
+    variables[idx].representedVariableVariableUnitType = representedVariable.node.variable.unitType.name[0].languageText
     return variables
   }
 
@@ -283,7 +285,7 @@ class InstanceVariablesTableEdit extends Component {
       let isUpdated = false
       get(ldsDataUrl + '/' + instanceVariable.instanceVariableId).then(data => {
         updatedData = data
-        if (data.description[0].languageText !== instanceVariable.instanceVariableDescription) {
+        if ((data.description && data.description[0] && data.description[0].languageText) !== instanceVariable.instanceVariableDescription) {
           updatedData.description[0].languageText = instanceVariable.instanceVariableDescription
           isUpdated = true
         }
@@ -313,7 +315,7 @@ class InstanceVariablesTableEdit extends Component {
         }
 
         if (isUpdated) {
-          console.log(JSON.stringify(updatedData))
+          console.log(JSON.stringify(updatedData), 'updatedData')
           put(ldsDataUrl + '/' + instanceVariable.instanceVariableId, JSON.stringify(updatedData)).then(response => {
               console.log(response)
               this.setState({

@@ -32,13 +32,23 @@ export const DATARESOURCE_WITH_STRUCTURE = `
                               id
                               name{languageText}
                               description {languageText}
-                            }
+                            }                       
                             representedVariable {
                               id
                               name {languageText}
                               description {languageText}
+                              substantiveValueDomain{
+                                ... on DescribedValueDomain {
+                                  id
+                                  name{languageText}
+                                }
+                                ... on EnumeratedValueDomain {
+                                  id
+                                  name{languageText}
+                                }
+                              }                              
                               universe {
-                                id
+                                    id
                                 name{languageText}
                               }
                               variable {

@@ -15,7 +15,6 @@ export function populateDropdown(dropdownArray) {
 
 
 export let mapLdmArray = (ldmArray) => {
-  console.log(ldmArray)
   return (ldmArray != null && ldmArray.length > 0) ? ldmArray.map(mapEdge) : []
 }
 
@@ -29,7 +28,6 @@ function mapEdge(edge) {
 }
 
 export let getLogicalRecordsFromLdmStructure = (data, ldmObject) => {
-  console.log(data)
   return ldmObject === LDM_TYPE.DATASET ?
     getLogicalRecordsFromDataSet(data.UnitDataSetById) :
     getLogicalRecordsFromDataResource(data.DataResourceById)
