@@ -129,7 +129,7 @@ export const UI = {
   },
   INSTANCE_VARIABLES: {
     en: 'Instance variables',
-    nb: 'Instansvariabler'
+    nb: 'Dokumentasjon av variabler'
   },
   SEARCH: {
     en: 'Search',

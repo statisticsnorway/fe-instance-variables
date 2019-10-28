@@ -69,7 +69,7 @@ class InstanceVariablesTableEdit extends Component {
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
-          {Header: 'name', accessor: 'instanceVariableName', width: 500, show: true}]
+          {Header: 'name', accessor: 'instanceVariableName', width: 700, show: true}]
       },
       {
         Header: 'InstanceVariable', columns: [
@@ -119,7 +119,7 @@ class InstanceVariablesTableEdit extends Component {
               />), show: this.showColumn(showColumns, 'instanceVariableFormatMask')
           },
           {
-            Header: 'population', accessor: 'population', width: 300, Cell: row => (
+            Header: 'population', accessor: 'populationName', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
                         options={(populateDropdown(mapLdmArray(populations.Population.edges)))}
@@ -127,7 +127,7 @@ class InstanceVariablesTableEdit extends Component {
                         value={row.value}
                         onChange={(e, data) => this.onChangePopulation(e, data)}
               />
-            ), show: this.showColumn(showColumns, 'population')
+            ), show: this.showColumn(showColumns, 'populationName')
           },
           {
             Header: 'sentinelValueDomain', accessor: 'sentinelValueDomainName', width: 200, Cell: (row) => (
@@ -176,19 +176,19 @@ class InstanceVariablesTableEdit extends Component {
             Header: 'name',
             accessor: 'representedVariableVariableName',
             width: 300,
-            show: this.showColumn(showColumns, 'variableName')
+            show: this.showColumn(showColumns, 'representedVariableVariableName')
           },
           {
             Header: 'description',
             accessor: 'representedVariableVariableDescription',
             width: 300,
-            show: this.showColumn(showColumns, 'variableDescription')
+            show: this.showColumn(showColumns, 'representedVariableVariableDescription')
           },
           {
             Header: 'unitType',
             accessor: 'representedVariableVariableUnitType',
             width: 300,
-            show: this.showColumn(showColumns, 'variableUnitType')
+            show: this.showColumn(showColumns, 'representedVariableVariableUnitType')
           }]
       }
     ]
@@ -370,7 +370,7 @@ class InstanceVariablesTableEdit extends Component {
                                       sortable
                                       filterable
                                       defaultFilterMethod={this.filterMethod}
-                                      getTrProps={(state, rowInfo) => ({
+                                      getTrProps={() => ({
                                         onClick: () => {
                                           this.setState({
                                             message: '',

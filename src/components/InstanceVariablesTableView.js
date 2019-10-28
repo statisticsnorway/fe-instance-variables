@@ -25,7 +25,7 @@ class InstanceVariablesTableView extends Component {
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
-          {Header: 'name', accessor: 'instanceVariableName', width: 500, show: true}
+          {Header: 'name', accessor: 'instanceVariableName', width: 700, show: true}
         ]
       },
       {
@@ -60,16 +60,18 @@ class InstanceVariablesTableView extends Component {
       return {Header: header,
         accessor: accessor,
         width: width,
-        show: this.showColumn(showColumns, accessor)
+        show: showColumn(showColumns, accessor)
       }
+    }
+
+    function showColumn (showColumns, accessorName)  {
+      let showCol = showColumns.find(col => col.name === accessorName)
+      if (showCol != null) return showCol.show
+      else return true
     }
   }
 
-  showColumn = (showColumns, accessorName) => {
-    let showCol = showColumns.find(col => col.name === accessorName)
-    if (showCol != null) return showCol.show
-    else return true
-  }
+
 
   // handleButtonStateClick = () => {
   //   console.log('State:' + JSON.stringify(this.state, null, 2))
