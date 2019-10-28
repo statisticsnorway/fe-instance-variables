@@ -30,6 +30,16 @@ export const DATASET_WITH_STRUCTURE = `
                       id
                       name {languageText}
                       description {languageText}
+                      substantiveValueDomain{
+                        ... on DescribedValueDomain {
+                          id
+                          name{languageText}
+                        }
+                        ... on EnumeratedValueDomain {
+                          id
+                          name{languageText}
+                        }
+                      }   
                       universe {
                         id
                         name{languageText}

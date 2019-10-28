@@ -6,7 +6,10 @@ export const ALL_REPRESENTED_VARIABLES = `
           id
           name {languageText}
           description {languageText}
-          # substantiveValueDomain{__typename}
+          substantiveValueDomain{
+            ... on DescribedValueDomain {name{languageText}}
+            ... on EnumeratedValueDomain {name{languageText}}
+          }
           universe {
             id
             name{languageText}
