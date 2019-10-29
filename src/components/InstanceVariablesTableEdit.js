@@ -13,6 +13,7 @@ import { get, put } from '../utilities/fetch/Fetch'
 import { ALL_POPULATIONS } from '../services/graphql/queries/Population'
 import { ALL_REPRESENTED_VARIABLES } from '../services/graphql/queries/RepresentedVariables'
 import { DATASTRUCTURECOMPONENTTYPE, GSIM, MESSAGES, ICON } from '../utilities/Enum'
+import { filterCaseInsensitive } from '../utilities/common/Filter'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
@@ -369,7 +370,7 @@ class InstanceVariablesTableEdit extends Component {
                                       className="-striped -highlight -filters -fixed"
                                       sortable
                                       filterable
-                                      defaultFilterMethod={this.filterMethod}
+                                      defaultFilterMethod={filterCaseInsensitive}
                                       getTrProps={() => ({
                                         onClick: () => {
                                           this.setState({
