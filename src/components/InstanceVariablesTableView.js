@@ -3,6 +3,7 @@ import ReactTable from 'react-table'
 import { getInstanceVariableFromLogicalRecords } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
+import {filterCaseInsensitive} from '../utilities/common/Filter'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
@@ -71,8 +72,6 @@ class InstanceVariablesTableView extends Component {
     }
   }
 
-
-
   // handleButtonStateClick = () => {
   //   console.log('State:' + JSON.stringify(this.state, null, 2))
   // }
@@ -92,7 +91,7 @@ class InstanceVariablesTableView extends Component {
                                 className="-striped -highlight -filters -fixed"
                                 sortable
                                 filterable
-                                defaultFilterMethod={this.filterMethod}
+                                defaultFilterMethod={filterCaseInsensitive}
                                 getTdProps={() => {
                                   return {
                                     style: {
