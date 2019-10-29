@@ -21,19 +21,19 @@ class VariableColumnVisibilityTable extends Component {
   populateShowColumns = () => {
     return [
       {name: 'instanceVariableKey', show: false},
-      {name: 'instanceVariableName', show: false},
-      {name: 'instanceVariableDescription', show: true},
-      {name: 'instanceVariableDataStructureComponentType', show: true},
-      {name: 'instanceVariableFormatMask', show: true},
-      {name: 'populationName', show: true},
-      {name: 'sentinelValueDomainName', show: true},
+      {name: 'instanceVariableDescription', show: false},
+      {name: 'instanceVariableShortName', show: false},
+      {name: 'instanceVariableDataStructureComponentType', show: false},
+      {name: 'instanceVariableFormatMask', show: false},
+      {name: 'populationName', show: false},
+      {name: 'sentinelValueDomainName', show: false},
       {name: 'representedVariableName', show: true},
       {name: 'representedVariableDescription', show: true},
-      {name: 'representedVariableUniverse', show: true},
-      {name: 'representedVariableSubstantiveValueDomain', show: true},
-      {name: 'variableName', show: true},
-      {name: 'variableDescription', show: true},
-      {name: 'variableUnitType', show: true}
+      {name: 'representedVariableUniverse', show: false},
+      {name: 'representedVariableSubstantiveValueDomain', show: false},
+      {name: 'representedVariableVariableName', show: false},
+      {name: 'representedVariableVariableDescription', show: false},
+      {name: 'representedVariableVariableUnitType', show: false}
     ]
   }
 
