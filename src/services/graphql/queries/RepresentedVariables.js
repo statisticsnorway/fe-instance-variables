@@ -4,21 +4,21 @@ export const ALL_REPRESENTED_VARIABLES = `
       edges {
         node {
           id
-          name {languageText}
-          description {languageText}
+          name {languageText, languageCode}
+          description {languageText, languageCode}
           substantiveValueDomain{
-            ... on DescribedValueDomain {name{languageText}}
-            ... on EnumeratedValueDomain {name{languageText}}
+            ... on DescribedValueDomain {name{languageText, languageCode}}
+            ... on EnumeratedValueDomain {name{languageText, languageCode}}
           }
           universe {
             id
-            name{languageText}
+            name{languageText, languageCode}
           }
           variable {
             id
-            name {languageText}
-            description {languageText}
-            unitType{name{languageText}}
+            name {languageText, languageCode}
+            description {languageText, languageCode}
+            unitType{name{languageText, languageCode}}
           }
         }
       }

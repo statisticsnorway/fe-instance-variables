@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
 import InstanceVariables from './components/InstanceVariables'
+import { LanguageContext } from './utilities/context/LanguageContext'
 
 class App extends Component {
+
   state = {
     languageCode: 'nb',
     lds: {
@@ -13,14 +15,25 @@ class App extends Component {
     }
   }
 
+  setLanguage = (languageCode) => {
+    this.setState({ languageCode: languageCode }, () => {
+      localStorage.setItem('languageCode', languageCode)
+    })
+  }
+
   render () {
     const { languageCode, lds } = this.state
 
   return (
-    <InstanceVariables
-      languageCode = {languageCode}
-      lds = {lds}
-    />
+    <LanguageContext.Provider value={{
+      value: languageCode,
+      setLanguage: (languageCode) => this.setLanguage(languageCode)
+    }}>
+      <InstanceVariables
+        languageCode = {languageCode}
+        lds = {lds}
+      />
+    </LanguageContext.Provider>
   )
   }
 }

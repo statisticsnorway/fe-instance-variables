@@ -6,6 +6,7 @@ import { request } from 'graphql-request'
 import { UI, LDS_URL, LDM_TYPE, MESSAGES, ICON } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
+import { LanguageContext, languages} from '../utilities/context/LanguageContext'
 import {
   getLogicalRecordsFromLdmStructure,
   mapLdmArray
@@ -30,8 +31,7 @@ class InstanceVariables extends Component {
       filteredDataResources: [],
       error: '',
       ready: false,
-      lds: props.lds,
-      languageCode: props.languageCode
+      lds: props.lds
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -150,6 +150,8 @@ class InstanceVariables extends Component {
   render () {
     const {dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, message, messageIcon, lds, isLoading} = this.state
 
+    let language = this.context.value
+
     return (
       <Segment basic>
         <Segment basic>
@@ -158,7 +160,7 @@ class InstanceVariables extends Component {
               <Grid.Row>
                 <Header as='h2' icon>
                   <Icon name='clone outline' onClick={() => window.location.reload(false)}/>
-                  {UI.INSTANCE_VARIABLES.nb}
+                  {UI.INSTANCE_VARIABLES[language]}
                 </Header>
               </Grid.Row>
             </Grid.Column>
@@ -170,6 +172,14 @@ class InstanceVariables extends Component {
               </Grid.Row>
               <Grid.Row>
                 <Segment basic>
+                  <Dropdown item text={`${UI.LANGUAGE[language]} (${UI.LANGUAGE_CHOICE[language]})`}>
+                    <Dropdown.Menu>
+                      {Object.keys(languages).map(languageName =>
+                        <Dropdown.Item key={languageName} content={UI[languageName][language]}
+                                       onClick={() => this.context.setLanguage(languages[languageName].languageCode)} />
+                      )}
+                    </Dropdown.Menu>
+                  </Dropdown>
                   <Dropdown style={{width: "400px"}}
                             selection
                             placeholder={UI.CHOOSE_LDS.nb}
@@ -188,7 +198,7 @@ class InstanceVariables extends Component {
         </Segment>
         <Segment.Group horizontal>
           <Segment>
-            <Header> {UI.SEARCH_BY_DATARESOURCEID.nb}</Header>
+            <Header> {UI.SEARCH_BY_DATARESOURCEID[language]}</Header>
             <Search
               input={{fluid: true}}
               loading={isLoading}
@@ -202,7 +212,7 @@ class InstanceVariables extends Component {
             />
           </Segment>
           <Segment>
-            <Header> {UI.SEARCH_BY_DATASETID.nb}</Header>
+            <Header> {UI.SEARCH_BY_DATASETID[language]}</Header>
             <Search
               input={{fluid: true}}
               loading={isLoading}
@@ -227,5 +237,7 @@ class InstanceVariables extends Component {
     )
   }
 }
+
+InstanceVariables.contextType = LanguageContext
 
 export default InstanceVariables
