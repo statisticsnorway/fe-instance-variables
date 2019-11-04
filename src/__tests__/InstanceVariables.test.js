@@ -17,30 +17,27 @@ const setup = () => {
       graphql: 'graphql'
     }
   }
-  const { queryAllByTestId, queryAllByText } = render(
+  const {queryAllByTestId, queryAllByText} = render(
     <InstanceVariables {...props} />
   )
 
-  return { queryAllByTestId, queryAllByText }
+  return {queryAllByTestId, queryAllByText}
 }
 
 test('InstanceVariables renders correctly', () => {
-  const { queryAllByTestId, queryAllByText } = setup()
+  const {queryAllByTestId, queryAllByText} = setup()
 
   expect(queryAllByText('SSB Logo')).toHaveLength(1)
-  expect(queryAllByText('Instansvariabler')).toHaveLength(1)
-
+  expect(queryAllByText('Dokumentasjon av variabler')).toHaveLength(1)
   expect(queryAllByTestId('choose-lds')).toHaveLength(1)
   expect(queryAllByTestId('search-dataseteid')).toHaveLength(1)
-  expect(queryAllByTestId('search-dataresourceeid')).toHaveLength(1)
+  expect(queryAllByTestId('search-dataresourceid')).toHaveLength(1)
 })
 
 test('ChooseLdsDropdown renders correctly', () => {
-  const { queryAllByText } = setup()
+  const {queryAllByText} = setup()
 
-  Object.keys(LDS_URL).map(choice => {
-    expect(queryAllByText(LDS_URL[choice])).toHaveLength(1)
-  })
+  expect(queryAllByText(LDS_URL.stagingLds)).toHaveLength(1)
 })
 
 
