@@ -4,7 +4,7 @@ export const ALL_POPULATIONS = `
       edges {
         node {
           id
-          name {languageText}  
+          name {languageText}
           description{languageText}
         }
       }

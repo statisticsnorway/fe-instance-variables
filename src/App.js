@@ -16,12 +16,12 @@ class App extends Component {
   render () {
     const { languageCode, lds } = this.state
 
-  return (
-    <InstanceVariables
-      languageCode = {languageCode}
-      lds = {lds}
-    />
-  )
+    return (
+      <InstanceVariables
+        languageCode={languageCode}
+        lds={lds}
+      />
+    )
   }
 }
 

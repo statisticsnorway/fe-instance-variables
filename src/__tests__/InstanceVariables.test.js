@@ -9,16 +9,16 @@ afterEach(() => {
 
 const setup = () => {
   const props = {
-      languageCode: 'nb',
-      lds: {
-        namespace: 'ns',
-        url: 'http://localhost:9090',
-        user: 'Test user',
-        graphql: 'graphql'
-      }
+    languageCode: 'nb',
+    lds: {
+      namespace: 'ns',
+      url: 'http://localhost:9090',
+      user: 'Test user',
+      graphql: 'graphql'
     }
+  }
   const { queryAllByTestId, queryAllByText } = render(
-        <InstanceVariables {...props} />
+    <InstanceVariables {...props} />
   )
 
   return { queryAllByTestId, queryAllByText }

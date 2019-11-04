@@ -1,7 +1,7 @@
 export const DATARESOURCE_WITH_STRUCTURE = `
   query getDataResourceById($id: ID!) {
     DataResourceById(id: $id) {
-      id 
+      id
       name {languageText}
       dataSets {
         edges {
@@ -32,7 +32,7 @@ export const DATARESOURCE_WITH_STRUCTURE = `
                               id
                               name{languageText}
                               description {languageText}
-                            }                       
+                            }
                             representedVariable {
                               id
                               name {languageText}
@@ -46,7 +46,7 @@ export const DATARESOURCE_WITH_STRUCTURE = `
                                   id
                                   name{languageText}
                                 }
-                              }                              
+                              }
                               universe {
                                     id
                                 name{languageText}
@@ -60,7 +60,7 @@ export const DATARESOURCE_WITH_STRUCTURE = `
                             }
                           }
                         }
-                      } 
+                      }
                     }
                   }
                 }
@@ -79,7 +79,7 @@ export const ALL_DATARESOURCES = `
       edges {
         node {
           id
-          name {languageText}  
+          name {languageText}
           description{languageText}
         }
       }
