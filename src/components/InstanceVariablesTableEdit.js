@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
-import { Dropdown, Button, Input, Icon, Message, Grid } from 'semantic-ui-react'
+import { Button, Dropdown, Grid, Icon, Input, Message } from 'semantic-ui-react'
 import ReactTable from 'react-table'
-import {
-  populateDropdown,
-  mapLdmArray,
-  getInstanceVariableFromLogicalRecords
-} from '../utilities/GqlDataConverter'
+import { getInstanceVariableFromLogicalRecords, mapLdmArray, populateDropdown } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
 import { request } from 'graphql-request'
 import { get, put } from '../utilities/fetch/Fetch'
 import { ALL_POPULATIONS } from '../services/graphql/queries/Population'
 import { ALL_REPRESENTED_VARIABLES } from '../services/graphql/queries/RepresentedVariables'
-import { DATASTRUCTURECOMPONENTTYPE, GSIM, MESSAGES, ICON } from '../utilities/Enum'
+import { DATASTRUCTURECOMPONENTTYPE, GSIM, ICON, MESSAGES } from '../utilities/Enum'
 import { filterCaseInsensitive } from '../utilities/common/Filter'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
@@ -38,7 +34,7 @@ class InstanceVariablesTableEdit extends Component {
   }
 
   componentDidMount () {
-    const {lds} = this.state
+    const { lds } = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
     Promise.all([request(graphqlUrl, ALL_POPULATIONS), request(graphqlUrl, ALL_REPRESENTED_VARIABLES)])
       .then(response => {
@@ -53,7 +49,7 @@ class InstanceVariablesTableEdit extends Component {
 
   componentDidUpdate (prevProps) {
     if (this.props.data !== prevProps.data) {
-      this.setState({instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data)})
+      this.setState({ instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data) })
     }
   }
 
@@ -63,14 +59,14 @@ class InstanceVariablesTableEdit extends Component {
 
   onChangeValue = (e, data) => {
     this.changeValue(this.state.instanceVariables.slice(), data.id, data.name, data.value)
-    this.setState({instanceVariables: this.state.instanceVariables.slice()})
+    this.setState({ instanceVariables: this.state.instanceVariables.slice() })
   }
 
   populateColumns = (showColumns, populations, representedVariables, dataStructureComponentTypes) => {
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
-          {Header: 'name', accessor: 'instanceVariableName', width: 700, show: true}]
+          { Header: 'name', accessor: 'instanceVariableName', width: 700, show: true }]
       },
       {
         Header: 'InstanceVariable', columns: [
@@ -83,7 +79,7 @@ class InstanceVariablesTableEdit extends Component {
               <Input id={row.row.instanceVariableKey}
                      value={row.value || ''}
                      name={'instanceVariableDescription'}
-                     style={{width: 900}}
+                     style={{ width: 900 }}
                      onChange={(e, data) => this.onChangeValue(e, data)}
               />), show: this.showColumn(showColumns, 'instanceVariableDescription')
           },
@@ -92,7 +88,7 @@ class InstanceVariablesTableEdit extends Component {
               <Input id={row.row.instanceVariableKey}
                      value={row.value}
                      name={'instanceVariableShortName'}
-                     style={{width: 300}}
+                     style={{ width: 300 }}
                      onChange={(e, data) => this.onChangeValue(e, data)}
               />), show: this.showColumn(showColumns, 'instanceVariableShortName')
           },
@@ -101,7 +97,7 @@ class InstanceVariablesTableEdit extends Component {
             accessor: 'instanceVariableDataStructureComponentType',
             width: 200,
             Cell: (row) => (
-              <Dropdown style={{overflow: 'visible', position: 'relative'}}
+              <Dropdown style={{ overflow: 'visible', position: 'relative' }}
                         selection
                         options={populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges))}
                         id={row.row.instanceVariableKey}
@@ -115,13 +111,13 @@ class InstanceVariablesTableEdit extends Component {
               <Input id={row.row.instanceVariableKey}
                      value={row.value || ''}
                      name={'instanceVariableFormatMask'}
-                     style={{width: 200}}
+                     style={{ width: 200 }}
                      onChange={(e, data) => this.onChangeValue(e, data)}
               />), show: this.showColumn(showColumns, 'instanceVariableFormatMask')
           },
           {
             Header: 'population', accessor: 'populationName', width: 300, Cell: row => (
-              <Dropdown style={{overflow: 'visible', position: 'relative'}}
+              <Dropdown style={{ overflow: 'visible', position: 'relative' }}
                         selection
                         options={(populateDropdown(mapLdmArray(populations.Population.edges)))}
                         id={row.row.instanceVariableKey}
@@ -135,7 +131,7 @@ class InstanceVariablesTableEdit extends Component {
               <Input id={row.row.instanceVariableKey}
                      value={row.value || ''}
                      name={'sentinelValueDomainName'}
-                     style={{width: 200}}
+                     style={{ width: 200 }}
                      onChange={(e, data) => this.onChangeValue(e, data)}
               />), show: this.showColumn(showColumns, 'sentinelValueDomainName')
           }]
@@ -144,7 +140,7 @@ class InstanceVariablesTableEdit extends Component {
         Header: 'Represented variable', columns: [
           {
             Header: 'name', accessor: 'representedVariable', width: 300, Cell: row => (
-              <Dropdown style={{overflow: 'visible', position: 'relative'}}
+              <Dropdown style={{ overflow: 'visible', position: 'relative' }}
                         selection
                         options={populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges))}
                         id={row.row.instanceVariableKey}
@@ -216,14 +212,14 @@ class InstanceVariablesTableEdit extends Component {
     let population = this.getSelectedOption(this.state.populations.Population.edges, data.value)
     let instVars = this.state.instanceVariables
 
-    this.setState({instanceVariables: this.changePopulation(instVars, data.id, population)})
+    this.setState({ instanceVariables: this.changePopulation(instVars, data.id, population) })
   }
 
   onChangeRepresentedVariable = (e, data) => {
     let representedVariable = this.getSelectedOption(this.state.representedVariables.RepresentedVariable.edges, data.value)
     let instVars = this.state.instanceVariables
 
-    this.setState({instanceVariables: this.changeRepresentedVariable(instVars, data.id, representedVariable)})
+    this.setState({ instanceVariables: this.changeRepresentedVariable(instVars, data.id, representedVariable) })
     // console.log(this.state.instanceVariables)
   }
 
@@ -231,7 +227,7 @@ class InstanceVariablesTableEdit extends Component {
     let instanceVariableDataStructureComponentType = this.getSelectedOption(this.state.dataStructureComponentTypes.DataStructureComponentType.edges, data.value)
     let instVars = this.state.instanceVariables
 
-    this.setState({instanceVariables: this.changeDataStructureComponentType(instVars, data.id, instanceVariableDataStructureComponentType)})
+    this.setState({ instanceVariables: this.changeDataStructureComponentType(instVars, data.id, instanceVariableDataStructureComponentType) })
   }
 
   changePopulation (variables, key, population) {
@@ -278,7 +274,7 @@ class InstanceVariablesTableEdit extends Component {
   // }
 
   handleSave = () => {
-    const {lds} = this.props
+    const { lds } = this.props
     const ldsDataUrl = `${lds.url}/${lds.namespace}/${GSIM.INSTANCE_VARIABLE}`
 
     this.state.instanceVariables.forEach((instanceVariable) => {
@@ -343,8 +339,8 @@ class InstanceVariablesTableEdit extends Component {
   }
 
   render () {
-    const {instanceVariables, populations, representedVariables, dataStructureComponentTypes, message, messageColor, messageIcon} = this.state
-    const {showColumns} = this.props
+    const { instanceVariables, populations, representedVariables, dataStructureComponentTypes, message, messageColor, messageIcon } = this.state
+    const { showColumns } = this.props
 
     let columns = this.populateColumns(showColumns, populations, representedVariables, dataStructureComponentTypes)
 
@@ -363,7 +359,7 @@ class InstanceVariablesTableEdit extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <ReactTableFixedColumns style={{borderColor: 'purple', overflow: 'visible'}}
+              <ReactTableFixedColumns style={{ borderColor: 'purple', overflow: 'visible' }}
                                       data={instanceVariables}
                                       columns={columns}
                                       defaultPageSize={10}

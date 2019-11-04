@@ -1,4 +1,4 @@
-export function populateDropdown(enumList) {
+export function populateDropdown (enumList) {
   let options = []
   if (enumList) {
     Object.keys(enumList).forEach(enumItem => {
@@ -6,7 +6,7 @@ export function populateDropdown(enumList) {
       let text = enumList[enumItem]
       let value = enumList[enumItem]
       options.push(
-        {key, text, value})
+        { key, text, value })
     })
   } else {
     console.warn('No dropdowncontent found.')

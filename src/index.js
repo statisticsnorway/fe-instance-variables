@@ -5,4 +5,4 @@ import 'react-table/react-table.css'
 import 'react-sortable-tree/style.css'
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'))

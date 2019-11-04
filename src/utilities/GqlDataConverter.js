@@ -1,5 +1,6 @@
-import {LDM_TYPE} from '../utilities/Enum'
-export function populateDropdown(dropdownArray) {
+import { LDM_TYPE } from '../utilities/Enum'
+
+export function populateDropdown (dropdownArray) {
   let options = []
   if (dropdownArray) {
     dropdownArray.forEach((element) => {
@@ -7,18 +8,17 @@ export function populateDropdown(dropdownArray) {
       let text = element.name
       let value = element.id
       options.push(
-        {key, text, value})
+        { key, text, value })
     })
-  } else {console.warn('No dropdowncontent found.')  }
+  } else {console.warn('No dropdowncontent found.') }
   return options
 }
-
 
 export let mapLdmArray = (ldmArray) => {
   return (ldmArray != null && ldmArray.length > 0) ? ldmArray.map(mapEdge) : []
 }
 
-function mapEdge(edge) {
+function mapEdge (edge) {
   return {
     id: edge.node.id,
     name: edge.node.name[0].languageText,
@@ -55,7 +55,7 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
     let logicalRecordKey = logicalRecord.id
     logicalRecord.instanceVariables.edges.forEach((instanceVariable) => {
       // console.log(instanceVariable)
-      let instanceVariableKey = logicalRecordKey + "_" + instanceVariable.node.id
+      let instanceVariableKey = logicalRecordKey + '_' + instanceVariable.node.id
       let instanceVariableId = instanceVariable.node.id
       let instanceVariableName = instanceVariable.node.name[0].languageText
       let instanceVariableDescription = instanceVariable.node.description ?
@@ -73,19 +73,19 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
         instanceVariable.node.representedVariable.name[0].languageText : null
       let representedVariableDescription =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.description) ?
-        instanceVariable.node.representedVariable.description[0].languageText : null
+          instanceVariable.node.representedVariable.description[0].languageText : null
       let representedVariableUniverse = instanceVariable.node.representedVariable ?
         instanceVariable.node.representedVariable.universe.name[0].languageText : null
       let representedVariableSubstantiveValueDomain =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.substantiveValueDomain)
-        ? instanceVariable.node.representedVariable.substantiveValueDomain.name[0].languageText : null
+          ? instanceVariable.node.representedVariable.substantiveValueDomain.name[0].languageText : null
       let representedVariableVariableName =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable) ?
           instanceVariable.node.representedVariable.variable.name[0].languageText : null
       let representedVariableVariableDescription =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable
-        && instanceVariable.node.representedVariable.variable.description) ?
-        instanceVariable.node.representedVariable.variable.description[0].languageText : null
+          && instanceVariable.node.representedVariable.variable.description) ?
+          instanceVariable.node.representedVariable.variable.description[0].languageText : null
       let representedVariableVariableUnitType =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable) ?
           instanceVariable.node.representedVariable.variable.unitType.name[0].languageText : null

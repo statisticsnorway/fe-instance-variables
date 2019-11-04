@@ -20,7 +20,7 @@ export const get = (url) => {
 }
 
 export const post = (url, body) => {
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(url, {
       credentials: credentials,
       method: 'POST',
@@ -39,7 +39,7 @@ export const post = (url, body) => {
 }
 
 export const put = (url, body) => {
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(url, {
       credentials: credentials,
       method: 'PUT',
@@ -57,11 +57,9 @@ export const put = (url, body) => {
   })
 }
 
-
-
 export function dataDeleteAxios (url) {
   return new Promise((resolve, reject) => {
-    console.log('dataFetcher - url: '+ url )
+    console.log('dataFetcher - url: ' + url)
     axios.delete(url)
       .then(response => {
         resolve(response)

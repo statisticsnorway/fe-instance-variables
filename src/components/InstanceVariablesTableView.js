@@ -3,7 +3,7 @@ import ReactTable from 'react-table'
 import { getInstanceVariableFromLogicalRecords } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
-import {filterCaseInsensitive} from '../utilities/common/Filter'
+import { filterCaseInsensitive } from '../utilities/common/Filter'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
@@ -26,7 +26,7 @@ class InstanceVariablesTableView extends Component {
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
-          {Header: 'name', accessor: 'instanceVariableName', width: 700, show: true}
+          { Header: 'name', accessor: 'instanceVariableName', width: 700, show: true }
         ]
       },
       {
@@ -58,14 +58,15 @@ class InstanceVariablesTableView extends Component {
     ]
 
     function createColumn (header, accessor, width) {
-      return {Header: header,
+      return {
+        Header: header,
         accessor: accessor,
         width: width,
         show: showColumn(showColumns, accessor)
       }
     }
 
-    function showColumn (showColumns, accessorName)  {
+    function showColumn (showColumns, accessorName) {
       let showCol = showColumns.find(col => col.name === accessorName)
       if (showCol != null) return showCol.show
       else return true
@@ -77,14 +78,14 @@ class InstanceVariablesTableView extends Component {
   // }
 
   render () {
-    const {populations} = this.state
+    const { populations } = this.state
     const instanceVariables = this.props.data ? getInstanceVariableFromLogicalRecords(this.props.data) : []
-    const {showColumns} = this.props
+    const { showColumns } = this.props
     const columns = this.populateColumns(showColumns, populations)
 
     return (
       <div>
-        <ReactTableFixedColumns style={{borderColor: 'purple', overflow: 'visible'}}
+        <ReactTableFixedColumns style={{ borderColor: 'purple', overflow: 'visible' }}
                                 data={instanceVariables}
                                 columns={columns}
                                 defaultPageSize={10}

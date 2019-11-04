@@ -1,5 +1,5 @@
-import {ALL_DATASETS, DATASET_WITH_STRUCTURE} from '../services/graphql/queries/DataSet'
-import {ALL_DATARESOURCES, DATARESOURCE_WITH_STRUCTURE} from '../services/graphql/queries/DataResource'
+import { ALL_DATASETS, DATASET_WITH_STRUCTURE } from '../services/graphql/queries/DataSet'
+import { ALL_DATARESOURCES, DATARESOURCE_WITH_STRUCTURE } from '../services/graphql/queries/DataResource'
 
 export const LANGUAGES = {
   norwegian: {
@@ -13,56 +13,56 @@ export const LANGUAGES = {
 }
 
 export const LDS_URL = {
-  local:  'http://localhost:9090',
+  local: 'http://localhost:9090',
   stagingLds: 'https://instance-variables.staging-bip-app.ssb.no/be/lds',
   stagingLdsB: 'https://instance-variables.staging-bip-app.ssb.no/be/lds-b',
   stagingLdsC: 'https://instance-variables.staging-bip-app.ssb.no/be/lds-c'
 }
 
 export const DATASTRUCTURECOMPONENTTYPE = {
-  "DataStructureComponentType": {
-    "edges": [
+  'DataStructureComponentType': {
+    'edges': [
       {
-        "node": {
-          "id": "MEASURE",
-          "name": [
+        'node': {
+          'id': 'MEASURE',
+          'name': [
             {
-              "languageText": "MEASURE"
+              'languageText': 'MEASURE'
             }
           ],
-          "description": [
+          'description': [
             {
-              "languageText": "MEASURE"
+              'languageText': 'MEASURE'
             }
           ]
         }
       },
       {
-        "node": {
-          "id": "ATTRIBUTE",
-          "name": [
+        'node': {
+          'id': 'ATTRIBUTE',
+          'name': [
             {
-              "languageText": "ATTRIBUTE"
+              'languageText': 'ATTRIBUTE'
             }
           ],
-          "description": [
+          'description': [
             {
-              "languageText": "ATTRIBUTE"
+              'languageText': 'ATTRIBUTE'
             }
           ]
         }
       },
       {
-        "node": {
-          "id": "IDENTIFIER",
-          "name": [
+        'node': {
+          'id': 'IDENTIFIER',
+          'name': [
             {
-              "languageText": "IDENTIFIER"
+              'languageText': 'IDENTIFIER'
             }
           ],
-          "description": [
+          'description': [
             {
-              "languageText": "IDENTIFIER"
+              'languageText': 'IDENTIFIER'
             }
           ]
         }

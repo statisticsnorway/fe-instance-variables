@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import { Header, Segment, Grid, Icon, Dropdown, Message, Search } from 'semantic-ui-react'
+import { Dropdown, Grid, Header, Icon, Message, Search, Segment } from 'semantic-ui-react'
 import _ from 'lodash'
 import VariableColumnVisibilityTable from './VariableColumnVisibilityTable'
 import { request } from 'graphql-request'
-import { UI, LDS_URL, LDM_TYPE, MESSAGES, ICON } from '../utilities/Enum'
+import { ICON, LDM_TYPE, LDS_URL, MESSAGES, UI } from '../utilities/Enum'
 import { SSBLogo } from '../media/Logo'
 import { populateDropdown } from '../utilities/common/dropdown'
-import {
-  getLogicalRecordsFromLdmStructure,
-  mapLdmArray
-} from '../utilities/GqlDataConverter'
+import { getLogicalRecordsFromLdmStructure, mapLdmArray } from '../utilities/GqlDataConverter'
 
 class InstanceVariables extends Component {
 
@@ -50,27 +47,27 @@ class InstanceVariables extends Component {
     })
   }
 
-  handleDatasetSearchChange = (e, {value}) => {
+  handleDatasetSearchChange = (e, { value }) => {
     this.setFilteredArray(value, LDM_TYPE.DATASET, this.state.allDatasets)
   }
 
-  handleDatasetResultSelect = (e, {result}) => {
+  handleDatasetResultSelect = (e, { result }) => {
     this.searchLdmStructure(result.id, LDM_TYPE.DATASET)
   }
 
-  handleDataResourceSearchChange = (e, {value}) => {
+  handleDataResourceSearchChange = (e, { value }) => {
     this.setFilteredArray(value, LDM_TYPE.DATARESOURCE, this.state.allDataResources)
   }
 
-  handleDataResourceResultSelect = (e, {result}) => {
+  handleDataResourceResultSelect = (e, { result }) => {
     this.searchLdmStructure(result.id, LDM_TYPE.DATARESOURCE)
   }
 
   setFilteredArray = (value, ldmObject, allDataArray) => {
-    this.setState({isLoading: true, [ldmObject.ldmId]: value})
+    this.setState({ isLoading: true, [ldmObject.ldmId]: value })
 
     setTimeout(() => {
-      if (value < 1) return this.setState({isLoading: false, result: [], [ldmObject.ldmId]: ''})
+      if (value < 1) return this.setState({ isLoading: false, result: [], [ldmObject.ldmId]: '' })
 
       const re = new RegExp(_.escapeRegExp(value), 'i')
       const isMatch = obj =>
@@ -84,8 +81,8 @@ class InstanceVariables extends Component {
   }
 
   searchLdmStructure = (queryId, ldmObject) => {
-    const queryParam = {id: queryId}
-    const {lds, languageCode} = this.state
+    const queryParam = { id: queryId }
+    const { lds, languageCode } = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
 
     request(graphqlUrl, ldmObject.dataStructureQuery, queryParam)
@@ -114,7 +111,7 @@ class InstanceVariables extends Component {
   }
 
   setLdsState = (ldsUrl) => {
-    const {languageCode} = this.state
+    const { languageCode } = this.state
 
     const graphqlUrl = `${ldsUrl}/${this.state.lds.graphql}`
     Promise.all([request(graphqlUrl, LDM_TYPE.DATARESOURCE.allDataQuery),
@@ -148,7 +145,7 @@ class InstanceVariables extends Component {
   }
 
   render () {
-    const {dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, message, messageIcon, lds, isLoading} = this.state
+    const { dataresourceid, datasetid, filteredDataResources, filteredDatasets, result, ready, message, messageIcon, lds, isLoading } = this.state
 
     return (
       <Segment basic>
@@ -170,7 +167,7 @@ class InstanceVariables extends Component {
               </Grid.Row>
               <Grid.Row>
                 <Segment basic>
-                  <Dropdown style={{width: "400px"}}
+                  <Dropdown style={{ width: '400px' }}
                             selection
                             placeholder={UI.CHOOSE_LDS.nb}
                             value={lds.url}
@@ -190,7 +187,7 @@ class InstanceVariables extends Component {
           <Segment>
             <Header> {UI.SEARCH_BY_DATARESOURCEID.nb}</Header>
             <Search
-              input={{fluid: true}}
+              input={{ fluid: true }}
               loading={isLoading}
               onResultSelect={this.handleDataResourceResultSelect}
               onSearchChange={_.debounce(this.handleDataResourceSearchChange, 500, {
@@ -204,7 +201,7 @@ class InstanceVariables extends Component {
           <Segment>
             <Header> {UI.SEARCH_BY_DATASETID.nb}</Header>
             <Search
-              input={{fluid: true}}
+              input={{ fluid: true }}
               loading={isLoading}
               onResultSelect={this.handleDatasetResultSelect}
               onSearchChange={_.debounce(this.handleDatasetSearchChange, 500, {

@@ -1,22 +1,26 @@
-import { cleanup } from "@testing-library/react"
+import { cleanup } from '@testing-library/react'
 import UnitDatasets from '../test-data/AllDatasets'
 import DatasetWithStructure from '../test-data/DatasetWithStructure'
 import DataResourceWithStructure from '../test-data/DataResourceWithStructure'
 import LogicalRecordsWithStructure from '../test-data/LogicalRecordsWithStructure'
 import LogicalRecordWithSingleInstanceVariable from '../test-data/LogicalRecordWithSingleInstanceVariable'
-import LogicalRecordWithSingleInstanceVariableNoRepresentedVariable from '../test-data/LogicalRecordWithSingleInstanceVariableNoRepresentedVariable'
-import LogicalRecordWithSingleInstanceVariableNoVariable from '../test-data/LogicalRecordWithSingleInstanceVariableNoVariable'
-import {mapLdmArray,
-  populateDropdown,
-  getLogicalRecordsFromDataSet,
-  getLogicalRecordsFromDataResource,
+import LogicalRecordWithSingleInstanceVariableNoRepresentedVariable
+  from '../test-data/LogicalRecordWithSingleInstanceVariableNoRepresentedVariable'
+import LogicalRecordWithSingleInstanceVariableNoVariable
+  from '../test-data/LogicalRecordWithSingleInstanceVariableNoVariable'
+import {
   getInstanceVariableFromLogicalRecords,
-  getLogicalRecordsFromLdmStructure} from '../../utilities/GqlDataConverter'
-import {LDM_TYPE} from '../../utilities/Enum'
+  getLogicalRecordsFromDataResource,
+  getLogicalRecordsFromDataSet,
+  getLogicalRecordsFromLdmStructure,
+  mapLdmArray,
+  populateDropdown
+} from '../../utilities/GqlDataConverter'
+import { LDM_TYPE } from '../../utilities/Enum'
 
 let unitDataArray
-beforeAll( () => {
-  unitDataArray = UnitDatasets.data.UnitDataSet.edges;
+beforeAll(() => {
+  unitDataArray = UnitDatasets.data.UnitDataSet.edges
 })
 
 afterEach(() => {
@@ -41,7 +45,6 @@ describe('Test GqlDataConverter functions', () => {
     expect(mapLdmArray(unitDataArray)[0].title).toBe('b9c10b86-5867-4270-b56e-ee7439fe381e')
   })
 
-
   test('Test populateDropdown has two options for datasets and one has given values', () => {
     let ddArray = mapLdmArray(unitDataArray)
     let dropdownOptions = populateDropdown(ddArray)
@@ -59,7 +62,6 @@ describe('Test GqlDataConverter functions', () => {
     dropdownOptions = populateDropdown([])
     expect(dropdownOptions.length).toBe(0)
   })
-
 
   test.skip('Test getLogicalRecordsFromLdmStructure calls right method and returns correct number of logical records', () => {
     // getLogicalRecordsFromDataResource = jest.fn()
@@ -158,7 +160,6 @@ describe('Test GqlDataConverter functions', () => {
     expect(instanceVariable.representedVariableVariableDescription).toBeNull()
     expect(instanceVariable.representedVariableVariableUnitType).toBeNull()
   })
-
 
 })
 

@@ -1,7 +1,7 @@
 export const DATASET_WITH_STRUCTURE = `
   query getUnitDataSetById($id: ID!) {
     UnitDataSetById(id: $id) {
-      id 
+      id
       name {languageText}
       unitDataStructure {
         id
@@ -39,7 +39,7 @@ export const DATASET_WITH_STRUCTURE = `
                           id
                           name{languageText}
                         }
-                      }   
+                      } 
                       universe {
                         id
                         name{languageText}
@@ -53,7 +53,7 @@ export const DATASET_WITH_STRUCTURE = `
                     }
                   }
                 }
-              } 
+              }
             }
           }
         }
@@ -67,7 +67,7 @@ export const ALL_DATASETS = `
       edges {
         node {
           id
-          name {languageText}  
+          name {languageText}
           description{languageText}
         }
       }
