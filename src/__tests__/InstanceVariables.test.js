@@ -17,15 +17,15 @@ const setup = () => {
       graphql: 'graphql'
     }
   }
-  const {queryAllByTestId, queryAllByText} = render(
+  const { queryAllByTestId, queryAllByText } = render(
     <InstanceVariables {...props} />
   )
 
-  return {queryAllByTestId, queryAllByText}
+  return { queryAllByTestId, queryAllByText }
 }
 
 test('InstanceVariables renders correctly', () => {
-  const {queryAllByTestId, queryAllByText} = setup()
+  const { queryAllByTestId, queryAllByText } = setup()
 
   expect(queryAllByText('SSB Logo')).toHaveLength(1)
   expect(queryAllByText('Dokumentasjon av variabler')).toHaveLength(1)
@@ -35,7 +35,7 @@ test('InstanceVariables renders correctly', () => {
 })
 
 test('ChooseLdsDropdown renders correctly', () => {
-  const {queryAllByText} = setup()
+  const { queryAllByText } = setup()
 
   expect(queryAllByText(LDS_URL.stagingLds)).toHaveLength(1)
 })
