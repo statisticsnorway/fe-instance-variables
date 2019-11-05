@@ -93,6 +93,10 @@ export const MESSAGES = {
     en: 'A property starts with uppercase',
     nb: 'Et objektelement starter med stor bokstav'
   },
+  NO_RESULT_FOUND: {
+    en: 'No result found',
+    nb: 'Fant desverre ingenting'
+  },
   SAVE_SUCCESSFUL: {
     en: 'Save to LDS was is completed',
     nb: 'Lagring til LDS gjennomført'

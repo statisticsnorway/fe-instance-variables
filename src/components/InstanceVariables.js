@@ -209,6 +209,7 @@ class InstanceVariables extends Component {
               results={filteredDataResources}
               value={dataresourceid}
               data-testid='search-dataresourceid'
+              noResultsMessage={MESSAGES.NO_RESULT_FOUND[language]}
             />
           </Segment>
           <Segment>
@@ -223,6 +224,7 @@ class InstanceVariables extends Component {
               results={filteredDatasets}
               value={datasetid}
               data-testid='search-dataseteid'
+              noResultsMessage={MESSAGES.NO_RESULT_FOUND[language]}
             />
           </Segment>
         </Segment.Group>
