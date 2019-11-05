@@ -1,17 +1,6 @@
 import {ALL_DATASETS, DATASET_WITH_STRUCTURE} from '../services/graphql/queries/DataSet'
 import {ALL_DATARESOURCES, DATARESOURCE_WITH_STRUCTURE} from '../services/graphql/queries/DataResource'
 
-export const LANGUAGES = {
-  norwegian: {
-    flag: 'no',
-    languageCode: 'nb'
-  },
-  english: {
-    flag: 'gb',
-    languageCode: 'en'
-  }
-}
-
 export const LDS_URL = {
   local:  'http://localhost:9090',
   stagingLds: 'https://instance-variables.staging-bip-app.ssb.no/be/lds',
@@ -103,6 +92,10 @@ export const MESSAGES = {
   PROPERTY_ERROR_CASE: {
     en: 'A property starts with uppercase',
     nb: 'Et objektelement starter med stor bokstav'
+  },
+  NO_RESULT_FOUND: {
+    en: 'No result found',
+    nb: 'Fant desverre ingenting'
   },
   SAVE_SUCCESSFUL: {
     en: 'Save to LDS was is completed',
