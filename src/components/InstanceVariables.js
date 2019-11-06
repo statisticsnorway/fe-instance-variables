@@ -182,7 +182,7 @@ class InstanceVariables extends Component {
                   </Dropdown>
                   <Dropdown style={{width: "400px"}}
                             selection
-                            placeholder={UI.CHOOSE_LDS.nb}
+                            placeholder={UI.CHOOSE_LDS[language]}
                             value={lds.url}
                             options={populateDropdown(LDS_URL)}
                             onChange={(e, data) => this.onChangeLds(e, data)}
@@ -231,7 +231,7 @@ class InstanceVariables extends Component {
         {ready &&
         <div>
           <Segment>
-            <VariableColumnVisibilityTable data={result} lds={lds}/>
+            <VariableColumnVisibilityTable data={result} lds={lds} language={language}/>
           </Segment>
         </div>
         }

@@ -5,6 +5,7 @@ import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
 import {filterCaseInsensitive} from '../utilities/common/Filter'
 
+
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
 class InstanceVariablesTableView extends Component {
@@ -17,7 +18,8 @@ class InstanceVariablesTableView extends Component {
       unitDataSetArray: [],
       instanceVariables: [],
       columns: [],
-      showColumns: []
+      showColumns: [],
+      language: this.props.language
     }
   }
 
@@ -77,8 +79,9 @@ class InstanceVariablesTableView extends Component {
   // }
 
   render () {
-    const {populations} = this.state
-    const instanceVariables = this.props.data ? getInstanceVariableFromLogicalRecords(this.props.data) : []
+    const {populations, language} = this.state
+    console.log(language, 'language in render')
+    const instanceVariables = this.props.data ? getInstanceVariableFromLogicalRecords(this.props.data, language) : []
     const {showColumns} = this.props
     const columns = this.populateColumns(showColumns, populations)
 

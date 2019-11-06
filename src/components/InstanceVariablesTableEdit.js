@@ -44,7 +44,7 @@ class InstanceVariablesTableEdit extends Component {
       .then(response => {
         this.setState({
             populations: response[0],
-            instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data),
+            instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data, this.props.language),
             representedVariables: response[1]
           }
         )
@@ -53,7 +53,7 @@ class InstanceVariablesTableEdit extends Component {
 
   componentDidUpdate (prevProps) {
     if (this.props.data !== prevProps.data) {
-      this.setState({instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data)})
+      this.setState({instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data, this.props.language)})
     }
   }
 
@@ -66,7 +66,7 @@ class InstanceVariablesTableEdit extends Component {
     this.setState({instanceVariables: this.state.instanceVariables.slice()})
   }
 
-  populateColumns = (showColumns, populations, representedVariables, dataStructureComponentTypes) => {
+  populateColumns = (showColumns, populations, representedVariables, dataStructureComponentTypes, language) => {
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
@@ -103,7 +103,7 @@ class InstanceVariablesTableEdit extends Component {
             Cell: (row) => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges))}
+                        options={populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges, language))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangeDataStructureComponentType(e, data)}
@@ -123,7 +123,7 @@ class InstanceVariablesTableEdit extends Component {
             Header: 'population', accessor: 'populationName', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={(populateDropdown(mapLdmArray(populations.Population.edges)))}
+                        options={(populateDropdown(mapLdmArray(populations.Population.edges, language)))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangePopulation(e, data)}
@@ -146,7 +146,7 @@ class InstanceVariablesTableEdit extends Component {
             Header: 'name', accessor: 'representedVariable', width: 300, Cell: row => (
               <Dropdown style={{overflow: 'visible', position: 'relative'}}
                         selection
-                        options={populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges))}
+                        options={populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges, language))}
                         id={row.row.instanceVariableKey}
                         value={row.value}
                         onChange={(e, data) => this.onChangeRepresentedVariable(e, data)}
@@ -320,7 +320,7 @@ class InstanceVariablesTableEdit extends Component {
           put(ldsDataUrl + '/' + instanceVariable.instanceVariableId, JSON.stringify(updatedData)).then(response => {
               console.log(response)
               this.setState({
-                message: MESSAGES.SAVE_SUCCESSFUL.nb,
+                message: MESSAGES.SAVE_SUCCESSFUL[this.props.language],
                 messageColor: 'green',
                 messageIcon: ICON.INFO_MESSAGE
               })
@@ -328,7 +328,7 @@ class InstanceVariablesTableEdit extends Component {
           ).catch(message => {
               console.log(message)
               this.setState({
-                message: MESSAGES.ERROR.nb,
+                message: MESSAGES.ERROR[this.props.language],
                 messageColor: 'red',
                 messageIcon: ICON.ERROR_MESSAGE
               })

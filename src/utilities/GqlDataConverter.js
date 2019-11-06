@@ -1,28 +1,20 @@
 import {LDM_TYPE} from '../utilities/Enum'
+import {getLocalizedGsimObjectText} from './common/GsimLanguageText'
+
 export function populateDropdown(dropdownArray) {
-  let options = []
-  if (dropdownArray) {
-    dropdownArray.forEach((element) => {
-      let key = element.id
-      let text = element.name
-      let value = element.id
-      options.push(
-        {key, text, value})
-    })
-  } else {console.warn('No dropdowncontent found.')  }
-  return options
+  return dropdownArray.map(element => ({key: element.id, text: element.name, value: element.id}))
 }
 
 
-export let mapLdmArray = (ldmArray) => {
-  return (ldmArray != null && ldmArray.length > 0) ? ldmArray.map(mapEdge) : []
+export let mapLdmArray = (ldmArray, languageCode) => {
+  return (ldmArray && ldmArray.length > 0) ? ldmArray.map(mapEdge, languageCode) : []
 }
 
-function mapEdge(edge) {
+function mapEdge(edge, languageCode) {
   return {
     id: edge.node.id,
-    name: edge.node.name[0].languageText,
-    description: (edge.node.description) ? edge.node.description[0].languageText : '',
+    name: getLocalizedGsimObjectText(edge.node.name, languageCode),
+    description: getLocalizedGsimObjectText(edge.node.description, languageCode),
     title: edge.node.id
   }
 }
@@ -49,7 +41,7 @@ export let getLogicalRecordsFromDataSet = (dataSet) => {
   return logicalRecords
 }
 
-export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
+export let getInstanceVariableFromLogicalRecords = (logicalRecords, languageCode) => {
   let instanceVariables = []
   logicalRecords.forEach((logicalRecord) => {
     let logicalRecordKey = logicalRecord.id
@@ -57,38 +49,38 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords) => {
       // console.log(instanceVariable)
       let instanceVariableKey = logicalRecordKey + "_" + instanceVariable.node.id
       let instanceVariableId = instanceVariable.node.id
-      let instanceVariableName = instanceVariable.node.name[0].languageText
-      let instanceVariableDescription = instanceVariable.node.description ?
-        instanceVariable.node.description[0].languageText : null
+      console.log(instanceVariable.node.name)
+      let instanceVariableName = getLocalizedGsimObjectText(instanceVariable.node.name, languageCode)
+      let instanceVariableDescription = getLocalizedGsimObjectText(instanceVariable.node.description, languageCode)
       let instanceVariableShortName = instanceVariable.node.shortName
       let instanceVariableDataStructureComponentType = instanceVariable.node.dataStructureComponentType
       let instanceVariableFormatMask = instanceVariable.node.formatMask
       let population = instanceVariable.node.population.id
-      let populationName = instanceVariable.node.population.name[0].languageText
+      let populationName = getLocalizedGsimObjectText(instanceVariable.node.population.name, languageCode)
       let sentinelValueDomainName = instanceVariable.node.sentinelValueDomain ?
-        instanceVariable.node.sentinelValueDomain.name[0].languageText : null
+        getLocalizedGsimObjectText(instanceVariable.node.sentinelValueDomain.name, languageCode) : null
       let representedVariable = instanceVariable.node.representedVariable ?
         instanceVariable.node.representedVariable.id : null
       let representedVariableName = instanceVariable.node.representedVariable ?
-        instanceVariable.node.representedVariable.name[0].languageText : null
+        getLocalizedGsimObjectText(instanceVariable.node.representedVariable.name, languageCode) : null
       let representedVariableDescription =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.description) ?
-        instanceVariable.node.representedVariable.description[0].languageText : null
+          getLocalizedGsimObjectText(instanceVariable.node.representedVariable.description, languageCode) : null
       let representedVariableUniverse = instanceVariable.node.representedVariable ?
-        instanceVariable.node.representedVariable.universe.name[0].languageText : null
+        getLocalizedGsimObjectText(instanceVariable.node.representedVariable.universe.name, languageCode) : null
       let representedVariableSubstantiveValueDomain =
-        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.substantiveValueDomain)
-        ? instanceVariable.node.representedVariable.substantiveValueDomain.name[0].languageText : null
+        (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.substantiveValueDomain) ?
+          getLocalizedGsimObjectText(instanceVariable.node.representedVariable.substantiveValueDomain.name, languageCode) : null
       let representedVariableVariableName =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable) ?
-          instanceVariable.node.representedVariable.variable.name[0].languageText : null
+          getLocalizedGsimObjectText(instanceVariable.node.representedVariable.variable.name, languageCode) : null
       let representedVariableVariableDescription =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable
         && instanceVariable.node.representedVariable.variable.description) ?
-        instanceVariable.node.representedVariable.variable.description[0].languageText : null
+          getLocalizedGsimObjectText(instanceVariable.node.representedVariable.variable.description, languageCode) : null
       let representedVariableVariableUnitType =
         (instanceVariable.node.representedVariable && instanceVariable.node.representedVariable.variable) ?
-          instanceVariable.node.representedVariable.variable.unitType.name[0].languageText : null
+          getLocalizedGsimObjectText(instanceVariable.node.representedVariable.variable.unitType.name, languageCode) : null
       instanceVariables.push({
         instanceVariableKey,
         instanceVariableId,

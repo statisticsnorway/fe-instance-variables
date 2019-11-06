@@ -5,15 +5,15 @@ import InstanceVariablesTableEdit from './InstanceVariablesTableEdit'
 class InstanceVariablesTable extends Component {
 
   render () {
-    const { mode, showColumns, data, lds } = this.props
+    const { mode, showColumns, data, lds, language } = this.props
 
     if (mode === 'edit') {
-      return <InstanceVariablesTableEdit showColumns={showColumns} data={data} lds={lds}> </InstanceVariablesTableEdit>
+      return <InstanceVariablesTableEdit showColumns={showColumns} data={data} lds={lds} language={language}> </InstanceVariablesTableEdit>
     }
 
     if (mode === 'view') {
       return <IndataVariablesReactTableView showColumns={showColumns} data={data}
-                                            lds={lds}> </IndataVariablesReactTableView>
+                                            lds={lds} language={language}> </IndataVariablesReactTableView>
     }
 
     return null

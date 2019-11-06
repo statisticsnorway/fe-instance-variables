@@ -10,7 +10,7 @@ class VariableColumnVisibilityTable extends Component {
     this.state = {
       showColumns: [],
       indataVariablesReactTableMode: 'view',
-      data: this.props.data
+      data: this.props.data,
     }
   }
 
@@ -76,7 +76,7 @@ class VariableColumnVisibilityTable extends Component {
           <Grid.Row style={{borderColor: 'b', overflow: 'visible'}}>
             <Grid.Column floated='left'>
               <Popup on='click' content={this.variableTable(showColumns)}
-                     trigger={<Button label={UI.SHOW_VARIABLES.nb} style={{borderColor: 'blue'}}/>}/>
+                     trigger={<Button label={UI.SHOW_VARIABLES[this.props.language]} style={{borderColor: 'blue'}}/>}/>
             </Grid.Column>
             <Grid.Column floated='right'>
               {indataVariablesReactTableMode === 'view' &&
@@ -94,7 +94,7 @@ class VariableColumnVisibilityTable extends Component {
           <Grid.Row>
             <Grid.Column>
               <InstanceVariablesTable mode={indataVariablesReactTableMode} showColumns={showColumns}
-                                      data={this.props.data} lds={this.props.lds}/>
+                                      data={this.props.data} lds={this.props.lds} language={this.props.language}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
