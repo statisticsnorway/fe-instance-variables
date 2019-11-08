@@ -80,7 +80,6 @@ class InstanceVariablesTableView extends Component {
 
   render () {
     const {populations, language} = this.state
-    console.log(language, 'language in render')
     const instanceVariables = this.props.data ? getInstanceVariableFromLogicalRecords(this.props.data, language) : []
     const {showColumns} = this.props
     const columns = this.populateColumns(showColumns, populations)

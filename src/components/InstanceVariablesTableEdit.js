@@ -14,6 +14,7 @@ import { ALL_POPULATIONS } from '../services/graphql/queries/Population'
 import { ALL_REPRESENTED_VARIABLES } from '../services/graphql/queries/RepresentedVariables'
 import { DATASTRUCTURECOMPONENTTYPE, GSIM, MESSAGES, ICON } from '../utilities/Enum'
 import { filterCaseInsensitive } from '../utilities/common/Filter'
+import { getLocalizedGsimObjectText} from '../utilities/common/GsimLanguageText'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
@@ -75,125 +76,78 @@ class InstanceVariablesTableEdit extends Component {
       {
         Header: 'InstanceVariable', columns: [
           {
-            Header: 'key', accessor: 'instanceVariableKey', width: 900, show: this.showColumn(showColumns,
+            Header: 'key', accessor: 'instanceVariableKey', width: 600, show: this.showColumn(showColumns,
               'instanceVariableKey')
           },
-          {
-            Header: 'description', accessor: 'instanceVariableDescription', width: 900, Cell: (row) => (
-              <Input id={row.row.instanceVariableKey}
-                     value={row.value || ''}
-                     name={'instanceVariableDescription'}
-                     style={{width: 900}}
-                     onChange={(e, data) => this.onChangeValue(e, data)}
-              />), show: this.showColumn(showColumns, 'instanceVariableDescription')
-          },
-          {
-            Header: 'shortName', accessor: 'instanceVariableShortName', width: 300, Cell: (row) => (
-              <Input id={row.row.instanceVariableKey}
-                     value={row.value}
-                     name={'instanceVariableShortName'}
-                     style={{width: 300}}
-                     onChange={(e, data) => this.onChangeValue(e, data)}
-              />), show: this.showColumn(showColumns, 'instanceVariableShortName')
-          },
-          {
-            Header: 'dataStructureComponentType',
-            accessor: 'instanceVariableDataStructureComponentType',
-            width: 200,
-            Cell: (row) => (
-              <Dropdown style={{overflow: 'visible', position: 'relative'}}
-                        selection
-                        options={populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges, language))}
-                        id={row.row.instanceVariableKey}
-                        value={row.value}
-                        onChange={(e, data) => this.onChangeDataStructureComponentType(e, data)}
-              />),
-            show: this.showColumn(showColumns, 'instanceVariableDataStructureComponentType')
-          },
-          {
-            Header: 'formatMask', accessor: 'instanceVariableFormatMask', width: 200, Cell: (row) => (
-              <Input id={row.row.instanceVariableKey}
-                     value={row.value || ''}
-                     name={'instanceVariableFormatMask'}
-                     style={{width: 200}}
-                     onChange={(e, data) => this.onChangeValue(e, data)}
-              />), show: this.showColumn(showColumns, 'instanceVariableFormatMask')
-          },
-          {
-            Header: 'population', accessor: 'populationName', width: 300, Cell: row => (
-              <Dropdown style={{overflow: 'visible', position: 'relative'}}
-                        selection
-                        options={(populateDropdown(mapLdmArray(populations.Population.edges, language)))}
-                        id={row.row.instanceVariableKey}
-                        value={row.value}
-                        onChange={(e, data) => this.onChangePopulation(e, data)}
-              />
-            ), show: this.showColumn(showColumns, 'populationName')
-          },
-          {
-            Header: 'sentinelValueDomain', accessor: 'sentinelValueDomainName', width: 200, Cell: (row) => (
-              <Input id={row.row.instanceVariableKey}
-                     value={row.value || ''}
-                     name={'sentinelValueDomainName'}
-                     style={{width: 200}}
-                     onChange={(e, data) => this.onChangeValue(e, data)}
-              />), show: this.showColumn(showColumns, 'sentinelValueDomainName')
-          }]
+          createColumn.call(this, 'description', 'instanceVariableDescription', 900,
+            (row) => input(row, 'instanceVariableDescription', 900, this.onChangeValue)),
+          createColumn.call(this, 'shortName', 'instanceVariableShortName', 300,
+            (row) => input(row, 'instanceVariableShortName', 300, this.onChangeValue)),
+          createColumn.call(this, 'dataStructureComponentType', 'instanceVariableDataStructureComponentType', 200,
+            (row) => dropdown(row, 'instanceVariableDataStructureComponentType', 200,
+                this.onChangeDataStructureComponentType, this.changeDataStructureComponentType, dataStructureComponentTypes.DataStructureComponentType.edges)),
+          createColumn.call(this, 'formatMask', 'instanceVariableFormatMask', 200,
+            (row) => input(row, 'instanceVariableFormatMask', 200, this.onChangeValue)),
+          createColumn.call(this, 'population', 'populationName', 300,
+            (row) => dropdown(row, 'populationName', 300, this.onChangePopulation, populations.Population.edges)),
+          createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomainName', 200,
+            (row) => input(row, 'sentinelValueDomainName', 200, this.onChangeValue))
+        ]
       },
       {
         Header: 'Represented variable', columns: [
-          {
-            Header: 'name', accessor: 'representedVariable', width: 300, Cell: row => (
-              <Dropdown style={{overflow: 'visible', position: 'relative'}}
-                        selection
-                        options={populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges, language))}
-                        id={row.row.instanceVariableKey}
-                        value={row.value}
-                        onChange={(e, data) => this.onChangeRepresentedVariable(e, data)}
-              />), show: this.showColumn(showColumns, 'representedVariableName')
-          },
-          {
-            Header: 'description',
-            accessor: 'representedVariableDescription',
-            width: 300,
-            show: this.showColumn(showColumns, 'representedVariableDescription')
-          },
-          {
-            Header: 'universe',
-            accessor: 'representedVariableUniverse',
-            width: 300,
-            show: this.showColumn(showColumns, 'representedVariableUniverse')
-          },
-          {
-            Header: 'substantiveValueDomain',
-            accessor: 'representedVariableSubstantiveValueDomain',
-            width: 300,
-            show: this.showColumn(showColumns, 'representedVariableSubstantiveValueDomain')
-          }]
+          createColumn.call(this, 'name', 'representedVariable', 300,
+            (row) => dropdown(row, 'representedVariable', 300, this.onChangeRepresentedVariable, representedVariables.RepresentedVariable.edges)),
+          createColumn.call(this, 'description', 'representedVariableDescription', 300),
+          createColumn.call(this, 'universe', 'representedVariableUniverse', 300),
+          createColumn.call(this, 'substantiveValueDomain', 'representedVariableSubstantiveValueDomain', 300)
+        ]
       },
       {
         Header: 'Variable', columns: [
-          {
-            Header: 'name',
-            accessor: 'representedVariableVariableName',
-            width: 300,
-            show: this.showColumn(showColumns, 'representedVariableVariableName')
-          },
-          {
-            Header: 'description',
-            accessor: 'representedVariableVariableDescription',
-            width: 300,
-            show: this.showColumn(showColumns, 'representedVariableVariableDescription')
-          },
-          {
-            Header: 'unitType',
-            accessor: 'representedVariableVariableUnitType',
-            width: 300,
-            show: this.showColumn(showColumns, 'representedVariableVariableUnitType')
-          }]
+          createColumn.call(this, 'name', 'representedVariableVariableName', 300),
+          createColumn.call(this, 'description', 'representedVariableVariableDescription', 300),
+          createColumn.call(this, 'unitType', 'representedVariableVariableUnitType', 300)
+        ]
       }
     ]
+
+    function createColumn (header, accessor, width, cell) {
+      return {Header: header,
+        accessor: accessor,
+        width: width,
+        show: showColumn(showColumns, accessor),
+        Cell: cell
+      }
+    }
+
+    function showColumn (showColumns, accessorName)  {
+      let showCol = showColumns.find(col => col.name === accessorName)
+      if (showCol != null) return showCol.show
+      else return true
+    }
+
+    function input(row, accessor, width, onchangemet) {
+      return <Input id={row.row.instanceVariableKey}
+             value={row.value || ''}
+             name={accessor}
+             style={{width: width}}
+             onChange={(e, data) => onchangemet(e, data)}
+      />
+    }
+
+    function dropdown(row, accessor, width, onchangemet, selectionchangemet, ldmarray) {
+      return <Dropdown style={{overflow: 'visible', position: 'relative', width: width}}
+                selection
+                options={populateDropdown(mapLdmArray(ldmarray, language))}
+                id={row.row.instanceVariableKey}
+                value={row.value}
+                onChange={(e, data) => onchangemet(e, data, selectionchangemet, ldmarray)}
+      />
+    }
   }
+
+
 
   showColumn = (showColumns, accessorName) => {
     let showCol = showColumns.find(col => col.name === accessorName)
@@ -201,15 +155,6 @@ class InstanceVariablesTableEdit extends Component {
     else return true
   }
 
-  clickRowVariable = (rowInfo) => {
-    console.log(rowInfo, 'rowinfo')
-    let instVariables = this.state.instanceVariables
-    let original = rowInfo.original
-    let editVariable = instVariables[rowInfo.index]
-    console.log(original, 'original')
-    console.log(editVariable, 'editVariable')
-    // return this.variableTable(original)
-  }
 
   //TODO: Refactor
   onChangePopulation = (e, data) => {
@@ -227,42 +172,44 @@ class InstanceVariablesTableEdit extends Component {
     // console.log(this.state.instanceVariables)
   }
 
-  onChangeDataStructureComponentType = (e, data) => {
-    let instanceVariableDataStructureComponentType = this.getSelectedOption(this.state.dataStructureComponentTypes.DataStructureComponentType.edges, data.value)
+  onChangeDataStructureComponentType = (e, data, optionsarray, optionchangemet) => {
+    let instanceVariableDataStructureComponentType = this.getSelectedOption(optionsarray, data.value)
     let instVars = this.state.instanceVariables
 
-    this.setState({instanceVariables: this.changeDataStructureComponentType(instVars, data.id, instanceVariableDataStructureComponentType)})
+    this.setState({instanceVariables: optionchangemet(instVars, data.id, instanceVariableDataStructureComponentType)})
   }
 
-  changePopulation (variables, key, population) {
-    let idx = variables.findIndex((variable) => {
+  getVariableIndex = (variables, key) =>
+    variables.findIndex((variable) => {
       return variable.instanceVariableKey === key
     })
+
+
+  changePopulation (variables, key, population) {
+    let idx = this.getVariableIndex(variables, key)
     variables[idx].population = population.node.id
     variables[idx].populationName = population.node.name
     return variables
   }
 
   changeRepresentedVariable (variables, key, representedVariable) {
-    let idx = variables.findIndex((variable) => {
-      return variable.instanceVariableKey === key
-    })
+    let idx = this.getVariableIndex(variables, key)
+    const language = this.props.language
+
     variables[idx].representedVariable = representedVariable.node.id
-    variables[idx].representedVariableName = representedVariable.node.name[0].languageText
-    variables[idx].representedVariableDescription = representedVariable.node.description[0].languageText
-    variables[idx].representedVariableUniverse = representedVariable.node.universe.name[0].languageText
-    variables[idx].representedVariableSubstantiveValueDomain = representedVariable.node.substantiveValueDomain.name[0].languageText
-    variables[idx].representedVariableVariable = representedVariable.node.variable.name[0].languageText
-    variables[idx].representedVariableVariableName = representedVariable.node.variable.name[0].languageText
-    variables[idx].representedVariableVariableDescription = representedVariable.node.variable.description[0].languageText
-    variables[idx].representedVariableVariableUnitType = representedVariable.node.variable.unitType.name[0].languageText
+    variables[idx].representedVariableName = getLocalizedGsimObjectText(representedVariable.node.name, language)
+    variables[idx].representedVariableDescription = getLocalizedGsimObjectText(representedVariable.node.description, language)
+    variables[idx].representedVariableUniverse = getLocalizedGsimObjectText(representedVariable.node.universe.name, language)
+    variables[idx].representedVariableSubstantiveValueDomain = getLocalizedGsimObjectText(representedVariable.node.substantiveValueDomain.name, language)
+    variables[idx].representedVariableVariable = getLocalizedGsimObjectText(representedVariable.node.variable.name, language)
+    variables[idx].representedVariableVariableName = getLocalizedGsimObjectText(representedVariable.node.variable.name, language)
+    variables[idx].representedVariableVariableDescription = getLocalizedGsimObjectText(representedVariable.node.variable.description, language)
+    variables[idx].representedVariableVariableUnitType = getLocalizedGsimObjectText(representedVariable.node.variable.unitType.name, language)
     return variables
   }
 
   changeDataStructureComponentType (variables, key, instanceVariableDataStructureComponentType) {
-    let idx = variables.findIndex((variable) => {
-      return variable.instanceVariableKey === key
-    })
+    let idx = this.getVariableIndex(variables, key)
     variables[idx].instanceVariableDataStructureComponentType = instanceVariableDataStructureComponentType.node.id
     return variables
   }
@@ -290,11 +237,11 @@ class InstanceVariablesTableEdit extends Component {
           updatedData.description[0].languageText = instanceVariable.instanceVariableDescription
           isUpdated = true
         }
-        if (data.shortName !== instanceVariable.instanceVariableShortName) {
-          updatedData.shortName = instanceVariable.instanceVariableShortName
+        if (data['shortName'] !== instanceVariable['instanceVariableShortName']) {
+          updatedData['shortName'] = instanceVariable['instanceVariableShortName']
           isUpdated = true
         }
-        if (data.dataStructureComponentType !== instanceVariable.instanceVariableDataStructureComponentType) {
+        if (data['dataStructureComponentType'] !== instanceVariable['instanceVariableDataStructureComponentType']) {
           updatedData.dataStructureComponentType = instanceVariable.instanceVariableDataStructureComponentType
           isUpdated = true
         }

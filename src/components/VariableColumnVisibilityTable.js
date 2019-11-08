@@ -9,7 +9,7 @@ class VariableColumnVisibilityTable extends Component {
 
     this.state = {
       showColumns: [],
-      indataVariablesReactTableMode: 'view',
+      indataVariablesReactTableMode: 'edit',
       data: this.props.data,
     }
   }
@@ -20,20 +20,19 @@ class VariableColumnVisibilityTable extends Component {
 
   populateShowColumns = () => {
     return [
-      {name: 'instanceVariableKey', show: false},
-      {name: 'instanceVariableDescription', show: false},
-      {name: 'instanceVariableShortName', show: false},
-      {name: 'instanceVariableDataStructureComponentType', show: false},
-      {name: 'instanceVariableFormatMask', show: false},
-      {name: 'populationName', show: false},
-      {name: 'sentinelValueDomainName', show: false},
+      {name: 'instanceVariableKey', show: true},
+      {name: 'instanceVariableDescription', show: true},
+      {name: 'instanceVariableShortName', show: true},
+      {name: 'instanceVariableDataStructureComponentType', show: true},
+      {name: 'instanceVariableFormatMask', show: true},
+      {name: 'populationName', show: true},
+      {name: 'sentinelValueDomainName', show: true},
       {name: 'representedVariableName', show: true},
       {name: 'representedVariableDescription', show: true},
-      {name: 'representedVariableUniverse', show: false},
-      {name: 'representedVariableSubstantiveValueDomain', show: false},
-      {name: 'representedVariableVariableName', show: false},
-      {name: 'representedVariableVariableDescription', show: false},
-      {name: 'representedVariableVariableUnitType', show: false}
+      {name: 'representedVariableUniverse', show: true},
+      {name: 'representedVariableSubstantiveValueDomain', show: true},
+      {name: 'representedVariableVariableName', show: true},
+      {name: 'representedVariableVariableDescription', show: true}
     ]
   }
 
