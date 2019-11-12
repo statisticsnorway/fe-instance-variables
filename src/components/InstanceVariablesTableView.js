@@ -38,8 +38,8 @@ class InstanceVariablesTableView extends Component {
           createColumn.call(this, 'shortName', 'instanceVariableShortName', 300),
           createColumn.call(this, 'dataStructureComponentType', 'instanceVariableDataStructureComponentType', 200),
           createColumn.call(this, 'formatMask', 'instanceVariableFormatMask', 200),
-          createColumn.call(this, 'population', 'populationName', 300),
-          createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomainName')
+          createColumn.call(this, 'population', 'population', 300),
+          createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomain')
         ]
       },
       {

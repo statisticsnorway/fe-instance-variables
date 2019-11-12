@@ -7,7 +7,7 @@ export function populateDropdown(dropdownArray) {
 
 
 export let mapLdmArray = (ldmArray, languageCode) => {
-  return (ldmArray && ldmArray.length > 0) ? ldmArray.map(mapEdge, languageCode) : []
+  return (ldmArray && ldmArray.length > 0) ? ldmArray.map(edge => mapEdge(edge,languageCode)) : []
 }
 
 function mapEdge(edge, languageCode) {
@@ -46,19 +46,15 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords, languageCode
   logicalRecords.forEach((logicalRecord) => {
     let logicalRecordKey = logicalRecord.id
     logicalRecord.instanceVariables.edges.forEach((instanceVariable) => {
-      // console.log(instanceVariable)
       let instanceVariableKey = logicalRecordKey + "_" + instanceVariable.node.id
       let instanceVariableId = instanceVariable.node.id
-      console.log(instanceVariable.node.name)
       let instanceVariableName = getLocalizedGsimObjectText(instanceVariable.node.name, languageCode)
       let instanceVariableDescription = getLocalizedGsimObjectText(instanceVariable.node.description, languageCode)
       let instanceVariableShortName = instanceVariable.node.shortName
       let instanceVariableDataStructureComponentType = instanceVariable.node.dataStructureComponentType
       let instanceVariableFormatMask = instanceVariable.node.formatMask
-      let population = instanceVariable.node.population.id
-      let populationName = getLocalizedGsimObjectText(instanceVariable.node.population.name, languageCode)
-      let sentinelValueDomainName = instanceVariable.node.sentinelValueDomain ?
-        getLocalizedGsimObjectText(instanceVariable.node.sentinelValueDomain.name, languageCode) : null
+      let population = instanceVariable.node.population ? instanceVariable.node.population.id : null
+      let sentinelValueDomain = instanceVariable.node.sentinelValueDomain ? instanceVariable.node.sentinelValueDomain.id : null
       let representedVariable = instanceVariable.node.representedVariable ?
         instanceVariable.node.representedVariable.id : null
       let representedVariableName = instanceVariable.node.representedVariable ?
@@ -88,8 +84,8 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords, languageCode
         instanceVariableDescription,
         instanceVariableShortName,
         population,
-        populationName,
-        sentinelValueDomainName,
+        // populationName,
+        sentinelValueDomain,
         instanceVariableDataStructureComponentType,
         instanceVariableFormatMask,
         representedVariable,
@@ -104,4 +100,20 @@ export let getInstanceVariableFromLogicalRecords = (logicalRecords, languageCode
     })
   })
   return instanceVariables
+}
+
+
+export let getVariableIndex = (variables, key) =>
+  variables.findIndex((variable) => {
+    return variable.instanceVariableKey === key
+  })
+
+export let getValueDomains = (describedValueDomains, enumeratedValueDomains) => {
+  let valueDomains = {
+      'ValueDomain': {
+        'edges': [].concat(describedValueDomains.DescribedValueDomain.edges, enumeratedValueDomains.EnumeratedValueDomain.edges)
+      }
+  }
+  return valueDomains
+
 }

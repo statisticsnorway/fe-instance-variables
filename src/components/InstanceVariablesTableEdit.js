@@ -4,17 +4,21 @@ import ReactTable from 'react-table'
 import {
   populateDropdown,
   mapLdmArray,
-  getInstanceVariableFromLogicalRecords
+  getInstanceVariableFromLogicalRecords,
+  getVariableIndex,
+  getValueDomains
 } from '../utilities/GqlDataConverter'
 import withFixedColumns from 'react-table-hoc-fixed-columns'
 import 'react-table-hoc-fixed-columns/lib/styles.css'
 import { request } from 'graphql-request'
 import { get, put } from '../utilities/fetch/Fetch'
+import { ALL_DESCRIBED_VALUE_DOMAINS, ALL_ENUMERATED_VALUE_DOMAINS } from '../services/graphql/queries/ValueDomain'
 import { ALL_POPULATIONS } from '../services/graphql/queries/Population'
 import { ALL_REPRESENTED_VARIABLES } from '../services/graphql/queries/RepresentedVariables'
 import { DATASTRUCTURECOMPONENTTYPE, GSIM, MESSAGES, ICON } from '../utilities/Enum'
 import { filterCaseInsensitive } from '../utilities/common/Filter'
-import { getLocalizedGsimObjectText} from '../utilities/common/GsimLanguageText'
+import { getLocalizedGsimObjectText, setLocalizedGsimObjectText} from '../utilities/common/GsimLanguageText'
+import { getSelectedOption } from '../utilities/common/dropdown'
 
 const ReactTableFixedColumns = withFixedColumns(ReactTable)
 
@@ -23,6 +27,7 @@ class InstanceVariablesTableEdit extends Component {
     super(props)
 
     this.state = {
+      sentinelValueDomains: [],
       populations: [],
       representedVariables: [],
       dataStructureComponentTypes: DATASTRUCTURECOMPONENTTYPE,
@@ -41,12 +46,17 @@ class InstanceVariablesTableEdit extends Component {
   componentDidMount () {
     const {lds} = this.state
     const graphqlUrl = `${lds.url}/${lds.graphql}`
-    Promise.all([request(graphqlUrl, ALL_POPULATIONS), request(graphqlUrl, ALL_REPRESENTED_VARIABLES)])
-      .then(response => {
+    Promise.all([
+          request(graphqlUrl, ALL_DESCRIBED_VALUE_DOMAINS),
+          request(graphqlUrl, ALL_ENUMERATED_VALUE_DOMAINS),
+          request(graphqlUrl, ALL_POPULATIONS),
+          request(graphqlUrl, ALL_REPRESENTED_VARIABLES)
+    ]).then(response => {
         this.setState({
-            populations: response[0],
+            sentinelValueDomains: getValueDomains(response[0], response[1]),
+            populations: response[2],
             instanceVariables: getInstanceVariableFromLogicalRecords(this.props.data, this.props.language),
-            representedVariables: response[1]
+            representedVariables: response[3]
           }
         )
       }).catch(console.message)
@@ -67,7 +77,11 @@ class InstanceVariablesTableEdit extends Component {
     this.setState({instanceVariables: this.state.instanceVariables.slice()})
   }
 
-  populateColumns = (showColumns, populations, representedVariables, dataStructureComponentTypes, language) => {
+  populateColumns = (showColumns, sentinelValueDomains, populations, representedVariables, dataStructureComponentTypes, language) => {
+    const sentinelValueOptions = sentinelValueDomains.ValueDomain ? populateDropdown(mapLdmArray(sentinelValueDomains.ValueDomain.edges, language)) : []
+    const populationOptions = populations.Population ? populateDropdown(mapLdmArray(populations.Population.edges, language)) : []
+    const representedVariableOptions = representedVariables.RepresentedVariable ? populateDropdown(mapLdmArray(representedVariables.RepresentedVariable.edges, language)) : []
+    const dataStructureComponentTypeOptions = dataStructureComponentTypes.DataStructureComponentType ? populateDropdown(mapLdmArray(dataStructureComponentTypes.DataStructureComponentType.edges, language)) : []
     return [
       {
         Header: 'InstanceVariable', fixed: 'left', columns: [
@@ -76,8 +90,7 @@ class InstanceVariablesTableEdit extends Component {
       {
         Header: 'InstanceVariable', columns: [
           {
-            Header: 'key', accessor: 'instanceVariableKey', width: 600, show: this.showColumn(showColumns,
-              'instanceVariableKey')
+            Header: 'key', accessor: 'instanceVariableKey', width: 600, show: showColumn(showColumns,'instanceVariableKey')
           },
           createColumn.call(this, 'description', 'instanceVariableDescription', 900,
             (row) => input(row, 'instanceVariableDescription', 900, this.onChangeValue)),
@@ -85,19 +98,20 @@ class InstanceVariablesTableEdit extends Component {
             (row) => input(row, 'instanceVariableShortName', 300, this.onChangeValue)),
           createColumn.call(this, 'dataStructureComponentType', 'instanceVariableDataStructureComponentType', 200,
             (row) => dropdown(row, 'instanceVariableDataStructureComponentType', 200,
-                this.onChangeDataStructureComponentType, this.changeDataStructureComponentType, dataStructureComponentTypes.DataStructureComponentType.edges)),
+              this.onChangeValue, this.null, dataStructureComponentTypeOptions)),
           createColumn.call(this, 'formatMask', 'instanceVariableFormatMask', 200,
             (row) => input(row, 'instanceVariableFormatMask', 200, this.onChangeValue)),
-          createColumn.call(this, 'population', 'populationName', 300,
-            (row) => dropdown(row, 'populationName', 300, this.onChangePopulation, populations.Population.edges)),
-          createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomainName', 200,
-            (row) => input(row, 'sentinelValueDomainName', 200, this.onChangeValue))
+          createColumn.call(this, 'population', 'population', 300,
+            (row) => dropdown(row, 'population', 300, this.onChangeValue, null, populationOptions)),
+          createColumn.call(this, 'sentinelValueDomain', 'sentinelValueDomain', 300,
+            (row) => dropdown(row, 'sentinelValueDomain', 300, this.onChangeValue,null, sentinelValueOptions))
         ]
       },
       {
         Header: 'Represented variable', columns: [
           createColumn.call(this, 'name', 'representedVariable', 300,
-            (row) => dropdown(row, 'representedVariable', 300, this.onChangeRepresentedVariable, representedVariables.RepresentedVariable.edges)),
+            (row) => dropdown(row, 'representedVariable', 300, this.onChangeOptions, this.changeRepresentedVariable,
+              representedVariableOptions, representedVariables.RepresentedVariable.edges)),
           createColumn.call(this, 'description', 'representedVariableDescription', 300),
           createColumn.call(this, 'universe', 'representedVariableUniverse', 300),
           createColumn.call(this, 'substantiveValueDomain', 'representedVariableSubstantiveValueDomain', 300)
@@ -136,65 +150,34 @@ class InstanceVariablesTableEdit extends Component {
       />
     }
 
-    function dropdown(row, accessor, width, onchangemet, selectionchangemet, ldmarray) {
+    function dropdown(row, accessor, width, onchangemet, selectionchangemet, options, ldmArray) {
       return <Dropdown style={{overflow: 'visible', position: 'relative', width: width}}
                 selection
-                options={populateDropdown(mapLdmArray(ldmarray, language))}
+                options={options}
+                name={accessor}
                 id={row.row.instanceVariableKey}
                 value={row.value}
-                onChange={(e, data) => onchangemet(e, data, selectionchangemet, ldmarray)}
+                onChange={(e, data) => onchangemet(e, data, selectionchangemet, ldmArray, language)}
       />
     }
   }
 
-
-
-  showColumn = (showColumns, accessorName) => {
-    let showCol = showColumns.find(col => col.name === accessorName)
-    if (showCol != null) return showCol.show
-    else return true
+  onChangeOptions = (e, data, optionschangemet, optionsarray, language) => {
+    console.log(data, 'data')
+    console.log(optionschangemet, 'optionschangemet')
+    console.log(optionsarray, 'optionsarray')
+    let selected = getSelectedOption(optionsarray, data.value, language)
+    this.setState(prevState => ({
+      [data.name]: data.value,
+      instanceVariables: optionschangemet(prevState.instanceVariables, data.id, selected, language)
+    }))
   }
 
 
-  //TODO: Refactor
-  onChangePopulation = (e, data) => {
-    let population = this.getSelectedOption(this.state.populations.Population.edges, data.value)
-    let instVars = this.state.instanceVariables
-
-    this.setState({instanceVariables: this.changePopulation(instVars, data.id, population)})
-  }
-
-  onChangeRepresentedVariable = (e, data) => {
-    let representedVariable = this.getSelectedOption(this.state.representedVariables.RepresentedVariable.edges, data.value)
-    let instVars = this.state.instanceVariables
-
-    this.setState({instanceVariables: this.changeRepresentedVariable(instVars, data.id, representedVariable)})
-    // console.log(this.state.instanceVariables)
-  }
-
-  onChangeDataStructureComponentType = (e, data, optionsarray, optionchangemet) => {
-    let instanceVariableDataStructureComponentType = this.getSelectedOption(optionsarray, data.value)
-    let instVars = this.state.instanceVariables
-
-    this.setState({instanceVariables: optionchangemet(instVars, data.id, instanceVariableDataStructureComponentType)})
-  }
-
-  getVariableIndex = (variables, key) =>
-    variables.findIndex((variable) => {
-      return variable.instanceVariableKey === key
-    })
 
 
-  changePopulation (variables, key, population) {
-    let idx = this.getVariableIndex(variables, key)
-    variables[idx].population = population.node.id
-    variables[idx].populationName = population.node.name
-    return variables
-  }
-
-  changeRepresentedVariable (variables, key, representedVariable) {
-    let idx = this.getVariableIndex(variables, key)
-    const language = this.props.language
+  changeRepresentedVariable (variables, key, representedVariable, language) {
+    let idx = getVariableIndex(variables, key)
 
     variables[idx].representedVariable = representedVariable.node.id
     variables[idx].representedVariableName = getLocalizedGsimObjectText(representedVariable.node.name, language)
@@ -208,18 +191,6 @@ class InstanceVariablesTableEdit extends Component {
     return variables
   }
 
-  changeDataStructureComponentType (variables, key, instanceVariableDataStructureComponentType) {
-    let idx = this.getVariableIndex(variables, key)
-    variables[idx].instanceVariableDataStructureComponentType = instanceVariableDataStructureComponentType.node.id
-    return variables
-  }
-
-  getSelectedOption (options, selected) {
-    return options.find((option) => {
-      return option.node.id === selected
-    })
-  }
-
   // handleButtonStateClick = () => {
   //   console.log('State:' + JSON.stringify(this.state, null, 2))
   // }
@@ -227,38 +198,26 @@ class InstanceVariablesTableEdit extends Component {
   handleSave = () => {
     const {lds} = this.props
     const ldsDataUrl = `${lds.url}/${lds.namespace}/${GSIM.INSTANCE_VARIABLE}`
+    const language = this.props.language
 
     this.state.instanceVariables.forEach((instanceVariable) => {
       let updatedData = {}
       let isUpdated = false
       get(ldsDataUrl + '/' + instanceVariable.instanceVariableId).then(data => {
         updatedData = data
-        if ((data.description && data.description[0] && data.description[0].languageText) !== instanceVariable.instanceVariableDescription) {
-          updatedData.description[0].languageText = instanceVariable.instanceVariableDescription
-          isUpdated = true
+        if (data['id'] === '3') {
+          console.log(updatedData, 'updated data før sjekk på ulikheter')
+          console.log(isUpdated, 'isUpdated')
         }
-        if (data['shortName'] !== instanceVariable['instanceVariableShortName']) {
-          updatedData['shortName'] = instanceVariable['instanceVariableShortName']
-          isUpdated = true
-        }
-        if (data['dataStructureComponentType'] !== instanceVariable['instanceVariableDataStructureComponentType']) {
-          updatedData.dataStructureComponentType = instanceVariable.instanceVariableDataStructureComponentType
-          isUpdated = true
-        }
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'description', instanceVariable['instanceVariableDescription'], language, isUpdated)
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'shortName', instanceVariable['instanceVariableShortName'], language, isUpdated)
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'dataStructureComponentType', instanceVariable['instanceVariableDataStructureComponentType'], language, isUpdated)
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'formatMask', instanceVariable['instanceVariableFormatMask'], language, isUpdated)
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'population', '/Population/' + instanceVariable['population'], language, isUpdated)
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'sentinelValueDomain', instanceVariable['sentinelValueDomain'] ? '/SentinelValueDomain/' + instanceVariable['sentinelValueDomain'] : null, language, isUpdated)
+        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'representedVariable', '/RepresentedVariable/' + instanceVariable['representedVariable'], language, isUpdated)
         if ((Object.is(data.formatMask, undefined) ? null : data.formatMask) !== instanceVariable.instanceVariableFormatMask) {
           updatedData.formatMask = instanceVariable.instanceVariableFormatMask
-          isUpdated = true
-        }
-        if (data.population !== '/Population/' + instanceVariable.population) {
-          updatedData.population = '/Population/' + instanceVariable.population
-          isUpdated = true
-        }
-        if (data.sentinelValueDomain !== instanceVariable.sentinelValueDomain) {
-          updatedData.sentinelValueDomain = instanceVariable.sentinelValueDomain
-          isUpdated = true
-        }
-        if (data.representedVariable !== '/RepresentedVariable/' + instanceVariable.representedVariable) {
-          updatedData.representedVariable = '/RepresentedVariable/' + instanceVariable.representedVariable
           isUpdated = true
         }
 
@@ -289,11 +248,25 @@ class InstanceVariablesTableEdit extends Component {
     })
   }
 
+  setUpdatedDataIfChange(updatedData, data, dataName, instanceVariableValue, language, isUpdated) {
+    let dataValue = Array.isArray(data[dataName]) ? getLocalizedGsimObjectText(data[dataName], language) : data[dataName]
+    if (dataValue !== instanceVariableValue) {
+      updatedData[dataName] = Array.isArray(data[dataName]) ? setLocalizedGsimObjectText(updatedData[dataName], language, instanceVariableValue) : instanceVariableValue
+      isUpdated = true
+    }
+    return [updatedData, isUpdated]
+  }
+
+
   render () {
-    const {instanceVariables, populations, representedVariables, dataStructureComponentTypes, message, messageColor, messageIcon} = this.state
+    const {instanceVariables, sentinelValueDomains, populations, representedVariables, dataStructureComponentTypes, message, messageColor, messageIcon} = this.state
     const {showColumns} = this.props
 
-    let columns = this.populateColumns(showColumns, populations, representedVariables, dataStructureComponentTypes)
+    console.log(populations, 'populations in render()')
+    console.log(representedVariables, 'representedVariables in render()')
+    console.log(dataStructureComponentTypes, 'dataStructureComponentTypes in render()')
+
+    let columns = this.populateColumns(showColumns, sentinelValueDomains, populations, representedVariables, dataStructureComponentTypes, this.props.language)
 
     return (
       <div>
