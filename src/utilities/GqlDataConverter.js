@@ -42,11 +42,11 @@ export let getLogicalRecordsFromDataSet = (dataSet) => {
 }
 
 export let getInstanceVariableFromLogicalRecords = (logicalRecords, languageCode) => {
+
   let instanceVariables = []
   logicalRecords.forEach((logicalRecord) => {
-    let logicalRecordKey = logicalRecord.id
     logicalRecord.instanceVariables.edges.forEach((instanceVariable) => {
-      let instanceVariableKey = logicalRecordKey + "_" + instanceVariable.node.id
+      let instanceVariableKey = instanceVariable.node.id
       let instanceVariableId = instanceVariable.node.id
       let instanceVariableName = getLocalizedGsimObjectText(instanceVariable.node.name, languageCode)
       let instanceVariableDescription = getLocalizedGsimObjectText(instanceVariable.node.description, languageCode)

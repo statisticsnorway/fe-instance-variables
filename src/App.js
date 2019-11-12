@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
-import InstanceVariables from './components/InstanceVariables'
 import { LanguageContext } from './utilities/context/LanguageContext'
+import InstanceVariables from './components/InstanceVariables'
 
 class App extends Component {
 
@@ -24,17 +24,17 @@ class App extends Component {
   render () {
     const { languageCode, lds } = this.state
 
-  return (
-    <LanguageContext.Provider value={{
-      value: languageCode,
-      setLanguage: (languageCode) => this.setLanguage(languageCode)
-    }}>
-      <InstanceVariables
-        languageCode = {languageCode}
-        lds = {lds}
-      />
-    </LanguageContext.Provider>
-  )
+    return (
+      <LanguageContext.Provider value={{
+        value: languageCode,
+        setLanguage: (languageCode) => this.setLanguage(languageCode)
+      }}>
+        <InstanceVariables
+          languageCode={languageCode}
+          lds={lds}
+        />
+      </LanguageContext.Provider>
+    )
   }
 }
 

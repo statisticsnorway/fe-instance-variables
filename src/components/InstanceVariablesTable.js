@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import IndataVariablesReactTableView from './InstanceVariablesTableView'
-import InstanceVariablesTableEdit from './InstanceVariablesTableEdit'
+import Testing from './Testing'
 
 class InstanceVariablesTable extends Component {
 
@@ -8,7 +8,8 @@ class InstanceVariablesTable extends Component {
     const { mode, showColumns, data, lds, language } = this.props
 
     if (mode === 'edit') {
-      return <InstanceVariablesTableEdit showColumns={showColumns} data={data} lds={lds} language={language}> </InstanceVariablesTableEdit>
+      //return <InstanceVariablesTableEdit showColumns={showColumns} data={data} lds={lds} language={language}> </InstanceVariablesTableEdit>
+      return <Testing data={data} lds={lds} language={language} />
     }
 
     if (mode === 'view') {

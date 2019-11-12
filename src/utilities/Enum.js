@@ -175,6 +175,30 @@ export const LDM_TYPE = {
     filteredArray: 'filteredDataResources',
     ldmId: 'dataresourceid'
   }
-
 }
 
+export const InstanceVariableTable = [
+  ['InstanceVariable', [
+    {Header: 'name', width: 700}
+  ]],
+  ['InstanceVariable', [
+    {Header: 'key', width: 600, input: 'text'},
+    {Header: 'description', width: 900, input: ''},
+    {Header: 'shortName', width: 300, input: ''},
+    {Header: 'dataStructureComponentType', width: 200, input: ''},
+    {Header: 'formatMask', width: 200, input: ''},
+    {Header: 'population', width: 300, input: ''},
+    {Header: 'sentinelValueDomain', width: 300, input: ''}
+  ]],
+  ['RepresentedVariable', [
+    {Header: 'name', width: 300, input: ''},
+    {Header: 'description', width: 300, input: 'text'},
+    {Header: 'universe', width: 300, input: 'text'},
+    {Header: 'substantiveValueDomain', width: 300, input: 'text'}
+  ]],
+  ['Variable', [
+    {Header: 'name', width: 300, input: 'text'},
+    {Header: 'description', width: 300, input: 'text'},
+    {Header: 'unitType', width: 300, input: 'text'}
+  ]]
+]
