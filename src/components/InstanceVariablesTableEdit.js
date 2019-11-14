@@ -209,17 +209,14 @@ class InstanceVariablesTableEdit extends Component {
           console.log(updatedData, 'updated data før sjekk på ulikheter')
           console.log(isUpdated, 'isUpdated')
         }
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'description', instanceVariable['instanceVariableDescription'], language, isUpdated)
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'shortName', instanceVariable['instanceVariableShortName'], language, isUpdated)
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'dataStructureComponentType', instanceVariable['instanceVariableDataStructureComponentType'], language, isUpdated)
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'formatMask', instanceVariable['instanceVariableFormatMask'], language, isUpdated)
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'population', '/Population/' + instanceVariable['population'], language, isUpdated)
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'sentinelValueDomain', instanceVariable['sentinelValueDomain'] ? '/SentinelValueDomain/' + instanceVariable['sentinelValueDomain'] : null, language, isUpdated)
-        [updatedData, isUpdated] = this.setUpdatedDataIfChange(updatedData, data,'representedVariable', '/RepresentedVariable/' + instanceVariable['representedVariable'], language, isUpdated)
-        if ((Object.is(data.formatMask, undefined) ? null : data.formatMask) !== instanceVariable.instanceVariableFormatMask) {
-          updatedData.formatMask = instanceVariable.instanceVariableFormatMask
-          isUpdated = true
-        }
+        //TODO: comparisation on GSIM-link-objects must be done differently
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'description', instanceVariable['instanceVariableDescription'], language, isUpdated)
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'shortName', instanceVariable['instanceVariableShortName'], language, isUpdated)
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'dataStructureComponentType', instanceVariable['instanceVariableDataStructureComponentType'], language, isUpdated)
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'formatMask', instanceVariable['instanceVariableFormatMask'], language, isUpdated)
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'population', '/Population/' + instanceVariable['population'], language, isUpdated)
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'sentinelValueDomain', instanceVariable['sentinelValueDomain'] ? '/SentinelValueDomain/' + instanceVariable['sentinelValueDomain'] : null, language, isUpdated)
+        [{updatedData, isUpdated}] = this.setUpdatedDataIfChange(updatedData, data,'representedVariable', '/RepresentedVariable/' + instanceVariable['representedVariable'], language, isUpdated)
 
         if (isUpdated) {
           console.log(JSON.stringify(updatedData), 'updatedData')
